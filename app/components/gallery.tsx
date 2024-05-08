@@ -13,7 +13,7 @@ export function Gallery() {
   return (
     <div className="w-full">
       <div className="flex flex-col items-center justify-center mt-20">
-        <TypewriterEffectSmooth words={words} />
+        <TypewriterEffectSmooth words={words} className="text-3xl md:text-4xl lg:text:5xl"/>
       </div>
       <ParallaxScroll images={videos} />;
     </div>
