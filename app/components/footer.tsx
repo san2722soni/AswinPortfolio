@@ -69,7 +69,7 @@ export const Footer = () => {
                 <li>
                   <a
                     className="text-white hover:text-gray-400"
-                    href="https://www.linkedin.com/in/aswin-anand/"
+                    href="https://www.linkedin.com/in/aswin-anand-90ab91275/"
                     target="_blank"
                   >
                     LinkedIn

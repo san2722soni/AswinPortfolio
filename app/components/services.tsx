@@ -73,6 +73,3 @@ export const projects = [
   },
   
 ];
-
-"Experienced with Next.js, I've developed dynamic web applications, showcasing expertise in server-side rendering and seamless client-side navigation."
-"Proficient in React, I've created interactive user interfaces, demonstrating expertise in component-based architecture and state management."
