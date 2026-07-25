@@ -427,16 +427,41 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 <IconX className="h-5 w-5" />
               </button>
             </div>
-            <p className="mt-5 text-sm leading-7 text-neutral-300">{project.about}</p>
-            <p className="mt-4 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-cyan-50/90">
-              {project.myRole}
-            </p>
+            <div className="mt-5 space-y-4">
+              <div>
+                <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+                  Project About
+                </h4>
+                <p className="mt-3 text-sm leading-7 text-neutral-300">
+                  {project.about}
+                </p>
+              </div>
+              <div>
+                <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+                  What I Did
+                </h4>
+                <p className="mt-3 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-cyan-50/90">
+                  {project.myRole}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="grid gap-6 border-t border-white/10 p-6 lg:grid-cols-3">
-          <DetailList title="What It Does" items={project.features} />
-          <DetailList title="What It Proves" items={project.proof} />
+        <div className="border-t border-white/10 p-6">
+          <div className="mb-6">
+            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">
+              Project Breakdown
+            </h4>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-300">
+              This section is written for reviewers: what the software does,
+              which parts are visible in the demo, and what engineering skill
+              the project is meant to prove.
+            </p>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            <DetailList title="What It Does" items={project.features} />
+            <DetailList title="What It Proves" items={project.proof} />
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
               Stack
@@ -458,6 +483,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 </a>
               )}
             </div>
+          </div>
           </div>
         </div>
       </div>
