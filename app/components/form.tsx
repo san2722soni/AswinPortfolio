@@ -1,7 +1,7 @@
 "use client";
 // import "@/app/form.css";
 import { z } from "zod";
-import { Toaster, toast } from "sonner";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import emailjs from "@emailjs/browser";
@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/moving-border";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -40,8 +39,6 @@ const formSchema = z.object({
 });
 
 async function onSubmit(values: z.infer<typeof formSchema>) {
-  // Defining template params for eamil js template
-
   const templateParams = {
     from_name: values.email,
     to_name: "Aswin Anand",
@@ -71,7 +68,6 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
       });
     });
 
-  console.log("HERE", values);
 }
 
 export const FormUI = () => {
@@ -79,9 +75,9 @@ export const FormUI = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: " ",
-      email: " ",
-      description: " ",
+      username: "",
+      email: "",
+      description: "",
     },
   });
   return (
@@ -98,7 +94,7 @@ export const FormUI = () => {
                   <FormLabel className="text-white">Username</FormLabel>
                   <FormControl>
                     <InputShad
-                      placeholder="Jhon Doe..."
+                      placeholder="Your name"
                       {...field}
                       className="bg-[#ffffff12] text-white ring-none border-none"
                     />

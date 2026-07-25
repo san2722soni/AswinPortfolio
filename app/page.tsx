@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 import { useEffect, useState } from "react";
 import AnimatedCursor from "react-animated-cursor";
 
@@ -6,12 +6,10 @@ import Navbar from "./components/navbar";
 import { Header } from "./components/home";
 import { Spotlight } from "@/components/ui/Spotlight";
 import { About } from "./components/About";
-import { Projects } from "./projects";
+import { VideoProjects } from "./components/VideoProjects";
 import { Services } from "./components/services";
-import { Testimonial } from "./components/testimonial";
 import { Form } from "./components/box";
 import { Footer } from "./components/footer";
-import { Gallery } from "./components/gallery";
 export default function Home() {
   const [mounted, isMounted] = useState(false);
 
@@ -51,17 +49,11 @@ export default function Home() {
           <About />
         </section>
         <section id="portfolio">
-          <Projects />
+          <VideoProjects />
         </section>
         <section id="services">
           <Services />
         </section>
-        <section id="gallery">
-          <Gallery />
-        </section>
-        {/* <section id="testimonial">
-          <Testimonial />
-        </section> */}
         <section id="contact">
         <Form />
         </section>

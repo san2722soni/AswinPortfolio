@@ -6,184 +6,116 @@ import {
   IconPhone,
 } from "@tabler/icons-react";
 import { Link } from "react-scroll";
-import "@/app/globals.css";
 import { toast } from "sonner";
+
+const navLinks = [
+  { label: "Home", to: "home" },
+  { label: "About", to: "about" },
+  { label: "Portfolio", to: "portfolio" },
+  { label: "Skills", to: "services" },
+  { label: "Contact", to: "contact" },
+];
 
 export const Footer = () => {
   return (
-    <>
-      <footer className="text-gray-600 body-font bg-[#ffffff04] mt-40">
-        <div className="container px-5 py-24 mx-auto">
-          <div className="flex flex-wrap md:text-left text-center order-first">
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white hover:text-gray-500 tracking-widest text-sm mb-3">
-                Navigate
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <Link smooth={true} duration={700} to="home">
-                    <a className="text-white hover:text-gray-400">Home</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link smooth={true} duration={700} to="about">
-                    <a className="text-white hover:text-gray-400">About</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link smooth={true} duration={700} to="contact">
-                    <a className="text-white hover:text-gray-400">Contact</a>
-                  </Link>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white hover:text-gray-500 tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <Link smooth={true} duration={700} to="services">
-                    <a className="text-white hover:text-gray-400">Services</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link smooth={true} duration={700} to="portfolio">
-                    <a className="text-white hover:text-gray-400">Portfolio</a>
-                  </Link>
-                </li>
-                <li>
-                  <Link smooth={true} duration={700} to="testimonial">
-                    <a className="text-white hover:text-gray-400">
-                      Testimonial
-                    </a>
-                  </Link>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white hover:text-gray-500 tracking-widest text-sm mb-3">
-                CATEGORIES
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a
-                    className="text-white hover:text-gray-400"
-                    href="https://www.linkedin.com/in/aswin-anand-90ab91275/"
-                    target="_blank"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-white hover:text-gray-400"
-                    href="https://github.com/san2722soni"
-                    target="_blank"
-                  >
-                    Git-Hub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="text-white hover:text-gray-400"
-                    href="https://www.instagram.com/code2006asw"
-                    target="_blank"
-                  >
-                    Instagram
-                  </a>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-white hover:text-gray-500 tracking-widest text-sm mb-3">
-                SUBSCRIBE
-              </h2>
-              <div className="flex xl:flex-nowrap md:flex-nowrap lg:flex-wrap flex-wrap justify-center items-end md:justify-start lg:items-centre">
-                <div className="relative w-40 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 mr-2">
-                  <label
-                    htmlFor="footer-field"
-                    className="leading-7 text-sm text-gray-300"
-                  >
-                    Placeholder
-                  </label>
-                  <input
-                    type="text"
-                    id="footer-field"
-                    name="footer-field"
-                    className="w-full bg-[#ffffff12] rounded border border-gray-300 text-base outline-none text-white focus:bg-transparent py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
-                </div>
-                <button className="bg-[#525252] border border-white text-white hover:bg-transparent py-2 px-5 rounded-md" onClick={() => toast.info("Please click on 'Contact Me' button,to send messsage.")}>
-                  Submit
-                </button>
-              </div>
-              <p className="text-gray-500 text-sm mt-2 md:text-left text-center">
-                Enter your email to stay tuned!
+    <footer className="mt-28 border-t border-white/10 bg-white/[0.03] text-neutral-300">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 md:grid-cols-[1.2fr_0.8fr_1fr] lg:px-10">
+        <div>
+          <div className="flex items-center gap-4">
+            <img
+              src="/image.png"
+              alt="Aswin Anand"
+              className="h-16 w-16 rounded-full object-cover"
+            />
+            <div>
+              <p className="text-xl font-semibold text-white">{"<ASWIN/>"}</p>
+              <p className="mt-1 text-sm text-neutral-400">
+                Full-Stack Developer | Systems & CLI Tooling
               </p>
             </div>
           </div>
+          <p className="mt-5 max-w-md text-sm leading-7 text-neutral-400">
+            Building modern web apps, backend systems, terminal workflows, and
+            production-ready project documentation.
+          </p>
         </div>
-        <div className="bg-[#ffffff12]">
-          <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
-            <a className="flex title-font font-medium items-center md:justify-start justify-center text-white hover:text-gray-500">
-              <img
-                src={`/pfp3.jpg`}
-                alt="Image"
-                className="rounded-full w-24 h-24 hover:scale-150 transition-all duration-500"
-              />
 
-              <span className="ml-3 text-xl">{`<ASWIN/>`}</span>
+        <nav>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white">
+            Navigate
+          </h2>
+          <ul className="grid gap-2">
+            {navLinks.map((item) => (
+              <li key={item.to}>
+                <Link
+                  smooth={true}
+                  duration={700}
+                  to={item.to}
+                  className="cursor-pointer text-sm text-neutral-300 hover:text-cyan-200"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-white">
+            Connect
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            <button
+              className="rounded-full bg-white p-3 text-black transition hover:bg-cyan-200"
+              onClick={() => {
+                navigator.clipboard.writeText("9852502007");
+                toast.success("Phone number copied");
+              }}
+              aria-label="Copy phone number"
+            >
+              <IconPhone className="h-5 w-5" />
+            </button>
+            <button
+              className="rounded-full bg-white p-3 text-black transition hover:bg-cyan-200"
+              onClick={() => {
+                navigator.clipboard.writeText("invictusasw7@gmail.com");
+                toast.success("Email copied");
+              }}
+              aria-label="Copy email"
+            >
+              <IconMail className="h-5 w-5" />
+            </button>
+            <a
+              className="rounded-full bg-white p-3 text-black transition hover:bg-cyan-200"
+              href="https://github.com/san2722soni"
+              target="_blank"
+              aria-label="GitHub"
+            >
+              <IconBrandGithub className="h-5 w-5" />
             </a>
-            <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
-              © 2024 aswinPortfolio —
-            </p>
-            <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-              <a
-                className="ml-3 text-gray-500 group"
-                href="/"
-                onDoubleClick={() =>
-                  navigator.clipboard.writeText("9852502007")
-                }
-                target="_blank"
-              >
-                <IconPhone className="w-10 h-10 p-2 bg-white text-black hover:border hover:border-white hover:bg-transparent hover:text-white rounded-full" onClick={() => toast.info('Please double click to copy phone no.')}/>
-              </a>
-              <a
-                className="ml-3 text-gray-500"
-                href="/"
-                onDoubleClick={() =>
-                  navigator.clipboard.writeText("invictusasw7@gmail.com")
-                }
-                target="_blank"
-              >
-                <IconMail className="w-10 h-10 p-2 bg-white text-black hover:border hover:border-white hover:bg-transparent hover:text-white rounded-full" onClick={() => toast.info('Please double click to copy mail id.')}/>
-              </a>
-              <a
-                className="ml-3 text-gray-500"
-                href="https://github.com/san2722soni"
-                target="_blank"
-              >
-                <IconBrandGithub className="w-10 h-10 p-2 bg-white text-black hover:border hover:border-white hover:bg-transparent hover:text-white rounded-full" />
-              </a>
-              <a
-                className="ml-3 text-gray-500"
-                href="https://www.instagram.com/code2006asw/"
-                target="_blank"
-              >
-                <IconBrandInstagram className="w-10 h-10 p-2 bg-white text-black hover:border hover:border-white hover:bg-transparent hover:text-white rounded-full" />
-              </a>
-              <a
-                className="ml-3 text-gray-500"
-                href="https://www.linkedin.com/in/aswin-anand/"
-                target="_blank"
-              >
-                <IconBrandLinkedin className="w-10 h-10 p-2 bg-white text-black hover:border hover:border-white hover:bg-transparent hover:text-white rounded-full" />
-              </a>
-            </span>
+            <a
+              className="rounded-full bg-white p-3 text-black transition hover:bg-cyan-200"
+              href="https://www.linkedin.com/in/aswin-anand-90ab91275/"
+              target="_blank"
+              aria-label="LinkedIn"
+            >
+              <IconBrandLinkedin className="h-5 w-5" />
+            </a>
+            <a
+              className="rounded-full bg-white p-3 text-black transition hover:bg-cyan-200"
+              href="https://www.instagram.com/code2006asw/"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <IconBrandInstagram className="h-5 w-5" />
+            </a>
           </div>
         </div>
-      </footer>
-    </>
+      </div>
+      <div className="border-t border-white/10 px-6 py-5 text-center text-sm text-neutral-500">
+        (c) 2026 Aswin Anand. Portfolio built with Next.js, Tailwind, shadcn/Radix,
+        and motion components.
+      </div>
+    </footer>
   );
 };

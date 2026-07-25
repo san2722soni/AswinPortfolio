@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { LampContainer } from "@/components/ui/lamp";
 import { PinContainer } from "@/components/ui/3d-pin";
 import { HeroHighlight, Highlight } from "@/components/hero-highlight";
 
@@ -29,66 +28,68 @@ export function About() {
   }, []);
   return (
     <>
-      <HeroHighlight>
-        <motion.h1
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          animate={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          className="w-fit text-lg px-4 md:text-xl lg:text-2xl text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto lg:mb-14"
-        >
-          {shouldLoad && (
-            <Highlight className="">
-              <a className="font-bold relative bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-200">
-                "Dynamic Full-Stack Developer with 2+ years of experience in
-                Software Engineering Technologies, prioritizing robust solutions
-                over UI/UX design. Known for problem-solving abilities and a
-                keen eye for detail. Excited to collaborate on compelling visual
-                content projects."
-              </a>
-            </Highlight>
-          )}
-        </motion.h1>
-      </HeroHighlight>
-      <div className="w-fit mx-auto mb-[100px]">
-        <PinContainer title="<Aswin/>" href="">
-          <div className="flex basis-full flex-col p-4 sm:basis-1/2 lg:w-[25rem] w-[13rem] lg:h-[25rem] h-[13rem] z-1 relative group overflow-visible">
-            <h2 className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[12px] opacity-50 absolute top-[50%] left-[40%] group-hover:left-[-95%] group-hover:top-[10%] transition-all duration-100 ease-in-out group-hover:opacity-100">
-              Name: Aswin Anand
-            </h2>
-            <h2 className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[14px] opacity-50 absolute top-[50%] left-[40%] group-hover:left-[-95%] group-hover:top-[50%] transition-all duration-500 ease-in-out group-hover:opacity-100">
-              Date Of Birth: 19/12/2006
-            </h2>
-            <h2 className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[14px] opacity-50 absolute top-[50%] left-[40%] group-hover:left-[-95%] group-hover:top-[90%] transition-all duration-[1000ms] ease-in-out group-hover:opacity-100">
-              Email: invictusasw7@gmail.com
-            </h2>
-            <h2 className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[14px] opacity-50 absolute top-[50%] right-[40%] group-hover:right-[-60%] group-hover:top-[10%] transition-all duration-[100ms] ease-in-out group-hover:opacity-100">
-              Hire Me
-            </h2>
-            <button className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[14px] opacity-50 absolute top-[50%] right-[40%] group-hover:right-[-60%] group-hover:top-[50%]  transition-all duration-[500ms] ease-in-out group-hover:opacity-100">
-              <a href="https://drive.google.com/file/d/1ibkxmcMT5-4oADko9CkZUlDlHO9dWA1V/view?usp=sharing" target="_blank">Downlaod CV</a>
-            </button>
-            <button className="w-fit py-2 px-4 rounded-md bg-[#202020] text-white text-[2px] lg:group-hover:text-lg group-hover:text-[14px] opacity-50 absolute top-[50%] right-[40%] group-hover:right-[-60%] group-hover:top-[90%]  transition-all duration-[1000ms] ease-in-out group-hover:opacity-100">
-              <a href="#contacts">Phone: 985252007</a>
-            </button>
-            <Image
-              src={"/profile.jpeg"}
-              width={400}
-              height={400}
-              className="rounded-full aspect-square object-cover filter grayscale transition duration-300 ease-in-out hover:filter-none border-2 border-gray-300 cursor-pointer hover:border-blue-500 hover:border-3 "
-              alt="profile"
-            />
-          </div>
-        </PinContainer>
-      </div>
+      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:px-10">
+        <HeroHighlight>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: [20, -5, 0] }}
+            transition={{ duration: 0.5, ease: [0.4, 0.0, 0.2, 1] }}
+            className="mx-auto max-w-3xl"
+          >
+            {shouldLoad && (
+              <Highlight>
+                <h2 className="text-2xl font-bold leading-tight text-white md:text-4xl">
+                  Full-stack developer building practical systems from UI to
+                  production runtime.
+                </h2>
+              </Highlight>
+            )}
+            <p className="mt-6 text-base leading-8 text-neutral-300 md:text-lg">
+              I work across Next.js, Node/Fastify, MongoDB/Redis, C++, Linux,
+              SSH, PM2, Nginx, AWS, Cloudflare, Docker, Kubernetes, and ELK
+              style monitoring. My strongest recent work is not just landing
+              pages: it includes engines, dashboards, APIs, runbooks, smoke
+              tests, and load-test notes.
+            </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {["20+ projects shipped", "CLI-first debugging", "Production docs"].map((item) => (
+                <div key={item} className="rounded-md border border-white/10 bg-white/[0.04] p-4 text-sm text-neutral-200">
+                  {item}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </HeroHighlight>
+
+        <div className="mx-auto w-full max-w-sm">
+          <PinContainer title="<Aswin/>" href="#contact">
+            <div className="relative h-[30rem] w-[20rem] overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-3">
+              <Image
+                src="/image.png"
+                width={720}
+                height={1280}
+                className="h-full w-full rounded object-cover object-center grayscale transition duration-300 hover:grayscale-0"
+                alt="Aswin Anand"
+                priority
+              />
+              <div className="absolute inset-x-3 bottom-3 rounded bg-black/75 p-4 backdrop-blur">
+                <p className="text-lg font-semibold text-white">Aswin Anand</p>
+                <p className="mt-1 text-sm text-neutral-300">
+                  Full-Stack Developer | Pune, India
+                </p>
+                <div className="mt-3 flex gap-2">
+                  <a href="#contact" className="rounded bg-white px-3 py-2 text-xs font-semibold text-black">
+                    Contact
+                  </a>
+                  <a href="https://drive.google.com/file/d/1ibkxmcMT5-4oADko9CkZUlDlHO9dWA1V/view?usp=sharing" target="_blank" className="rounded border border-white/20 px-3 py-2 text-xs font-semibold text-white">
+                    Resume
+                  </a>
+                </div>
+              </div>
+            </div>
+          </PinContainer>
+        </div>
+      </section>
     </>
   );
 }
