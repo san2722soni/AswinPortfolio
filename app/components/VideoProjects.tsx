@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import {
   IconArrowUpRight,
+  IconListDetails,
   IconMovie,
   IconTerminal2,
+  IconX,
 } from "@tabler/icons-react";
 
 type Project = {
@@ -14,6 +17,11 @@ type Project = {
   stack: string[];
   video: string;
   videoId: string;
+  repo?: string;
+  about: string;
+  myRole: string;
+  features: string[];
+  proof: string[];
   featured?: boolean;
 };
 
@@ -27,6 +35,13 @@ const projects: Project[] = [
     stack: ["Next.js", "Express", "MongoDB", "Charts", "SCADA", "Analytics"],
     video: "https://youtu.be/xJVRv9B4Hmk",
     videoId: "xJVRv9B4Hmk",
+    repo: "https://github.com/san2722soni/SAMVIT",
+    about:
+      "A SCADA-style solar monitoring platform for plant operations. It turns energy production, alarms, reports, and site health into dashboards that operators can scan quickly.",
+    myRole:
+      "I worked on the dashboard experience, backend/API connection points, demo data flow, and local run fixes so the system could be recorded end-to-end.",
+    features: ["Plant overview dashboard", "Energy analytics and reports", "Alarm and alert views", "Notification-focused operator screens"],
+    proof: ["Industrial domain UX", "Chart-heavy dashboard work", "Backend-driven pages", "Monitoring/debugging mindset"],
     featured: true,
   },
   {
@@ -38,6 +53,13 @@ const projects: Project[] = [
     stack: ["React", "Node.js", "Git", "CLI", "Desktop UX"],
     video: "https://youtu.be/V_F9goWYqc4",
     videoId: "V_F9goWYqc4",
+    repo: "https://github.com/san2722soni/Version-Control-Manager",
+    about:
+      "A developer tool for Git workflows: repository views, branch context, workflow screens, and backend-backed operations for managing version-control tasks.",
+    myRole:
+      "I handled the portfolio-ready frontend/backend setup, local auth flow, backend dependency mapping, and demo run path.",
+    features: ["Repository and branch screens", "Developer workflow UI", "Backend OTP/auth support", "CLI/Git-oriented product direction"],
+    proof: ["Git and terminal relevance", "Debugging-heavy workflow", "Tooling product sense", "Frontend plus backend integration"],
     featured: true,
   },
   {
@@ -49,6 +71,13 @@ const projects: Project[] = [
     stack: ["Next.js", "Tailwind", "Admin CMS", "Cloudinary", "Auth"],
     video: "https://youtu.be/GJjCe7zWu9Q",
     videoId: "GJjCe7zWu9Q",
+    repo: "https://github.com/san2722soni/XENVOLT-Site",
+    about:
+      "A business website and admin ecosystem for an industrial AI company. It covers public pages, case studies, blogs, careers, leads, and admin-side content workflows.",
+    myRole:
+      "I fixed local dev issues, removed fragile Google font loading paths, cleaned UI/font behavior, and prepared both site/admin as showcase material.",
+    features: ["Public company website", "Case-study and blog pages", "Admin CMS workflows", "Lead/content management"],
+    proof: ["Client-ready UI", "Admin product thinking", "Next.js app structure", "Network/font debugging"],
     featured: true,
   },
   {
@@ -60,6 +89,13 @@ const projects: Project[] = [
     stack: ["Next.js", "Express", "MongoDB", "CSV", "JWT", "Reports"],
     video: "https://youtu.be/bHUvejhSDjo",
     videoId: "bHUvejhSDjo",
+    repo: "https://github.com/san2722soni/Randomizer-BA-Test",
+    about:
+      "An airport staff testing platform where admins upload staff data, station managers run random selections, doctors record results, and reports summarize testing history.",
+    myRole:
+      "I debugged the frontend/backend run path, seeded demo-friendly data, generated a valid CSV sample, and prepared role-based demo credentials.",
+    features: ["CSV staff import", "Random test selection", "Doctor result workflow", "Admin/station manager reports"],
+    proof: ["Role-based app flow", "CSV/data handling", "Business reporting screens", "MongoDB-backed workflow"],
     featured: true,
   },
   {
@@ -71,6 +107,13 @@ const projects: Project[] = [
     stack: ["Next.js", "Fastify", "MongoDB", "Redis", "AWS"],
     video: "https://youtu.be/Sn7XAAzTvuM",
     videoId: "Sn7XAAzTvuM",
+    repo: "https://github.com/san2722soni/V-Dashboard",
+    about:
+      "A control-plane style dashboard for game operations: builds, sessions, developer management, backend docs, and production-like runtime controls.",
+    myRole:
+      "I connected it with the V-Server run path, removed production-only UI blocks for demos, and documented how frontend/backend run together.",
+    features: ["Build management", "Developer/admin panels", "Session/runtime views", "Backend API documentation surfaces"],
+    proof: ["Admin dashboard UX", "Backend control workflows", "MongoDB/Redis ecosystem", "Internal tooling style"],
   },
   {
     title: "SAMVIT Notifications",
@@ -81,6 +124,13 @@ const projects: Project[] = [
     stack: ["Next.js", "Alerts", "Notifications", "Dashboard UX"],
     video: "https://youtu.be/XdtZ9UeJzdM",
     videoId: "XdtZ9UeJzdM",
+    repo: "https://github.com/san2722soni/SAMVIT",
+    about:
+      "A focused notification and alert workflow for SAMVIT, designed around quick operational scanning and action clarity.",
+    myRole:
+      "I treated it as a focused sub-demo showing how monitoring systems communicate issues to operators.",
+    features: ["Notification list", "Alert priority views", "Operator-friendly scanning", "SCADA support workflow"],
+    proof: ["Monitoring UX", "Alert design", "Operational dashboard thinking", "Energy software context"],
   },
   {
     title: "Grid Prototype",
@@ -91,6 +141,12 @@ const projects: Project[] = [
     stack: ["React", "Animation", "Prototype", "UI"],
     video: "https://youtu.be/2ZT8AiIlpc0",
     videoId: "2ZT8AiIlpc0",
+    about:
+      "An interaction-heavy grid prototype focused on motion, layout behavior, and visual experimentation.",
+    myRole:
+      "I built it as supporting frontend proof: visual systems, transitions, and prototype thinking.",
+    features: ["Grid-based UI", "Motion-focused interactions", "Responsive layout experiments", "Prototype presentation"],
+    proof: ["Frontend polish", "Interaction design", "Animation practice", "UI experimentation"],
   },
   {
     title: "Chakra",
@@ -101,6 +157,13 @@ const projects: Project[] = [
     stack: ["React", "Next.js", "Tailwind", "UI"],
     video: "https://youtu.be/mDH5zXn7inI",
     videoId: "mDH5zXn7inI",
+    repo: "https://github.com/san2722soni/CHAKRA-OEE",
+    about:
+      "An OEE/manufacturing operations dashboard with digital twin, predictive, maintenance, and equipment-focused screens.",
+    myRole:
+      "I analyzed and prepared it as a portfolio project showing industrial dashboard depth separate from SCADA/SAMVIT.",
+    features: ["OEE dashboard", "Digital twin screen", "Predictive insights", "Maintenance/equipment views"],
+    proof: ["Industrial software UI", "Dashboard architecture", "Manufacturing domain", "Data visualization screens"],
   },
   {
     title: "Eduford",
@@ -111,6 +174,13 @@ const projects: Project[] = [
     stack: ["HTML", "CSS", "JavaScript", "Responsive UI"],
     video: "https://youtu.be/N8Q_hrBwZ6I",
     videoId: "N8Q_hrBwZ6I",
+    repo: "https://github.com/san2722soni/Eduford",
+    about:
+      "An education landing website from my earlier frontend phase, focused on sections, responsiveness, and content presentation.",
+    myRole:
+      "I keep it as archive proof to show the progression from static frontend work to full-stack systems.",
+    features: ["Education landing pages", "Responsive sections", "Contact/content layout", "Static frontend structure"],
+    proof: ["Frontend fundamentals", "Responsive design", "Archive progression", "Clean page composition"],
   },
   {
     title: "E-Commerce Site",
@@ -121,6 +191,13 @@ const projects: Project[] = [
     stack: ["React", "Frontend", "E-Commerce", "UI"],
     video: "https://youtu.be/2vWkRkh1WXE",
     videoId: "2vWkRkh1WXE",
+    repo: "https://github.com/san2722soni/RealViewGarden-store",
+    about:
+      "A storefront-style frontend for product browsing and ecommerce presentation, useful as older commerce UI proof.",
+    myRole:
+      "I use it as an archive/supporting project while the main portfolio now leads with newer systems work.",
+    features: ["Product browsing UI", "Storefront sections", "Commerce-style layout", "Responsive presentation"],
+    proof: ["Ecommerce patterns", "Frontend layout", "Customer-facing UI", "Archive project breadth"],
   },
   {
     title: "The Intellect",
@@ -131,6 +208,13 @@ const projects: Project[] = [
     stack: ["React", "Frontend", "Animation", "Responsive UI"],
     video: "https://youtu.be/VfKphuHxXYE",
     videoId: "VfKphuHxXYE",
+    repo: "https://github.com/san2722soni/The-Intellect",
+    about:
+      "A coaching/education frontend showcase with institutional content, responsive sections, and visual hierarchy.",
+    myRole:
+      "I keep it as an older project to show frontend fundamentals before the newer dashboard/backend projects.",
+    features: ["Education content pages", "Responsive sections", "Visual hierarchy", "Static frontend flow"],
+    proof: ["Frontend fundamentals", "Content layout", "Responsive UI", "Progression over time"],
   },
   {
     title: "Directors Chair",
@@ -141,6 +225,13 @@ const projects: Project[] = [
     stack: ["React", "UI", "Motion", "Frontend"],
     video: "https://youtu.be/CaNlNzLP8X4",
     videoId: "CaNlNzLP8X4",
+    repo: "https://github.com/san2722soni/Director-s-Chair",
+    about:
+      "A media workflow interface around clapperboard/director-style recording and production management flows.",
+    myRole:
+      "I included it as a creative product UI project that adds variety beyond dashboards and business websites.",
+    features: ["Media workflow screens", "Production-style UI", "Creative interface direction", "Motion-led presentation"],
+    proof: ["Creative UX", "Frontend breadth", "Workflow design", "Portfolio variety"],
   },
 ];
 
@@ -152,6 +243,7 @@ const stats = [
 ];
 
 export function VideoProjects() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const featured = projects.filter((project) => project.featured);
   const more = projects.filter((project) => !project.featured);
 
@@ -186,7 +278,11 @@ export function VideoProjects() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {featured.map((project, index) => (
-            <article key={project.title} className="overflow-hidden rounded-md border border-cyan-300/20 bg-white/[0.045] shadow-2xl shadow-black/30">
+            <article
+              key={project.title}
+              onClick={() => setSelectedProject(project)}
+              className="cursor-pointer overflow-hidden rounded-md border border-cyan-300/20 bg-white/[0.045] shadow-2xl shadow-black/30 transition hover:border-cyan-200/60 hover:bg-white/[0.07]"
+            >
               <div className="aspect-video w-full bg-black">
                 <iframe
                   className="h-full w-full"
@@ -210,7 +306,7 @@ export function VideoProjects() {
                 <p className="mt-3 border-l border-cyan-300/40 pl-3 text-sm leading-6 text-cyan-50/90">
                   {project.outcome}
                 </p>
-                <ProjectFooter project={project} />
+                <ProjectFooter project={project} onOpen={() => setSelectedProject(project)} />
               </div>
             </article>
           ))}
@@ -218,7 +314,11 @@ export function VideoProjects() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {more.map((project) => (
-            <article key={project.title} className="group rounded-md border border-white/10 bg-white/[0.035] p-4 transition hover:border-cyan-300/35 hover:bg-white/[0.06]">
+            <article
+              key={project.title}
+              onClick={() => setSelectedProject(project)}
+              className="group cursor-pointer rounded-md border border-white/10 bg-white/[0.035] p-4 transition hover:border-cyan-300/35 hover:bg-white/[0.06]"
+            >
               <div className="relative overflow-hidden rounded bg-black">
                 <img
                   src={`https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`}
@@ -236,16 +336,30 @@ export function VideoProjects() {
               </p>
               <h3 className="mt-2 text-lg font-semibold text-white">{project.title}</h3>
               <p className="mt-2 text-sm leading-6 text-neutral-300">{project.summary}</p>
-              <ProjectFooter project={project} compact />
+              <ProjectFooter project={project} compact onOpen={() => setSelectedProject(project)} />
             </article>
           ))}
         </div>
       </div>
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   );
 }
 
-function ProjectFooter({ project, compact = false }: { project: Project; compact?: boolean }) {
+function ProjectFooter({
+  project,
+  compact = false,
+  onOpen,
+}: {
+  project: Project;
+  compact?: boolean;
+  onOpen: () => void;
+}) {
   return (
     <>
       <div className={`flex flex-wrap gap-2 ${compact ? "mt-4" : "mt-5"}`}>
@@ -256,15 +370,114 @@ function ProjectFooter({ project, compact = false }: { project: Project; compact
         ))}
       </div>
       <div className={`flex flex-wrap gap-3 ${compact ? "mt-4" : "mt-6"}`}>
-        <a href={project.video} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200">
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onOpen();
+          }}
+          className="inline-flex items-center gap-2 rounded-md border border-cyan-300/35 px-3 py-2 text-xs font-semibold text-cyan-100 transition hover:bg-cyan-300/10"
+        >
+          Details <IconListDetails className="h-4 w-4" />
+        </button>
+        <a href={project.video} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200">
           Watch demo <IconArrowUpRight className="h-4 w-4" />
         </a>
         {!compact && (
-          <a href="#contact" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
+          <a href="#contact" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
             Discuss build <IconTerminal2 className="h-4 w-4" />
           </a>
         )}
       </div>
     </>
+  );
+}
+
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-[9999] overflow-y-auto bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
+      <div
+        className="mx-auto my-8 max-w-5xl overflow-hidden rounded-md border border-white/10 bg-neutral-950 shadow-2xl shadow-black"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="bg-black">
+            <iframe
+              className="aspect-video h-full min-h-64 w-full"
+              src={`https://www.youtube.com/embed/${project.videoId}`}
+              title={`${project.title} case study video`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          <div className="p-6">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+                  {project.eyebrow}
+                </p>
+                <h3 className="mt-3 text-3xl font-bold text-white">{project.title}</h3>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-md border border-white/10 p-2 text-neutral-300 transition hover:border-cyan-300 hover:text-white"
+                aria-label="Close project details"
+              >
+                <IconX className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="mt-5 text-sm leading-7 text-neutral-300">{project.about}</p>
+            <p className="mt-4 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-cyan-50/90">
+              {project.myRole}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-6 border-t border-white/10 p-6 lg:grid-cols-3">
+          <DetailList title="What It Does" items={project.features} />
+          <DetailList title="What It Proves" items={project.proof} />
+          <div>
+            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+              Stack
+            </h4>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.stack.map((tech) => (
+                <span key={tech} className="rounded border border-white/10 bg-white/[0.04] px-2.5 py-1 text-xs text-neutral-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a href={project.video} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200">
+                Watch demo <IconArrowUpRight className="h-4 w-4" />
+              </a>
+              {project.repo && (
+                <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
+                  GitHub <IconArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DetailList({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div>
+      <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+        {title}
+      </h4>
+      <ul className="mt-4 space-y-3">
+        {items.map((item) => (
+          <li key={item} className="rounded border border-white/10 bg-white/[0.035] px-3 py-2 text-sm text-neutral-300">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
