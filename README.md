@@ -1,40 +1,37 @@
-﻿# Aswin Anand Portfolio
+# Aswin Portfolio
 
 Personal developer portfolio showcasing full-stack apps, systems work, CLI/debugging experience, and production workflows.
 
-## Overview
+## Why This Project Matters
 
-My personal portfolio for presenting full-stack development, systems-oriented projects, CLI/debugging skills, and production workflow experience.
+This project is part of my portfolio because it shows practical product engineering: real screens, real workflows, backend/API thinking where relevant, and enough structure to explain design and debugging decisions clearly.
+
+## Highlights
+
+- Video-first project showcase
+- Updated skill positioning for full-stack and systems work
+- Modern portfolio sections
+- Built for recruiter scanning
 
 ## Tech Stack
 
-Next.js, React, TypeScript, Tailwind CSS, shadcn/ui, Aceternity UI
+Next.js, Tailwind, shadcn/Radix, Aceternity-style motion, YouTube demos
 
-## Features
+## Demo
 
-- Ranked project showcase
-- Skills grouped by frontend/backend/devops/systems
-- Responsive portfolio UI
-- Contact and project presentation sections
+- Demo video: add when available
 
 ## Run Locally
 
-- Install dependencies with npm install
-- Run locally with npm run dev
-- Build with npm run build
+`ash
+npm install
+npm run dev
+`
 
-## Showcase
+Some full-stack projects may also need MongoDB, Redis, or a paired backend/frontend service. Check the project-specific .env.example, backend folder, or existing docs before running production-like flows.
 
-Recommended assets for a stronger portfolio presentation:
+## Portfolio Notes
 
-- Demo video or walkthrough
-- 2-5 screenshots of the main workflow
-- Short architecture/API screenshot where relevant
-
-## Status
-
-Main personal portfolio.
-
-## Notes
-
-This repository is maintained as part of a developer portfolio. Secrets and local environment values should stay outside Git and be documented through .env.example files when required.
+- Built/maintained by Aswin Anand.
+- Showcase-ready README added for recruiters and project reviewers.
+- Private repositories are intentionally kept private when the project includes client-like code, internal workflows, or local environment assumptions.
