@@ -4,34 +4,30 @@ Personal developer portfolio showcasing full-stack apps, systems work, CLI/debug
 
 ## Why This Project Matters
 
-This project is part of my portfolio because it shows practical product engineering: real screens, real workflows, backend/API thinking where relevant, and enough structure to explain design and debugging decisions clearly.
+This portfolio is built for recruiter scanning: real projects, recorded walkthroughs, practical skills, backend/API context, and production-style workflows.
 
 ## Highlights
 
 - Video-first project showcase
-- Updated skill positioning for full-stack and systems work
-- Modern portfolio sections
-- Built for recruiter scanning
+- Updated full-stack and systems positioning
+- Modern sections for projects, skills, about, and contact
+- Built with a clean npm setup using `package-lock.json`
 
 ## Tech Stack
 
-Next.js, Tailwind, shadcn/Radix, Aceternity-style motion, YouTube demos
-
-## Demo
-
-- Demo video: add when available
+Next.js, Tailwind CSS, shadcn/Radix UI, Aceternity-style motion components, Sonner, EmailJS, YouTube demos.
 
 ## Run Locally
 
-`ash
+```bash
 npm install
 npm run dev
-`
+```
 
-Some full-stack projects may also need MongoDB, Redis, or a paired backend/frontend service. Check the project-specific .env.example, backend folder, or existing docs before running production-like flows.
+Open `http://localhost:3000`.
 
 ## Portfolio Notes
 
 - Built/maintained by Aswin Anand.
 - Showcase-ready README added for recruiters and project reviewers.
-- Private repositories are intentionally kept private when the project includes client-like code, internal workflows, or local environment assumptions.
+- Project demo videos should be set to Unlisted/Public on YouTube before sharing.
