@@ -1,79 +1,79 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import {
+  IconBriefcase,
+  IconBuildingFactory2,
+  IconCode,
+  IconUserCheck,
+} from "@tabler/icons-react";
 
-export function Testimonial() {
-  const words = [
-    {
-      text: "Words",
-    },
-    {
-      text: "from",
-    },
-    {
-      text: "my clients...",
-    },
-  ];
-
-  return (
-    <div className="h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden ">
-      <div className="flex flex-col items-center justify-center mt-20">
-        <TypewriterEffectSmooth words={words} />
-      </div>
-      <InfiniteMovingCards
-        items={testimonials}
-        direction="right"
-        speed="normal"
-      />
-    </div>
-  );
-}
-
-const testimonials = [
+const notes = [
   {
-    quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+    title: "Company Product Work",
+    name: "XENVOLT",
+    text:
+      "Built and maintained product work across SAMVIT, SAMVIT Pro, Randomizer, XENVOLT Site/Admin, and CHAKRA POC with sanitized demos for portfolio review.",
+    icon: IconBuildingFactory2,
   },
   {
-    quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
+    title: "Senior-Guided Engineering",
+    name: "Vineet Oli collaboration",
+    text:
+      "Worked on AnarchyV2, V-Dashboard/V-Server, and VCM with senior engineering guidance, focusing on implementation, debugging, systems thinking, and Linux-backed workflows.",
+    icon: IconCode,
   },
   {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
+    title: "Client Delivery",
+    name: "Independent client work",
+    text:
+      "Delivered websites and product interfaces for Auryvedic, Psych Learn, Dragstr, Eduford, The Intellect, RealViewGarden, and creator portfolio use cases.",
+    icon: IconBriefcase,
   },
   {
-    quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
-  },
-  {
-    quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+    title: "Personal Engineering",
+    name: "Curiosity-led builds",
+    text:
+      "Built Directors Chair and Halloween Calculator from practical ideas and curiosity, showing original workflow thinking beyond tutorial-style projects.",
+    icon: IconUserCheck,
   },
 ];
 
-{
-  /* <div className="h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden ">
- <div className="bg-hero bg-center bg-cover backdrop-blur relative rounded-md ">
-  <div className="panel bg-opacity-20 bg-gray-600 backdrop-filter backdrop-blur-md border border-white border-opacity-20 rounded-lg shadow-lg text-white text-2xl px-12 py-6">
-    <h1 className="text-white text-center">"Words from my clients"</h1>
-  </div>
-    <InfiniteMovingCards
-      items={testimonials}
-      direction="right"
-      speed="normal"
-    />
-</div> 
-</div> */
+export function Testimonial() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mb-10 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
+          Collaboration Notes
+        </p>
+        <h2 className="mt-4 text-3xl font-bold text-white md:text-5xl">
+          Real work contexts, not placeholder testimonials.
+        </h2>
+        <p className="mt-5 text-base leading-8 text-neutral-300">
+          These notes explain where the work came from: company product work,
+          partner-guided engineering, client delivery, and personal projects.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {notes.map((note) => {
+          const Icon = note.icon;
+          return (
+            <article
+              key={note.title}
+              className="rounded-md border border-white/10 bg-white/[0.035] p-5"
+            >
+              <span className="inline-flex rounded-md border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-200">
+                <Icon className="h-5 w-5" />
+              </span>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                {note.title}
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-white">{note.name}</h3>
+              <p className="mt-3 text-sm leading-7 text-neutral-300">{note.text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
 }

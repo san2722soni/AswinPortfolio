@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { IconBriefcase, IconHome, IconMessage, IconSettings, IconUser } from "@tabler/icons-react"
+import { IconBriefcase, IconHome, IconMessage, IconQuote, IconSettings, IconUser } from "@tabler/icons-react"
 
 interface navbarProps{
     name: string;
@@ -45,6 +45,12 @@ const Navbar: React.FC<navbarProps> = ({
             link: "/",
             to: "portfolio",
             icon: <IconBriefcase className="h-5 w-5 text-neutral-500" />,
+        },
+        {
+          name: "Proof",
+          link: "/",
+          to: "testimonial",
+          icon: <IconQuote className="h-5 w-5 text-neutral-500" />,
         },
       ];
     return (

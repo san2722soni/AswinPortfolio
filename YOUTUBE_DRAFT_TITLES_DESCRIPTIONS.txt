@@ -9,7 +9,8 @@ Format:
 - Do not expose client secrets, private data, credentials, or internal code details.
 
 1. AnarchyV2
-Link: https://youtu.be/-aJ0g3PiRls
+Link: https://youtu.be/ag_KtDZrXwI
+Extra walkthrough link: https://youtu.be/Sn7XAAzTvuM
 Title: AnarchyV2 - Massive Multiplayer Game Server Demo | Job Work
 Description:
 AnarchyV2 is a partner-guided job work project I worked on with Vineet Oli, a senior engineer from DTU/ex-Urban Company. The idea was a massive multiplayer "million chess boards" style game/server system where one server can coordinate a very large number of players and running game boards at the same time.
@@ -56,7 +57,7 @@ Work type: Job work at XENVOLT.
 Tech/focus: Next.js, dashboard UI, alert workflows, notification screens, monitoring UX.
 
 5. Version Control Manager
-Link: https://youtu.be/V_F9goWYqc4
+Link: TODO - correct VCM video recording pending
 Title: Version Control Manager - GitHub-Like Desktop Tool Demo | Partner-Guided Job Work
 Description:
 Version Control Manager is a GitHub-like version-control management project I worked on after V-Dashboard and V-Server. It was built using Electron, Next.js, Node.js, ELK, and Linux deployment workflows.
@@ -68,7 +69,7 @@ Work type: Partner-guided job work.
 Tech/focus: Electron, Next.js, Node.js, Git workflows, MongoDB, Redis, ELK, Linux deployment, developer tooling.
 
 6. V-Dashboard
-Link: https://youtu.be/Sn7XAAzTvuM
+Link: https://youtu.be/bHUvejhSDjo
 Title: V-Dashboard - Multiplayer Game Operations Dashboard Demo | Partner-Guided Job Work
 Description:
 V-Dashboard is the frontend/control dashboard for a multiplayer game server ecosystem I worked on with Vineet Oli after XENVOLT. It manages game builds, sessions, developers, backend docs, feature flows, and runtime operations.
@@ -92,7 +93,7 @@ Work type: Partner-guided job work.
 Tech/focus: Node.js, Fastify/Express-style APIs, MongoDB, Redis, JWT/auth, backend services, scheduler/util structure.
 
 8. Randomizer / BA Test
-Link: https://youtu.be/bHUvejhSDjo
+Link: https://youtu.be/y4-FRud6dlo
 Title: Randomizer BA Test - Airport Staff Testing System Demo | XENVOLT Job Work
 Description:
 Randomizer BA Test is a product I worked on at XENVOLT for airport/staff testing workflows. It includes role-based dashboards, staff CSV import, random selection, doctor result entry, station manager workflows, and admin reports.
@@ -104,7 +105,7 @@ Work type: Job work at XENVOLT.
 Tech/focus: Next.js, TypeScript, Node backend, MongoDB, CSV upload, JWT/auth, reports, role-based workflows.
 
 9. Auryvedic
-Link: https://youtu.be/ag_KtDZrXwI
+Link: https://youtu.be/IFI0Qrgk0E4
 Title: Auryvedic - Clinic Management Dashboard Demo | Client Work
 Description:
 Auryvedic is a client work project for an Ayurveda/clinic-style platform. It includes dashboard screens, appointments, users, conversations, knowledge/AI-assisted flows, and admin-style management views.
@@ -247,7 +248,7 @@ Work type: Client/friend work.
 Tech/focus: React/Next.js, Tailwind/CSS, portfolio UI, responsive personal branding.
 
 22. Halloween Calculator
-Link: Add video link after upload
+Link: https://youtu.be/LjS2nbdrMf0
 Title: Halloween Calculator - Multi-Utility Vanilla JS Calculator With Easter Eggs | Personal Project
 Description:
 Halloween Calculator is a personal curiosity project from my early frontend phase. It is not just a basic calculator: it includes a normal arithmetic calculator, advanced calculator tabs, age calculator, area solver, BMI, data, discount, length, mass, speed, temperature, currency conversion, keyboard support, Halloween mode, tutorial popup, clues, and hidden easter eggs.

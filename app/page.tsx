@@ -8,6 +8,7 @@ import { Spotlight } from "@/components/ui/Spotlight";
 import { About } from "./components/About";
 import { VideoProjects } from "./components/VideoProjects";
 import { Services } from "./components/services";
+import { Testimonial } from "./components/testimonial";
 import { Form } from "./components/box";
 import { Footer } from "./components/footer";
 export default function Home() {
@@ -50,6 +51,9 @@ export default function Home() {
         </section>
         <section id="portfolio">
           <VideoProjects />
+        </section>
+        <section id="testimonial">
+          <Testimonial />
         </section>
         <section id="services">
           <Services />

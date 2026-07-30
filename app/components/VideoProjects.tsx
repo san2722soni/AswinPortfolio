@@ -3,281 +3,484 @@
 import { useState } from "react";
 import {
   IconArrowUpRight,
+  IconBriefcase,
   IconListDetails,
   IconMovie,
   IconTerminal2,
+  IconUserCode,
+  IconUsers,
   IconX,
 } from "@tabler/icons-react";
+
+type Filter = "All" | "Job Work" | "Partner-Guided" | "Client Work" | "Personal";
 
 type Project = {
   title: string;
   eyebrow: string;
-  summary: string;
-  outcome: string;
-  stack: string[];
-  video: string;
-  videoId: string;
-  repo?: string;
+  category: Exclude<Filter, "All">;
   workType: string;
   duration?: string;
   context: string;
+  summary: string;
   about: string;
   myRole: string;
+  outcome: string;
+  stack: string[];
   features: string[];
   proof: string[];
-  featured?: boolean;
+  video: string;
+  videoId: string;
+  repo?: string;
+  extraLinks?: { label: string; href: string }[];
 };
 
 const projects: Project[] = [
   {
-    title: "SAMVIT / SCADA Platform",
-    eyebrow: "Energy Monitoring + Backend APIs",
+    title: "AnarchyV2",
+    eyebrow: "Massive Multiplayer Game Server",
+    category: "Partner-Guided",
+    workType: "Partner-guided job work",
+    duration: "2-3 months",
+    context:
+      "Worked with Vineet Oli on a massive multiplayer game/server system where one server coordinates many running boards/players.",
     summary:
-      "Solar monitoring dashboards with plant analytics, alarms, reports, notifications, and backend-driven operational views.",
-    outcome: "Best proof of dashboard thinking, data-heavy UX, and real-world industrial domain work.",
-    stack: ["Next.js", "Express", "MongoDB", "Charts", "SCADA", "Analytics"],
-    video: "https://youtu.be/xJVRv9B4Hmk",
-    videoId: "xJVRv9B4Hmk",
-    repo: "https://github.com/san2722soni/SAMVIT",
-    workType: "Job work at XENVOLT",
-    duration: "1 month",
-    context: "Built while working at XENVOLT as a full-stack developer.",
+      "A multiplayer game platform built around engine/runtime thinking, backend services, load testing, and operational scripts.",
     about:
-      "A SCADA-style solar monitoring platform for plant operations. It turns energy production, alarms, reports, and site health into dashboards that operators can scan quickly.",
+      "AnarchyV2 was a large game/server engineering project inspired by a massive multi-board chess-like workload. The core idea was to support a very high number of simultaneous players and game boards through one coordinated backend/runtime system.",
     myRole:
-      "I worked on the dashboard experience, backend/API connection points, demo data flow, and local run fixes so the system could be recorded end-to-end.",
-    features: ["Plant overview dashboard", "Energy analytics and reports", "Alarm and alert views", "Notification-focused operator screens"],
-    proof: ["Industrial domain UX", "Chart-heavy dashboard work", "Backend-driven pages", "Monitoring/debugging mindset"],
-    featured: true,
+      "I coded and debugged implementation pieces while Vineet Oli guided architecture, review, and engineering direction. This was one of my strongest learning-heavy job-work projects.",
+    outcome:
+      "Best proof of systems thinking, terminal-first debugging, multiplayer backend work, load testing, and senior-guided engineering growth.",
+    stack: ["C++", "Next.js", "Node/Fastify", "MongoDB", "Redis", "Linux", "PM2", "Nginx", "ELK"],
+    features: ["Game client/server flow", "Engine/runtime structure", "Load-test direction", "Deployment and monitoring scripts"],
+    proof: ["Systems engineering", "Multiplayer backend thinking", "Linux/terminal workflow", "Performance/debugging mindset"],
+    video: "https://youtu.be/ag_KtDZrXwI",
+    videoId: "ag_KtDZrXwI",
+    repo: "https://github.com/san2722soni/AnarchyV2",
+    extraLinks: [{ label: "Screen walkthrough", href: "https://youtu.be/Sn7XAAzTvuM" }],
   },
   {
     title: "Version Control Manager",
-    eyebrow: "Developer Tooling",
+    eyebrow: "GitHub-Like Desktop Tool",
+    category: "Partner-Guided",
+    workType: "Partner-guided job work",
+    duration: "3 months",
+    context:
+      "Worked after V-Dashboard/V-Server with Vineet Oli guiding architecture while I coded implementation.",
     summary:
-      "Git workflow manager with repository views, branch operations, developer-focused UX, and backend integration.",
-    outcome: "Strong match for terminal, Git, debugging, and tooling-heavy roles.",
-    stack: ["React", "Node.js", "Git", "CLI", "Desktop UX"],
+      "A GitHub-like version-control manager built with Electron, Next.js, Node.js, ELK, and Linux deployment workflows.",
+    about:
+      "VCM is a developer tooling product for repository, branch, and workflow management. It was built as a desktop-style Git/version-control tool with frontend screens, backend APIs, auth, and deployment/observability thinking.",
+    myRole:
+      "I worked on the implementation, frontend/backend flow, local run path, and project preparation while receiving senior guidance on architecture and product direction.",
+    outcome:
+      "Strong match for Git, terminal, debugging, CLI, and developer-tooling roles.",
+    stack: ["Electron", "Next.js", "Node.js", "Git", "MongoDB", "Redis", "ELK", "Linux"],
+    features: ["Repository workflow UI", "Branch/developer screens", "Backend auth/API flow", "Desktop-style developer product"],
+    proof: ["Git workflow understanding", "Developer tooling", "Full-stack integration", "Linux/ELK deployment exposure"],
     video: "https://youtu.be/V_F9goWYqc4",
     videoId: "V_F9goWYqc4",
     repo: "https://github.com/san2722soni/Version-Control-Manager",
-    workType: "Partner-guided job work",
-    duration: "3 months",
-    context: "Worked after V-Dashboard/V-Server with senior guidance from Vineet Oli; I coded and implemented core parts.",
-    about:
-      "A developer tool for Git workflows: repository views, branch context, workflow screens, and backend-backed operations for managing version-control tasks.",
-    myRole:
-      "I handled the portfolio-ready frontend/backend setup, local auth flow, backend dependency mapping, and demo run path.",
-    features: ["Repository and branch screens", "Developer workflow UI", "Backend OTP/auth support", "CLI/Git-oriented product direction"],
-    proof: ["Git and terminal relevance", "Debugging-heavy workflow", "Tooling product sense", "Frontend plus backend integration"],
-    featured: true,
   },
   {
-    title: "XENVOLT Site + Admin",
-    eyebrow: "Business Website + CMS",
+    title: "Auryvedic",
+    eyebrow: "Clinic Management Dashboard",
+    category: "Client Work",
+    workType: "Client work",
+    duration: "2-3 weeks",
+    context: "Client project for an Ayurveda/clinic-style product.",
     summary:
-      "Industrial AI website with admin flows for content, leads, products, and case-study style business pages.",
-    outcome: "Shows client-ready UI polish plus admin-side product thinking.",
-    stack: ["Next.js", "Tailwind", "Admin CMS", "Cloudinary", "Auth"],
+      "Clinic dashboard with appointments, users, conversations, knowledge/AI-assisted flows, and admin-style management views.",
+    about:
+      "Auryvedic is a client-facing healthcare-style platform for clinic workflows. It brings operational screens like dashboard metrics, appointments, users, conversations, and knowledge workflows into one admin product.",
+    myRole:
+      "I built the client-facing product screens and full-stack workflow needed for the demo.",
+    outcome:
+      "Shows fast client delivery, dashboard UX, appointment workflows, and full-stack product thinking.",
+    stack: ["Next.js", "Node.js", "MongoDB", "Tailwind", "API Client", "Dashboard UI"],
+    features: ["Clinic dashboard", "Appointment screens", "User management", "Conversations and knowledge flows"],
+    proof: ["Client delivery", "Healthcare-style UX", "Full-stack dashboard", "Fast product execution"],
+    video: "https://youtu.be/IFI0Qrgk0E4",
+    videoId: "IFI0Qrgk0E4",
+    repo: "https://github.com/san2722soni/Auyrveda",
+  },
+  {
+    title: "XENVOLT Site",
+    eyebrow: "16-Page Industrial AI Website",
+    category: "Job Work",
+    workType: "Job work at XENVOLT",
+    duration: "Built in 1 month, maintained during employment",
+    context:
+      "Built and maintained the XENVOLT company website: pages, updates, content tweaks, Vercel/devops and CI/CD-style workflow.",
+    summary:
+      "Industrial AI company website with product pages, AI solutions, case studies, blogs, careers, clients, and company content.",
+    about:
+      "XENVOLT Site is the company website I worked on during my XENVOLT role. It presents company positioning, products, AI solutions, case studies, blogs, careers, and client-facing pages across a multi-page Next.js app.",
+    myRole:
+      "I built the website, maintained updates, handled content tweaks, fixed UI/dev issues, and supported deployment workflow.",
+    outcome:
+      "Shows professional client/company website work, responsive UI, content-heavy pages, and real maintenance responsibility.",
+    stack: ["Next.js", "Tailwind", "shadcn/Radix", "CMS APIs", "Vercel", "Responsive UI"],
+    features: ["16-page company website", "Case studies and blogs", "Careers and clients pages", "Maintenance and deployment workflow"],
+    proof: ["Business website delivery", "UI polish", "Content-heavy Next.js app", "Devops/deployment support"],
     video: "https://youtu.be/GJjCe7zWu9Q",
     videoId: "GJjCe7zWu9Q",
     repo: "https://github.com/san2722soni/XENVOLT-Site",
+  },
+  {
+    title: "XENVOLT Admin",
+    eyebrow: "Website CMS Dashboard",
+    category: "Job Work",
     workType: "Job work at XENVOLT",
-    duration: "Built in 1 month, maintained during employment",
-    context: "Company website work: 16 pages, updates, content tweaks, Vercel/devops, and CI/CD-style maintenance.",
+    context:
+      "Internal dashboard built so data/content users could update blogs and website content without sending files to a developer.",
+    summary:
+      "Admin CMS with forms, markdown-editor style content entry, blog/content management, and internal website update workflows.",
     about:
-      "A business website and admin ecosystem for an industrial AI company. It covers public pages, case studies, blogs, careers, leads, and admin-side content workflows.",
+      "XENVOLT Admin was built to make the website maintainable by non-developer users. Instead of sending Word files for each blog/content update, the internal team could manage content through dashboard forms and editor flows.",
     myRole:
-      "I fixed local dev issues, removed fragile Google font loading paths, cleaned UI/font behavior, and prepared both site/admin as showcase material.",
-    features: ["Public company website", "Case-study and blog pages", "Admin CMS workflows", "Lead/content management"],
-    proof: ["Client-ready UI", "Admin product thinking", "Next.js app structure", "Network/font debugging"],
-    featured: true,
+      "I built the admin product, content editing flow, and dashboard UX for internal website/content operations.",
+    outcome:
+      "Shows product thinking beyond frontend: solving an internal workflow with admin tooling.",
+    stack: ["Next.js", "Tailwind", "Admin UI", "Markdown Editor", "REST APIs", "CMS Workflow"],
+    features: ["Blog/content editor", "Admin dashboard", "Lead/content management", "Website update workflow"],
+    proof: ["Internal tooling", "CMS product thinking", "Admin UX", "Business process improvement"],
+    video: "https://youtu.be/u7WYNmXhg_Q",
+    videoId: "u7WYNmXhg_Q",
+    repo: "https://github.com/san2722soni/XENVOLT-Admin",
+  },
+  {
+    title: "SAMVIT / SCADA Platform",
+    eyebrow: "Solar Monitoring Product",
+    category: "Job Work",
+    workType: "Job work at XENVOLT",
+    duration: "1 month",
+    context: "Product built while working at XENVOLT as a full-stack developer.",
+    summary:
+      "SCADA-style solar monitoring platform with plant dashboards, energy analytics, alarms, reports, and notifications.",
+    about:
+      "SAMVIT is a solar monitoring product for plant operations. It turns energy production, alarms, reports, and site health into dashboards that operators can scan quickly.",
+    myRole:
+      "I built and connected full-stack product screens, dashboard flows, data views, and demo-ready functionality.",
+    outcome:
+      "Best proof of industrial dashboard thinking, data-heavy UX, and real-world monitoring software.",
+    stack: ["Next.js", "Node/Express", "MongoDB", "REST APIs", "Charts", "SCADA"],
+    features: ["Plant overview dashboard", "Energy analytics", "Alarms and reports", "Notification workflows"],
+    proof: ["Industrial domain UX", "Chart-heavy dashboard work", "Backend-driven pages", "Monitoring/debugging mindset"],
+    video: "https://youtu.be/xJVRv9B4Hmk",
+    videoId: "xJVRv9B4Hmk",
+    repo: "https://github.com/san2722soni/SAMVIT",
+    extraLinks: [{ label: "Notification workflow", href: "https://youtu.be/XdtZ9UeJzdM" }],
+  },
+  {
+    title: "SAMVIT Pro / Xenvolt EPC Track",
+    eyebrow: "Solar EPC Dashboard",
+    category: "Job Work",
+    workType: "Job work at XENVOLT",
+    duration: "1 month",
+    context:
+      "Separate new product after SAMVIT, not just an improvement of the previous product.",
+    summary:
+      "Solar EPC tracking dashboard with plant status, production analytics, maintenance, alerts, weather, and performance views.",
+    about:
+      "SAMVIT Pro / Xenvolt EPC Track is a separate solar EPC product focused on tracking plant performance, maintenance, alerts, weather, and production across dashboard screens.",
+    myRole:
+      "I built and prepared the dashboard experience, data screens, mock/demo data flow, and recording-ready UI.",
+    outcome:
+      "Shows dashboard-heavy frontend engineering, EPC domain understanding, and data presentation.",
+    stack: ["Next.js", "TypeScript", "Tailwind", "Recharts", "Dashboard APIs", "Mock Data"],
+    features: ["Production analytics", "Maintenance views", "Alert screens", "Weather/performance pages"],
+    proof: ["Solar EPC domain", "Chart-heavy UI", "Dashboard architecture", "Frontend data handling"],
+    video: "https://youtu.be/FMMf0_Tfu9Y",
+    videoId: "FMMf0_Tfu9Y",
+    repo: "https://github.com/san2722soni/Xenvolt-EPC-Track",
+  },
+  {
+    title: "V-Dashboard + V-Server",
+    eyebrow: "Multiplayer Game Ops Stack",
+    category: "Partner-Guided",
+    workType: "Partner-guided job work",
+    duration: "4-5 months",
+    context:
+      "Frontend dashboard plus backend server stack built with Vineet Oli after XENVOLT.",
+    summary:
+      "Control dashboard and backend service layer for multiplayer game builds, sessions, developers, backend docs, and runtime operations.",
+    about:
+      "V-Dashboard is the game operations dashboard and V-Server is the backend behind it. Together they form a multiplayer game control stack built from scratch for builds, sessions, developer operations, auth, APIs, and runtime management.",
+    myRole:
+      "I built dashboard/product screens, worked on backend implementation, connected run flow, seed/demo setup, and integration between frontend and backend.",
+    outcome:
+      "Shows admin dashboard UX, backend services, MongoDB/Redis ecosystem, and internal tooling.",
+    stack: ["Next.js", "Node.js", "Fastify", "MongoDB", "Redis", "JWT", "API Services"],
+    features: ["Build/session management", "Developer/admin panels", "Backend API docs", "V-Server integration"],
+    proof: ["Full-stack control plane", "Backend services", "Admin workflows", "MongoDB/Redis usage"],
+    video: "https://youtu.be/bHUvejhSDjo",
+    videoId: "bHUvejhSDjo",
+    repo: "https://github.com/san2722soni/V-Dashboard",
+    extraLinks: [{ label: "V-Server repo", href: "https://github.com/san2722soni/V-Server" }],
+  },
+  {
+    title: "Psych Learn",
+    eyebrow: "Online EdTech Platform",
+    category: "Client Work",
+    workType: "Client work",
+    context:
+      "Online ed-tech platform for a woman educator to sell courses/materials with illustration-heavy UI.",
+    summary:
+      "Educational platform UI for psychology content, course/material presentation, clean navigation, and student-friendly screens.",
+    about:
+      "Psych Learn is a client project for presenting and selling educational psychology courses/materials online. The design uses clean course sections and illustration-led presentation.",
+    myRole:
+      "I built the client platform UI and course/material presentation flow.",
+    outcome:
+      "Shows client delivery, educational product UI, and clean content navigation.",
+    stack: ["Next.js", "React", "Tailwind", "Educational UI", "Illustration-Led Design"],
+    features: ["Course presentation", "Material/content screens", "Student-friendly navigation", "Responsive landing flow"],
+    proof: ["Client work", "EdTech UI", "Content structure", "Frontend polish"],
+    video: "https://youtu.be/eWCmQCCtYII",
+    videoId: "eWCmQCCtYII",
+    repo: "https://github.com/san2722soni/pysch-learning",
+  },
+  {
+    title: "Directors Chair",
+    eyebrow: "Cinematographer Workflow Tool",
+    category: "Personal",
+    workType: "Personal project + client/friend use case",
+    context:
+      "Built from a real use case for professional cinematographer Ayush Prakash, not from a tutorial.",
+    summary:
+      "Media-production workflow interface inspired by clapperboard/director-style recording and shoot management.",
+    about:
+      "Directors Chair came from a practical cinematography workflow idea. It explores a product experience for recording/shoot-management style tasks where there was no ready tutorial path to copy.",
+    myRole:
+      "I built the product concept and implementation out of curiosity and a real practical need.",
+    outcome:
+      "Shows original product thinking, creative workflow design, and frontend breadth beyond dashboards.",
+    stack: ["Next.js", "React", "Tailwind", "Media Workflow UI", "Product UX"],
+    features: ["Clapperboard-style screens", "Production workflow UI", "Creative interaction flow", "Cinematography use case"],
+    proof: ["Original idea", "Personal engineering", "Workflow design", "Creative UX"],
+    video: "https://youtu.be/CaNlNzLP8X4",
+    videoId: "CaNlNzLP8X4",
+    repo: "https://github.com/san2722soni/Director-s-Chair",
   },
   {
     title: "Randomizer / BA Test",
     eyebrow: "Airport Staff Testing System",
-    summary:
-      "Role-based staff testing workflow with CSV upload, random selection, doctor panel, station manager views, and reporting.",
-    outcome: "Full workflow product: auth, upload, selection, reports, and role routing.",
-    stack: ["Next.js", "Express", "MongoDB", "CSV", "JWT", "Reports"],
-    video: "https://youtu.be/bHUvejhSDjo",
-    videoId: "bHUvejhSDjo",
-    repo: "https://github.com/san2722soni/Randomizer-BA-Test",
+    category: "Job Work",
     workType: "Job work at XENVOLT",
     duration: "2 months",
     context: "Product built at XENVOLT for airport/staff testing workflows.",
+    summary:
+      "Role-based staff testing workflow with CSV upload, random selection, doctor result entry, station manager views, and reports.",
     about:
-      "An airport staff testing platform where admins upload staff data, station managers run random selections, doctors record results, and reports summarize testing history.",
+      "Randomizer BA Test is an airport staff testing platform. Admins upload staff data, station managers run random selections, doctors record test results, and reports summarize testing history.",
     myRole:
-      "I debugged the frontend/backend run path, seeded demo-friendly data, generated a valid CSV sample, and prepared role-based demo credentials.",
+      "I built/debugged the frontend and backend run path, generated demo data/CSV, prepared role flows, and made the product recording-ready.",
+    outcome:
+      "Shows real business process automation, role-based UX, CSV/data handling, and reporting dashboards.",
+    stack: ["Next.js", "TypeScript", "Node.js", "MongoDB", "CSV", "JWT", "Reports"],
     features: ["CSV staff import", "Random test selection", "Doctor result workflow", "Admin/station manager reports"],
-    proof: ["Role-based app flow", "CSV/data handling", "Business reporting screens", "MongoDB-backed workflow"],
-    featured: true,
+    proof: ["Role-based app flow", "CSV/data handling", "Business reporting", "MongoDB-backed workflow"],
+    video: "https://youtu.be/y4-FRud6dlo",
+    videoId: "y4-FRud6dlo",
+    repo: "https://github.com/san2722soni/Randomizer-BA-Test",
   },
   {
-    title: "V-Dashboard",
-    eyebrow: "Game Ops Control Plane",
-    summary:
-      "Admin dashboard for developers, builds, feature flags, game sessions, backend docs, and operational control.",
-    outcome: "Backend admin workflows, API surfaces, Redis/Mongo usage, and production-style tools.",
-    stack: ["Next.js", "Fastify", "MongoDB", "Redis", "AWS"],
-    video: "https://youtu.be/Sn7XAAzTvuM",
-    videoId: "Sn7XAAzTvuM",
-    repo: "https://github.com/san2722soni/V-Dashboard",
-    workType: "Partner-guided job work",
-    duration: "Part of 4-5 months with V-Server",
-    context: "Worked with Vineet Oli after XENVOLT on a multiplayer game server ecosystem.",
-    about:
-      "A control-plane style dashboard for game operations: builds, sessions, developer management, backend docs, and production-like runtime controls.",
-    myRole:
-      "I connected it with the V-Server run path, removed production-only UI blocks for demos, and documented how frontend/backend run together.",
-    features: ["Build management", "Developer/admin panels", "Session/runtime views", "Backend API documentation surfaces"],
-    proof: ["Admin dashboard UX", "Backend control workflows", "MongoDB/Redis ecosystem", "Internal tooling style"],
-  },
-  {
-    title: "SAMVIT Notifications",
-    eyebrow: "Operational Alerting",
-    summary:
-      "Notification and alert-management flow for energy operations, built around fast scanning and action clarity.",
-    outcome: "Useful proof for monitoring, alerts, and operator-facing interfaces.",
-    stack: ["Next.js", "Alerts", "Notifications", "Dashboard UX"],
-    video: "https://youtu.be/XdtZ9UeJzdM",
-    videoId: "XdtZ9UeJzdM",
-    repo: "https://github.com/san2722soni/SAMVIT",
+    title: "CHAKRA OEE",
+    eyebrow: "Manufacturing Dashboard POC",
+    category: "Job Work",
     workType: "Job work at XENVOLT",
-    context: "Notification/alert workflow from the SAMVIT monitoring product ecosystem.",
-    about:
-      "A focused notification and alert workflow for SAMVIT, designed around quick operational scanning and action clarity.",
-    myRole:
-      "I treated it as a focused sub-demo showing how monitoring systems communicate issues to operators.",
-    features: ["Notification list", "Alert priority views", "Operator-friendly scanning", "SCADA support workflow"],
-    proof: ["Monitoring UX", "Alert design", "Operational dashboard thinking", "Energy software context"],
-  },
-  {
-    title: "Grid Prototype",
-    eyebrow: "Interactive UI Prototype",
+    context: "Proof-of-concept dashboard built at XENVOLT for a client pitch.",
     summary:
-      "Visual prototype focused on grid-based interactions and polished motion-heavy interface behavior.",
-    outcome: "Supporting proof for frontend interaction design.",
-    stack: ["React", "Animation", "Prototype", "UI"],
-    video: "https://youtu.be/2ZT8AiIlpc0",
-    videoId: "2ZT8AiIlpc0",
+      "OEE/manufacturing dashboard with digital twin, maintenance, predictive insights, equipment, and production screens.",
     about:
-      "An interaction-heavy grid prototype focused on motion, layout behavior, and visual experimentation.",
-    workType: "Job work + personal/creative exploration",
-    context: "Compact UI/UX experiment for showing multiple graphs, dates, dependencies, and information cleanly.",
+      "CHAKRA OEE was a proof-of-concept project used to pitch a manufacturing/OEE dashboard idea. It focuses on operational dashboards, predictive screens, digital twin, and maintenance views.",
     myRole:
-      "I built it as supporting frontend proof: visual systems, transitions, and prototype thinking.",
-    features: ["Grid-based UI", "Motion-focused interactions", "Responsive layout experiments", "Prototype presentation"],
-    proof: ["Frontend polish", "Interaction design", "Animation practice", "UI experimentation"],
-  },
-  {
-    title: "Chakra",
-    eyebrow: "Product UI",
-    summary:
-      "Polished application interface with structured screens and clean flows for portfolio demonstration.",
-    outcome: "Compact visual proof of frontend UI implementation.",
-    stack: ["React", "Next.js", "Tailwind", "UI"],
+      "I worked on the POC dashboard and product UI used to communicate the client pitch idea.",
+    outcome:
+      "Shows industrial software UI, data-heavy product screens, and POC delivery under company work.",
+    stack: ["Next.js", "TypeScript", "Tailwind", "shadcn/Radix", "OEE Dashboard"],
+    features: ["OEE dashboard", "Digital twin screen", "Predictive insights", "Maintenance/equipment views"],
+    proof: ["Industrial software UI", "Dashboard architecture", "Manufacturing domain", "POC delivery"],
     video: "https://youtu.be/mDH5zXn7inI",
     videoId: "mDH5zXn7inI",
     repo: "https://github.com/san2722soni/CHAKRA-OEE",
-    workType: "Job work at XENVOLT",
-    context: "Proof-of-concept dashboard built at XENVOLT for a client pitch.",
+  },
+  {
+    title: "Grid Prototype",
+    eyebrow: "Compact Multi-Graph UI",
+    category: "Personal",
+    workType: "Job work + personal/creative exploration",
+    context:
+      "Creative compact dashboard UI for showing graphs, dates, dependencies, and dense information cleanly.",
+    summary:
+      "Interaction-heavy prototype for presenting multiple graph/data dependencies in a compact professional interface.",
     about:
-      "An OEE/manufacturing operations dashboard with digital twin, predictive, maintenance, and equipment-focused screens.",
+      "Grid Prototype is a UI/UX experiment for compressing many graphs, dates, dependencies, and supporting information into a clean dashboard presentation. It was built creatively with help from Vercel v0.",
     myRole:
-      "I analyzed and prepared it as a portfolio project showing industrial dashboard depth separate from SCADA/SAMVIT.",
-    features: ["OEE dashboard", "Digital twin screen", "Predictive insights", "Maintenance/equipment views"],
-    proof: ["Industrial software UI", "Dashboard architecture", "Manufacturing domain", "Data visualization screens"],
+      "I designed and built the prototype to explore a compact dashboard presentation pattern.",
+    outcome:
+      "Shows frontend creativity, information-density thinking, and dashboard prototyping.",
+    stack: ["React", "Vercel v0", "Dashboard UI", "Charts", "Prototype", "Animation"],
+    features: ["Multi-graph layout", "Date/dependency presentation", "Compact UI pattern", "Motion/polish"],
+    proof: ["Interaction design", "Information architecture", "Frontend polish", "Creative prototyping"],
+    video: "https://youtu.be/2ZT8AiIlpc0",
+    videoId: "2ZT8AiIlpc0",
+  },
+  {
+    title: "Dragstr",
+    eyebrow: "Digital Marketing Website",
+    category: "Client Work",
+    workType: "Client work",
+    context: "Website built for a digital marketing company.",
+    summary:
+      "Creative marketing website with brand positioning, service presentation, interactive sections, and responsive layout.",
+    about:
+      "Dragstr is a client website for a digital marketing company. It focuses on creative service presentation, brand sections, and conversion-oriented layout.",
+    myRole:
+      "I built the frontend website and creative interaction/presentation style.",
+    outcome:
+      "Shows client frontend delivery and creative landing-page design.",
+    stack: ["HTML", "CSS", "JavaScript", "Responsive UI", "Marketing Website"],
+    features: ["Service sections", "Interactive presentation", "Responsive layout", "Brand/content flow"],
+    proof: ["Client delivery", "Creative frontend", "Marketing UI", "Responsive fundamentals"],
+    video: "https://youtu.be/ZcdwwsQfSZA",
+    videoId: "ZcdwwsQfSZA",
+    repo: "https://github.com/san2722soni/Dragstr",
   },
   {
     title: "Eduford",
-    eyebrow: "Education Landing Experience",
+    eyebrow: "Education Website",
+    category: "Client Work",
+    workType: "Client work",
+    context: "Education website project built for a client.",
     summary:
-      "Education-focused frontend showcase with responsive sections and classic marketing layout.",
-    outcome: "Archive project showing earlier frontend fundamentals.",
+      "Education landing website focused on school/institute sections, content layout, contact presentation, and responsiveness.",
+    about:
+      "Eduford is an education website project from my earlier frontend phase. It is useful as a clean archive of responsive page-building fundamentals.",
+    myRole:
+      "I built the education website frontend and responsive page sections.",
+    outcome:
+      "Shows client-facing static frontend fundamentals.",
     stack: ["HTML", "CSS", "JavaScript", "Responsive UI"],
+    features: ["Education landing pages", "Responsive sections", "Contact/content layout", "Static frontend structure"],
+    proof: ["Frontend fundamentals", "Responsive design", "Client work", "Page composition"],
     video: "https://youtu.be/N8Q_hrBwZ6I",
     videoId: "N8Q_hrBwZ6I",
     repo: "https://github.com/san2722soni/Eduford",
-    workType: "Client work",
-    context: "Education website project built for a client.",
-    about:
-      "An education landing website from my earlier frontend phase, focused on sections, responsiveness, and content presentation.",
-    myRole:
-      "I keep it as archive proof to show the progression from static frontend work to full-stack systems.",
-    features: ["Education landing pages", "Responsive sections", "Contact/content layout", "Static frontend structure"],
-    proof: ["Frontend fundamentals", "Responsive design", "Archive progression", "Clean page composition"],
   },
   {
-    title: "E-Commerce Site",
-    eyebrow: "Frontend Commerce",
+    title: "RealViewGarden E-Commerce",
+    eyebrow: "Nursery Storefront + Dashboard",
+    category: "Client Work",
+    workType: "Client work",
+    context:
+      "Online nursery/storefront project with management-focused dashboard direction.",
     summary:
-      "E-commerce storefront demonstration with product browsing, visual sections, and shopping-style UI patterns.",
-    outcome: "Archive proof for frontend layout and commerce pages.",
-    stack: ["React", "Frontend", "E-Commerce", "UI"],
+      "E-commerce storefront for a nursery business with product browsing and owner-management workflow direction.",
+    about:
+      "This e-commerce project was built to represent a nursery business online. It includes storefront/product browsing and a dashboard/admin direction so the owner can manage the business end to end.",
+    myRole:
+      "I built the online storefront and management-focused flow for the client use case.",
+    outcome:
+      "Shows ecommerce UI, storefront patterns, and business management thinking.",
+    stack: ["React", "Frontend", "E-Commerce", "Product UI", "Dashboard Workflow"],
+    features: ["Product browsing", "Storefront sections", "Customer-facing pages", "Admin/dashboard direction"],
+    proof: ["Ecommerce patterns", "Client delivery", "Frontend layout", "Business workflow thinking"],
     video: "https://youtu.be/2vWkRkh1WXE",
     videoId: "2vWkRkh1WXE",
     repo: "https://github.com/san2722soni/RealViewGarden-store",
-    workType: "Client work",
-    context: "Nursery/business storefront and management-focused ecommerce project.",
-    about:
-      "A storefront-style frontend for product browsing and ecommerce presentation, useful as older commerce UI proof.",
-    myRole:
-      "I use it as an archive/supporting project while the main portfolio now leads with newer systems work.",
-    features: ["Product browsing UI", "Storefront sections", "Commerce-style layout", "Responsive presentation"],
-    proof: ["Ecommerce patterns", "Frontend layout", "Customer-facing UI", "Archive project breadth"],
   },
   {
     title: "The Intellect",
-    eyebrow: "Frontend Showcase",
+    eyebrow: "Coaching Website",
+    category: "Client Work",
+    workType: "Client work",
+    context: "Coaching/education website frontend built for a client.",
     summary:
-      "Editorial-style frontend project with page transitions, visual hierarchy, and content presentation.",
-    outcome: "Early frontend polish and animation practice.",
-    stack: ["React", "Frontend", "Animation", "Responsive UI"],
+      "Coaching/education website with institutional content, responsive layout, content hierarchy, and page sections.",
+    about:
+      "The Intellect is a client work coaching/education website frontend. It presents institutional content through responsive sections and clean visual hierarchy.",
+    myRole:
+      "I built the website frontend and responsive content presentation.",
+    outcome:
+      "Shows early client frontend polish and responsive content work.",
+    stack: ["HTML", "CSS", "JavaScript", "Responsive Frontend"],
+    features: ["Education content pages", "Responsive sections", "Visual hierarchy", "Static frontend flow"],
+    proof: ["Frontend fundamentals", "Client work", "Content layout", "Responsive UI"],
     video: "https://youtu.be/VfKphuHxXYE",
     videoId: "VfKphuHxXYE",
     repo: "https://github.com/san2722soni/The-Intellect",
-    workType: "Client work",
-    context: "Coaching/education website frontend built for a client.",
-    about:
-      "A coaching/education frontend showcase with institutional content, responsive sections, and visual hierarchy.",
-    myRole:
-      "I keep it as an older project to show frontend fundamentals before the newer dashboard/backend projects.",
-    features: ["Education content pages", "Responsive sections", "Visual hierarchy", "Static frontend flow"],
-    proof: ["Frontend fundamentals", "Content layout", "Responsive UI", "Progression over time"],
   },
   {
-    title: "Directors Chair",
-    eyebrow: "Creative Interface",
+    title: "Ayush Prakash Portfolio",
+    eyebrow: "Cinematographer Portfolio",
+    category: "Client Work",
+    workType: "Client/friend work",
+    context:
+      "Portfolio website for professional cinematographer Ayush Prakash.",
     summary:
-      "Media-themed interface demo focused on visual feel and motion-led presentation.",
-    outcome: "Archive-quality visual project for breadth.",
-    stack: ["React", "UI", "Motion", "Frontend"],
-    video: "https://youtu.be/CaNlNzLP8X4",
-    videoId: "CaNlNzLP8X4",
-    repo: "https://github.com/san2722soni/Director-s-Chair",
-    workType: "Personal project + client/friend use case",
-    context: "Built from a real use case for cinematographer Ayush Prakash, not from a tutorial.",
+      "Personal brand portfolio with project/media presentation, responsive sections, and contact flow.",
     about:
-      "A media workflow interface around clapperboard/director-style recording and production management flows.",
+      "Ayush Prakash Portfolio presents cinematography work, personal branding, project/media sections, and contact flow for a professional creator.",
     myRole:
-      "I included it as a creative product UI project that adds variety beyond dashboards and business websites.",
-    features: ["Media workflow screens", "Production-style UI", "Creative interface direction", "Motion-led presentation"],
-    proof: ["Creative UX", "Frontend breadth", "Workflow design", "Portfolio variety"],
+      "I built the portfolio website and presentation flow for his cinematography profile.",
+    outcome:
+      "Shows client portfolio delivery and media-focused personal branding.",
+    stack: ["React", "Next.js", "Tailwind/CSS", "Portfolio UI", "Responsive Branding"],
+    features: ["Personal branding", "Media/project presentation", "Responsive sections", "Contact flow"],
+    proof: ["Client/friend delivery", "Portfolio UI", "Responsive design", "Creator-focused layout"],
+    video: "https://youtu.be/LqQaX7pDyZk",
+    videoId: "LqQaX7pDyZk",
+    repo: "https://github.com/san2722soni/AyushPrakash_Portfolio",
+  },
+  {
+    title: "Halloween Calculator",
+    eyebrow: "Vanilla JS Multi-Calculator",
+    category: "Personal",
+    workType: "Personal curiosity project",
+    context:
+      "Early frontend project built from curiosity, not from a tutorial.",
+    summary:
+      "Halloween-themed multi-utility calculator with advanced tabs, converters, keyboard support, spooky mode, clues, and easter eggs.",
+    about:
+      "Halloween Calculator is not just a basic calculator. It includes arithmetic, age, area, BMI, data, discount, length, mass, speed, temperature, currency conversion, keyboard support, Halloween mode, tutorial popup, clues, and hidden OTP/easter egg behavior.",
+    myRole:
+      "I built the themed UI and vanilla JavaScript logic myself as a curiosity-driven project.",
+    outcome:
+      "Shows DOM-heavy JavaScript, event handling, UI state switching, and playful engineering curiosity.",
+    stack: ["HTML", "CSS", "Vanilla JavaScript", "DOM", "Converters", "Easter Eggs"],
+    features: ["Normal calculator", "Advanced calculator tabs", "Multiple converters", "Halloween mode and hidden easter eggs"],
+    proof: ["Vanilla JS fundamentals", "DOM/event handling", "Creative curiosity", "Early frontend progression"],
+    video: "https://youtu.be/LjS2nbdrMf0",
+    videoId: "LjS2nbdrMf0",
   },
 ];
 
+const filters: Filter[] = ["All", "Job Work", "Partner-Guided", "Client Work", "Personal"];
+
 const stats = [
-  ["12+", "recorded demos"],
-  ["6", "systems/admin tools"],
-  ["Full-stack", "UI to runtime"],
-  ["CLI", "Git/Linux/debugging"],
+  ["19", "recorded demos"],
+  ["8", "job-work systems"],
+  ["7", "client projects"],
+  ["4", "personal/creative builds"],
 ];
+
+const filterIcons: Record<Filter, typeof IconBriefcase> = {
+  All: IconMovie,
+  "Job Work": IconBriefcase,
+  "Partner-Guided": IconUserCode,
+  "Client Work": IconUsers,
+  Personal: IconTerminal2,
+};
 
 export function VideoProjects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const featured = projects.filter((project) => project.featured);
-  const more = projects.filter((project) => !project.featured);
+  const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const visibleProjects =
+    activeFilter === "All"
+      ? projects
+      : projects.filter((project) => project.category === activeFilter);
 
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-neutral-950 py-24">
@@ -285,17 +488,17 @@ export function VideoProjects() {
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
-              Video Project Showcase
+              Ordered Project Showcase
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-white md:text-5xl">
-              Recent work, recorded as real product walkthroughs.
+              Job work, client work, and personal builds with demo proof.
             </h2>
           </div>
           <div>
             <p className="text-base leading-8 text-neutral-300">
-              The portfolio now leads with proof: dashboards, backend systems,
-              admin tools, staff-testing workflows, energy monitoring, and Git
-              tooling. Every project opens with a demo video.
+              Projects are ordered by showcase priority: systems and job-work
+              projects first, then client delivery, then archive/personal
+              projects. Each card opens a detailed case-study view.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {stats.map(([value, label]) => (
@@ -308,32 +511,60 @@ export function VideoProjects() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {featured.map((project, index) => (
+        <div className="mt-10 flex flex-wrap gap-3">
+          {filters.map((filter) => {
+            const Icon = filterIcons[filter];
+            const active = activeFilter === filter;
+            return (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                className={`inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-semibold transition ${
+                  active
+                    ? "border-cyan-300 bg-cyan-300/15 text-cyan-100"
+                    : "border-white/10 bg-white/[0.035] text-neutral-300 hover:border-cyan-300/40 hover:text-white"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {filter}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {visibleProjects.map((project, index) => (
             <article
               key={project.title}
               onClick={() => setSelectedProject(project)}
-              className="cursor-pointer overflow-hidden rounded-md border border-cyan-300/20 bg-white/[0.045] shadow-2xl shadow-black/30 transition hover:border-cyan-200/60 hover:bg-white/[0.07]"
+              className={`group cursor-pointer overflow-hidden rounded-md border bg-white/[0.035] transition hover:border-cyan-300/45 hover:bg-white/[0.06] ${
+                index < 3 && activeFilter === "All"
+                  ? "border-cyan-300/25 shadow-2xl shadow-black/30 xl:col-span-1"
+                  : "border-white/10"
+              }`}
             >
-              <div className="aspect-video w-full bg-black">
-                <iframe
-                  className="h-full w-full"
-                  src={`https://www.youtube.com/embed/${project.videoId}`}
-                  title={`${project.title} demo video`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
+              <div className="relative overflow-hidden bg-black">
+                <img
+                  src={`https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`}
+                  alt={`${project.title} video thumbnail`}
+                  className="aspect-video w-full object-cover opacity-80 transition group-hover:scale-105 group-hover:opacity-100"
                 />
-              </div>
-              <div className="p-5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100">
-                    Featured {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-neutral-300">
-                    {project.eyebrow}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/25">
+                  <span className="rounded-full border border-white/30 bg-black/65 p-3 text-white">
+                    <IconMovie className="h-5 w-5" />
                   </span>
                 </div>
-                <h3 className="mt-4 text-2xl font-semibold text-white">{project.title}</h3>
+                <span className="absolute left-3 top-3 rounded-full border border-cyan-300/30 bg-black/70 px-3 py-1 text-xs font-semibold text-cyan-100">
+                  {String(projects.indexOf(project) + 1).padStart(2, "0")}
+                </span>
+              </div>
+              <div className="p-5">
+                <div className="flex flex-wrap gap-2">
+                  <Badge>{project.category}</Badge>
+                  <Badge>{project.eyebrow}</Badge>
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-white">{project.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-neutral-300">{project.summary}</p>
                 <p className="mt-3 border-l border-cyan-300/40 pl-3 text-sm leading-6 text-cyan-50/90">
                   {project.outcome}
@@ -343,65 +574,39 @@ export function VideoProjects() {
             </article>
           ))}
         </div>
-
-        <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {more.map((project) => (
-            <article
-              key={project.title}
-              onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer rounded-md border border-white/10 bg-white/[0.035] p-4 transition hover:border-cyan-300/35 hover:bg-white/[0.06]"
-            >
-              <div className="relative overflow-hidden rounded bg-black">
-                <img
-                  src={`https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`}
-                  alt={`${project.title} video thumbnail`}
-                  className="aspect-video w-full object-cover opacity-80 transition group-hover:scale-105 group-hover:opacity-100"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/25">
-                  <span className="rounded-full border border-white/30 bg-black/60 p-3 text-white">
-                    <IconMovie className="h-5 w-5" />
-                  </span>
-                </div>
-              </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
-                {project.eyebrow}
-              </p>
-              <h3 className="mt-2 text-lg font-semibold text-white">{project.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-neutral-300">{project.summary}</p>
-              <ProjectFooter project={project} compact onOpen={() => setSelectedProject(project)} />
-            </article>
-          ))}
-        </div>
       </div>
       {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
+        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
     </section>
   );
 }
 
+function Badge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs text-neutral-300">
+      {children}
+    </span>
+  );
+}
+
 function ProjectFooter({
   project,
-  compact = false,
   onOpen,
 }: {
   project: Project;
-  compact?: boolean;
   onOpen: () => void;
 }) {
   return (
     <>
-      <div className={`flex flex-wrap gap-2 ${compact ? "mt-4" : "mt-5"}`}>
-        {project.stack.map((tech) => (
+      <div className="mt-5 flex flex-wrap gap-2">
+        {project.stack.slice(0, 6).map((tech) => (
           <span key={tech} className="rounded border border-white/10 bg-black/30 px-2 py-1 text-xs text-neutral-300">
             {tech}
           </span>
         ))}
       </div>
-      <div className={`flex flex-wrap gap-3 ${compact ? "mt-4" : "mt-6"}`}>
+      <div className="mt-6 flex flex-wrap gap-3">
         <button
           type="button"
           onClick={(event) => {
@@ -412,14 +617,15 @@ function ProjectFooter({
         >
           Details <IconListDetails className="h-4 w-4" />
         </button>
-        <a href={project.video} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200">
+        <a
+          href={project.video}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(event) => event.stopPropagation()}
+          className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200"
+        >
           Watch demo <IconArrowUpRight className="h-4 w-4" />
         </a>
-        {!compact && (
-          <a href="#contact" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
-            Discuss build <IconTerminal2 className="h-4 w-4" />
-          </a>
-        )}
       </div>
     </>
   );
@@ -429,7 +635,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
   return (
     <div className="fixed inset-0 z-[9999] overflow-y-auto bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
       <div
-        className="mx-auto my-8 max-w-5xl overflow-hidden rounded-md border border-white/10 bg-neutral-950 shadow-2xl shadow-black"
+        className="mx-auto my-8 max-w-6xl overflow-hidden rounded-md border border-white/10 bg-neutral-950 shadow-2xl shadow-black"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
@@ -459,49 +665,34 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 <IconX className="h-5 w-5" />
               </button>
             </div>
-            <div className="mt-5 space-y-4">
-              <div className="grid gap-3 sm:grid-cols-3">
-                <InfoPill label="Type" value={project.workType} />
-                {project.duration && <InfoPill label="Duration" value={project.duration} />}
-                <InfoPill label="Context" value={project.context} />
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
-                  Project About
-                </h4>
-                <p className="mt-3 text-sm leading-7 text-neutral-300">
-                  {project.about}
-                </p>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
-                  What I Did
-                </h4>
-                <p className="mt-3 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-cyan-50/90">
-                  {project.myRole}
-                </p>
-              </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              <InfoPill label="Type" value={project.workType} />
+              {project.duration && <InfoPill label="Duration" value={project.duration} />}
+              <InfoPill label="Context" value={project.context} />
+            </div>
+            <div className="mt-6">
+              <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+                Project About
+              </h4>
+              <p className="mt-3 text-sm leading-7 text-neutral-300">{project.about}</p>
+            </div>
+            <div className="mt-5">
+              <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
+                What I Did
+              </h4>
+              <p className="mt-3 border-l border-cyan-300/40 pl-4 text-sm leading-7 text-cyan-50/90">
+                {project.myRole}
+              </p>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 p-6">
-          <div className="mb-6">
-            <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">
-              Project Breakdown
-            </h4>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-300">
-              This section is written for reviewers: what the software does,
-              which parts are visible in the demo, and what engineering skill
-              the project is meant to prove.
-            </p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            <DetailList title="What It Does" items={project.features} />
-            <DetailList title="What It Proves" items={project.proof} />
+        <div className="grid gap-6 border-t border-white/10 p-6 lg:grid-cols-3">
+          <DetailList title="What It Does" items={project.features} />
+          <DetailList title="What It Proves" items={project.proof} />
           <div>
             <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
-              Stack
+              Stack And Links
             </h4>
             <div className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((tech) => (
@@ -519,8 +710,12 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                   GitHub <IconArrowUpRight className="h-4 w-4" />
                 </a>
               )}
+              {project.extraLinks?.map((link) => (
+                <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
+                  {link.label} <IconArrowUpRight className="h-4 w-4" />
+                </a>
+              ))}
             </div>
-          </div>
           </div>
         </div>
       </div>
