@@ -1,11 +1,13 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   IconBriefcase,
   IconBuildingFactory2,
   IconCode,
   IconUserCheck,
 } from "@tabler/icons-react";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const notes = [
   {
@@ -41,7 +43,13 @@ const notes = [
 export function Testimonial() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-      <div className="mb-10 max-w-3xl">
+      <motion.div
+        className="mb-10 max-w-3xl"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.35 }}
+      >
         <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
           Collaboration Notes
         </p>
@@ -52,14 +60,19 @@ export function Testimonial() {
           These notes explain where the work came from: company product work,
           partner-guided engineering, client delivery, and personal projects.
         </p>
-      </div>
+      </motion.div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {notes.map((note) => {
+        {notes.map((note, index) => {
           const Icon = note.icon;
           return (
-            <article
+            <motion.article
               key={note.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.3, delay: index * 0.05 }}
+              whileHover={{ y: -4 }}
               className="rounded-md border border-white/10 bg-white/[0.035] p-5"
             >
               <span className="inline-flex rounded-md border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-200">
@@ -70,10 +83,21 @@ export function Testimonial() {
               </p>
               <h3 className="mt-2 text-xl font-semibold text-white">{note.name}</h3>
               <p className="mt-3 text-sm leading-7 text-neutral-300">{note.text}</p>
-            </article>
+            </motion.article>
           );
         })}
       </div>
+
+      <InfiniteMovingCards
+        className="mt-10"
+        items={notes.map((note) => ({
+          quote: note.text,
+          name: note.name,
+          title: note.title,
+        }))}
+        direction="right"
+        speed="slow"
+      />
     </section>
   );
 }

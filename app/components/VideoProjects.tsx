@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   IconArrowUpRight,
   IconBriefcase,
@@ -481,6 +482,10 @@ export function VideoProjects() {
     activeFilter === "All"
       ? projects
       : projects.filter((project) => project.category === activeFilter);
+  const getFilterCount = (filter: Filter) =>
+    filter === "All"
+      ? projects.length
+      : projects.filter((project) => project.category === filter).length;
 
   return (
     <section className="relative overflow-hidden border-y border-white/10 bg-neutral-950 py-24">
@@ -516,10 +521,12 @@ export function VideoProjects() {
             const Icon = filterIcons[filter];
             const active = activeFilter === filter;
             return (
-              <button
+              <motion.button
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.98 }}
                 className={`inline-flex items-center gap-2 rounded-md border px-4 py-2 text-sm font-semibold transition ${
                   active
                     ? "border-cyan-300 bg-cyan-300/15 text-cyan-100"
@@ -528,15 +535,25 @@ export function VideoProjects() {
               >
                 <Icon className="h-4 w-4" />
                 {filter}
-              </button>
+                <span className="rounded bg-white/10 px-1.5 py-0.5 text-[11px]">
+                  {getFilterCount(filter)}
+                </span>
+              </motion.button>
             );
           })}
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <AnimatePresence mode="popLayout">
           {visibleProjects.map((project, index) => (
-            <article
+            <motion.article
               key={project.title}
+              layout
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.22, ease: "easeOut" }}
+              whileHover={{ y: -4 }}
               onClick={() => setSelectedProject(project)}
               className={`group cursor-pointer overflow-hidden rounded-md border bg-white/[0.035] transition hover:border-cyan-300/45 hover:bg-white/[0.06] ${
                 index < 3 && activeFilter === "All"
@@ -571,13 +588,16 @@ export function VideoProjects() {
                 </p>
                 <ProjectFooter project={project} onOpen={() => setSelectedProject(project)} />
               </div>
-            </article>
+            </motion.article>
           ))}
+          </AnimatePresence>
         </div>
       </div>
-      {selectedProject && (
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      )}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -633,10 +653,20 @@ function ProjectFooter({
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-[9999] overflow-y-auto bg-black/80 p-4 backdrop-blur-sm" onClick={onClose}>
-      <div
+    <motion.div
+      className="fixed inset-0 z-[9999] overflow-y-auto bg-black/80 p-4 backdrop-blur-sm"
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
         className="mx-auto my-8 max-w-6xl overflow-hidden rounded-md border border-white/10 bg-neutral-950 shadow-2xl shadow-black"
         onClick={(event) => event.stopPropagation()}
+        initial={{ opacity: 0, y: 28, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
       >
         <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
           <div className="bg-black">
@@ -718,8 +748,8 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
