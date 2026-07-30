@@ -1,0 +1,258 @@
+YouTube Draft Titles And Descriptions
+====================================
+
+Use these while editing each YouTube draft. Set visibility to Unlisted or Public before adding links to the portfolio.
+
+Format:
+- Keep title professional.
+- Description should say whether it is Job Work, Client Work, Partner-Guided Job Work, or Personal Project.
+- Do not expose client secrets, private data, credentials, or internal code details.
+
+1. AnarchyV2
+Link: https://youtu.be/-aJ0g3PiRls
+Title: AnarchyV2 - Massive Multiplayer Game Server Demo | Job Work
+Description:
+AnarchyV2 is a partner-guided job work project I worked on with Vineet Oli, a senior engineer from DTU/ex-Urban Company. The idea was a massive multiplayer "million chess boards" style game/server system where one server can coordinate a very large number of players and running game boards at the same time.
+
+My role: I worked on implementation, debugging, and learning the architecture while Vineet guided the engineering direction and review.
+
+Duration: 2-3 months.
+Work type: Partner-guided job work.
+Tech/focus: C++, game engine/runtime thinking, multiplayer server flow, backend services, load testing, Linux, PM2/Nginx, monitoring/debugging.
+
+2. SAMVIT
+Link: https://youtu.be/xJVRv9B4Hmk
+Title: SAMVIT - SCADA Solar Monitoring Product Demo | XENVOLT Job Work
+Description:
+SAMVIT is a product I worked on while working at XENVOLT as a full-stack developer. It is a SCADA-style solar monitoring platform with plant dashboards, energy analytics, alarms, reports, notifications, and backend-driven operational views.
+
+My role: Built and connected full-stack product screens, dashboard flows, data views, and demo-ready functionality.
+
+Duration: 1 month.
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, Node/Express, MongoDB, REST APIs, charts, SCADA dashboards, industrial monitoring UX.
+
+3. SAMVIT Pro / Xenvolt EPC Track
+Link: https://youtu.be/FMMf0_Tfu9Y
+Title: SAMVIT Pro / Xenvolt EPC Track - Solar EPC Dashboard Demo | XENVOLT Job Work
+Description:
+SAMVIT Pro / Xenvolt EPC Track is a separate product I worked on at XENVOLT after SAMVIT. It was not just an improvement of the previous product; it was a new solar EPC tracking software with plant status, production analytics, maintenance, alerts, weather, and performance views.
+
+My role: Built and prepared the dashboard experience, data screens, mock/demo data flow, and portfolio-ready recording path.
+
+Duration: 1 month.
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, TypeScript, Tailwind CSS, Recharts, dashboard APIs, solar EPC workflow, mock demo data.
+
+4. SAMVIT Notifications
+Link: https://youtu.be/XdtZ9UeJzdM
+Title: SAMVIT Notifications - Alert And Monitoring Workflow Demo | XENVOLT Job Work
+Description:
+This demo focuses on the notification and alerting side of the SAMVIT ecosystem built during my XENVOLT work. It shows how operational alerts and monitoring messages can be presented clearly for plant operators.
+
+My role: Worked on the operator-facing notification/alert flow and demo-ready UI behavior.
+
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, dashboard UI, alert workflows, notification screens, monitoring UX.
+
+5. Version Control Manager
+Link: https://youtu.be/V_F9goWYqc4
+Title: Version Control Manager - GitHub-Like Desktop Tool Demo | Partner-Guided Job Work
+Description:
+Version Control Manager is a GitHub-like version-control management project I worked on after V-Dashboard and V-Server. It was built using Electron, Next.js, Node.js, ELK, and Linux deployment workflows.
+
+My role: I coded and worked on the implementation while Vineet Oli guided the architecture and engineering direction.
+
+Duration: 3 months.
+Work type: Partner-guided job work.
+Tech/focus: Electron, Next.js, Node.js, Git workflows, MongoDB, Redis, ELK, Linux deployment, developer tooling.
+
+6. V-Dashboard
+Link: https://youtu.be/Sn7XAAzTvuM
+Title: V-Dashboard - Multiplayer Game Operations Dashboard Demo | Partner-Guided Job Work
+Description:
+V-Dashboard is the frontend/control dashboard for a multiplayer game server ecosystem I worked on with Vineet Oli after XENVOLT. It manages game builds, sessions, developers, backend docs, feature flows, and runtime operations.
+
+My role: Built dashboard/product screens and connected the run flow with the backend service.
+
+Duration: Part of 4-5 months with V-Server.
+Work type: Partner-guided job work.
+Tech/focus: Next.js, TypeScript, Tailwind CSS, admin dashboard UX, backend control workflows, MongoDB/Redis ecosystem.
+
+7. V-Server
+Link: Add video link if uploaded separately
+Title: V-Server - Multiplayer Game Backend Demo | Partner-Guided Job Work
+Description:
+V-Server is the backend for V-Dashboard and the multiplayer game server system. It was built from scratch as part of the same workstream after XENVOLT.
+
+My role: Worked on backend implementation, API/service structure, local run flow, seed/demo setup, and integration with V-Dashboard.
+
+Duration: Part of 4-5 months with V-Dashboard.
+Work type: Partner-guided job work.
+Tech/focus: Node.js, Fastify/Express-style APIs, MongoDB, Redis, JWT/auth, backend services, scheduler/util structure.
+
+8. Randomizer / BA Test
+Link: https://youtu.be/bHUvejhSDjo
+Title: Randomizer BA Test - Airport Staff Testing System Demo | XENVOLT Job Work
+Description:
+Randomizer BA Test is a product I worked on at XENVOLT for airport/staff testing workflows. It includes role-based dashboards, staff CSV import, random selection, doctor result entry, station manager workflows, and admin reports.
+
+My role: Built/debugged the frontend and backend run path, generated demo data/CSV, prepared role flows, and made the product recording-ready.
+
+Duration: 2 months.
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, TypeScript, Node backend, MongoDB, CSV upload, JWT/auth, reports, role-based workflows.
+
+9. Auryvedic
+Link: https://youtu.be/ag_KtDZrXwI
+Title: Auryvedic - Clinic Management Dashboard Demo | Client Work
+Description:
+Auryvedic is a client work project for an Ayurveda/clinic-style platform. It includes dashboard screens, appointments, users, conversations, knowledge/AI-assisted flows, and admin-style management views.
+
+My role: Built the client-facing product screens and full-stack workflow needed for the demo.
+
+Duration: 2-3 weeks.
+Work type: Client work.
+Tech/focus: Next.js, Node.js, MongoDB, Tailwind CSS, API client, dashboard UI, appointments, conversations.
+
+10. XENVOLT Site
+Link: https://youtu.be/GJjCe7zWu9Q
+Title: XENVOLT Website - 16 Page Industrial AI Website Demo | XENVOLT Job Work
+Description:
+XENVOLT Site is the company website I built and maintained while working at XENVOLT. It includes 16 pages covering company information, products, AI solutions, case studies, blogs, careers, clients, and business content.
+
+My role: Built the website, maintained updates, handled content tweaks, fixed UI/dev issues, and supported Vercel/devops/CI-CD style workflow during my time there.
+
+Duration: Built in 1 month and maintained during employment.
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, Tailwind CSS, shadcn/Radix UI, CMS-style APIs, Vercel, responsive business website UI.
+
+11. XENVOLT Admin
+Link: https://youtu.be/u7WYNmXhg_Q
+Title: XENVOLT Admin - Blog And Website CMS Dashboard Demo | XENVOLT Job Work
+Description:
+XENVOLT Admin is an internal dashboard I built so the data/content team could update blogs and website content directly instead of sending Word files to a developer every time. It includes dashboard forms, markdown-editor style content entry, and admin content management flows.
+
+My role: Built the admin product, content editing flow, and dashboard UX for internal website/content operations.
+
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, Tailwind CSS, admin UI, markdown editor, REST APIs, content management, lead/blog/career workflows.
+
+12. CHAKRA OEE
+Link: https://youtu.be/mDH5zXn7inI
+Title: CHAKRA OEE - Manufacturing Dashboard POC Demo | XENVOLT Job Work
+Description:
+CHAKRA OEE was a proof-of-concept project built while I was at XENVOLT for a client pitch. It is an OEE/manufacturing operations dashboard with digital twin, maintenance, predictive insights, equipment, and production-focused screens.
+
+My role: Worked on the POC dashboard and product UI used to communicate the client pitch idea.
+
+Work type: Job work at XENVOLT.
+Tech/focus: Next.js, TypeScript, Tailwind CSS, shadcn/Radix UI, OEE dashboard, digital twin, predictive/maintenance UI.
+
+13. Grid Prototype
+Link: https://youtu.be/2ZT8AiIlpc0
+Title: Grid Prototype - Compact Multi-Graph Dashboard UI Demo | Job + Creative Work
+Description:
+Grid Prototype is an innovative UI/UX experiment for showing multiple graphs, dates, dependencies, and dense information in a short, clean, professional interface. It was built creatively with help from Vercel v0.
+
+My role: Designed and built the prototype to explore a compact dashboard presentation pattern.
+
+Work type: Job work + personal/creative exploration.
+Tech/focus: React, UI prototyping, dashboard layout, charts/graphs, information density, frontend polish.
+
+14. Directors Chair
+Link: https://youtu.be/CaNlNzLP8X4
+Title: Directors Chair - Cinematographer Workflow Tool Demo | Personal / Client Use Case
+Description:
+Directors Chair is a use-case software project I built for my professional cinematographer friend Ayush Prakash. It came from a real need and idea, not from a tutorial. The project explores clapperboard/director-style production workflows and creative recording support.
+
+My role: Built the product concept and implementation out of curiosity and practical engineering need.
+
+Work type: Personal project + client/friend use case.
+Tech/focus: Next.js/React, Tailwind CSS, creative workflow UI, media-production workflow, practical product thinking.
+
+15. Psych Learn
+Link: https://youtu.be/eWCmQCCtYII
+Title: Psych Learn - Online EdTech Course Platform Demo | Client Work
+Description:
+Psych Learn is a client work project for a woman educator's online ed-tech platform. It is designed to showcase and sell courses/materials with a clean illustration-heavy UI.
+
+My role: Built the client platform UI and course/material presentation flow.
+
+Work type: Client work.
+Tech/focus: Next.js/React, Tailwind CSS, educational UI, course landing flow, illustration-led design.
+
+16. Dragstr
+Link: https://youtu.be/ZcdwwsQfSZA
+Title: Dragstr - Digital Marketing Company Website Demo | Client Work
+Description:
+Dragstr is a client work website for a digital marketing company. It uses creative and interactive sections to present services, branding, and conversion-focused content.
+
+My role: Built the frontend website and creative interaction/presentation style.
+
+Work type: Client work.
+Tech/focus: HTML, CSS, JavaScript, responsive frontend, marketing site layout, interactive presentation.
+
+17. Eduford
+Link: https://youtu.be/N8Q_hrBwZ6I
+Title: Eduford - Education Website Frontend Demo | Client Work
+Description:
+Eduford is a client work education website project focused on school/institute-style sections, content layout, contact presentation, and responsive frontend fundamentals.
+
+My role: Built the education website frontend and responsive page sections.
+
+Work type: Client work.
+Tech/focus: HTML, CSS, JavaScript, responsive UI, education landing pages.
+
+18. E-Commerce Site / RealViewGarden
+Link: https://youtu.be/2vWkRkh1WXE
+Title: RealViewGarden E-Commerce - Nursery Storefront And Dashboard Demo | Client Work
+Description:
+This e-commerce project was client work for representing a nursery business online. It includes storefront/product browsing and a dashboard/admin direction so the owner can manage the business end to end.
+
+My role: Built the online storefront and management-focused flow for the client use case.
+
+Work type: Client work.
+Tech/focus: React/frontend, ecommerce UI, product browsing, customer-facing pages, admin/dashboard workflow.
+
+19. The Intellect
+Link: https://youtu.be/VfKphuHxXYE
+Title: The Intellect - Coaching Website Frontend Demo | Client Work
+Description:
+The Intellect is a client work coaching/education website frontend with institutional content, page sections, responsive layout, and content hierarchy.
+
+My role: Built the website frontend and responsive content presentation.
+
+Work type: Client work.
+Tech/focus: HTML, CSS, JavaScript, responsive frontend, education website UI.
+
+20. The Intellect Alternate Recording
+Link: https://youtu.be/rOglQXLKIZw
+Title: The Intellect - Alternate Frontend Walkthrough | Client Work
+Description:
+Alternate walkthrough for The Intellect coaching website frontend. Use this only if it shows a different version or better recording than the main demo.
+
+Work type: Client work.
+Tech/focus: HTML, CSS, JavaScript, responsive frontend, content layout.
+
+21. Ayush Prakash Portfolio
+Link: https://youtu.be/LqQaX7pDyZk
+Title: Ayush Prakash Portfolio - Cinematographer Portfolio Website Demo | Client/Friend Work
+Description:
+Ayush Prakash Portfolio is the portfolio website for my professional cinematographer friend Ayush Prakash. It presents his work, personal branding, project/media sections, and contact flow.
+
+My role: Built the portfolio website and presentation flow for his cinematography profile.
+
+Work type: Client/friend work.
+Tech/focus: React/Next.js, Tailwind/CSS, portfolio UI, responsive personal branding.
+
+22. Halloween Calculator
+Link: Add video link after upload
+Title: Halloween Calculator - Multi-Utility Vanilla JS Calculator With Easter Eggs | Personal Project
+Description:
+Halloween Calculator is a personal curiosity project from my early frontend phase. It is not just a basic calculator: it includes a normal arithmetic calculator, advanced calculator tabs, age calculator, area solver, BMI, data, discount, length, mass, speed, temperature, currency conversion, keyboard support, Halloween mode, tutorial popup, clues, and hidden easter eggs.
+
+My role: Built the themed UI and vanilla JavaScript logic myself as a curiosity-driven project, without following a tutorial.
+
+Work type: Personal curiosity project.
+Tech/focus: HTML, CSS, vanilla JavaScript, DOM manipulation, event handling, converters, playful UI, hidden easter eggs.

@@ -18,6 +18,9 @@ type Project = {
   video: string;
   videoId: string;
   repo?: string;
+  workType: string;
+  duration?: string;
+  context: string;
   about: string;
   myRole: string;
   features: string[];
@@ -36,6 +39,9 @@ const projects: Project[] = [
     video: "https://youtu.be/xJVRv9B4Hmk",
     videoId: "xJVRv9B4Hmk",
     repo: "https://github.com/san2722soni/SAMVIT",
+    workType: "Job work at XENVOLT",
+    duration: "1 month",
+    context: "Built while working at XENVOLT as a full-stack developer.",
     about:
       "A SCADA-style solar monitoring platform for plant operations. It turns energy production, alarms, reports, and site health into dashboards that operators can scan quickly.",
     myRole:
@@ -54,6 +60,9 @@ const projects: Project[] = [
     video: "https://youtu.be/V_F9goWYqc4",
     videoId: "V_F9goWYqc4",
     repo: "https://github.com/san2722soni/Version-Control-Manager",
+    workType: "Partner-guided job work",
+    duration: "3 months",
+    context: "Worked after V-Dashboard/V-Server with senior guidance from Vineet Oli; I coded and implemented core parts.",
     about:
       "A developer tool for Git workflows: repository views, branch context, workflow screens, and backend-backed operations for managing version-control tasks.",
     myRole:
@@ -72,6 +81,9 @@ const projects: Project[] = [
     video: "https://youtu.be/GJjCe7zWu9Q",
     videoId: "GJjCe7zWu9Q",
     repo: "https://github.com/san2722soni/XENVOLT-Site",
+    workType: "Job work at XENVOLT",
+    duration: "Built in 1 month, maintained during employment",
+    context: "Company website work: 16 pages, updates, content tweaks, Vercel/devops, and CI/CD-style maintenance.",
     about:
       "A business website and admin ecosystem for an industrial AI company. It covers public pages, case studies, blogs, careers, leads, and admin-side content workflows.",
     myRole:
@@ -90,6 +102,9 @@ const projects: Project[] = [
     video: "https://youtu.be/bHUvejhSDjo",
     videoId: "bHUvejhSDjo",
     repo: "https://github.com/san2722soni/Randomizer-BA-Test",
+    workType: "Job work at XENVOLT",
+    duration: "2 months",
+    context: "Product built at XENVOLT for airport/staff testing workflows.",
     about:
       "An airport staff testing platform where admins upload staff data, station managers run random selections, doctors record results, and reports summarize testing history.",
     myRole:
@@ -108,6 +123,9 @@ const projects: Project[] = [
     video: "https://youtu.be/Sn7XAAzTvuM",
     videoId: "Sn7XAAzTvuM",
     repo: "https://github.com/san2722soni/V-Dashboard",
+    workType: "Partner-guided job work",
+    duration: "Part of 4-5 months with V-Server",
+    context: "Worked with Vineet Oli after XENVOLT on a multiplayer game server ecosystem.",
     about:
       "A control-plane style dashboard for game operations: builds, sessions, developer management, backend docs, and production-like runtime controls.",
     myRole:
@@ -125,6 +143,8 @@ const projects: Project[] = [
     video: "https://youtu.be/XdtZ9UeJzdM",
     videoId: "XdtZ9UeJzdM",
     repo: "https://github.com/san2722soni/SAMVIT",
+    workType: "Job work at XENVOLT",
+    context: "Notification/alert workflow from the SAMVIT monitoring product ecosystem.",
     about:
       "A focused notification and alert workflow for SAMVIT, designed around quick operational scanning and action clarity.",
     myRole:
@@ -143,6 +163,8 @@ const projects: Project[] = [
     videoId: "2ZT8AiIlpc0",
     about:
       "An interaction-heavy grid prototype focused on motion, layout behavior, and visual experimentation.",
+    workType: "Job work + personal/creative exploration",
+    context: "Compact UI/UX experiment for showing multiple graphs, dates, dependencies, and information cleanly.",
     myRole:
       "I built it as supporting frontend proof: visual systems, transitions, and prototype thinking.",
     features: ["Grid-based UI", "Motion-focused interactions", "Responsive layout experiments", "Prototype presentation"],
@@ -158,6 +180,8 @@ const projects: Project[] = [
     video: "https://youtu.be/mDH5zXn7inI",
     videoId: "mDH5zXn7inI",
     repo: "https://github.com/san2722soni/CHAKRA-OEE",
+    workType: "Job work at XENVOLT",
+    context: "Proof-of-concept dashboard built at XENVOLT for a client pitch.",
     about:
       "An OEE/manufacturing operations dashboard with digital twin, predictive, maintenance, and equipment-focused screens.",
     myRole:
@@ -175,6 +199,8 @@ const projects: Project[] = [
     video: "https://youtu.be/N8Q_hrBwZ6I",
     videoId: "N8Q_hrBwZ6I",
     repo: "https://github.com/san2722soni/Eduford",
+    workType: "Client work",
+    context: "Education website project built for a client.",
     about:
       "An education landing website from my earlier frontend phase, focused on sections, responsiveness, and content presentation.",
     myRole:
@@ -192,6 +218,8 @@ const projects: Project[] = [
     video: "https://youtu.be/2vWkRkh1WXE",
     videoId: "2vWkRkh1WXE",
     repo: "https://github.com/san2722soni/RealViewGarden-store",
+    workType: "Client work",
+    context: "Nursery/business storefront and management-focused ecommerce project.",
     about:
       "A storefront-style frontend for product browsing and ecommerce presentation, useful as older commerce UI proof.",
     myRole:
@@ -209,6 +237,8 @@ const projects: Project[] = [
     video: "https://youtu.be/VfKphuHxXYE",
     videoId: "VfKphuHxXYE",
     repo: "https://github.com/san2722soni/The-Intellect",
+    workType: "Client work",
+    context: "Coaching/education website frontend built for a client.",
     about:
       "A coaching/education frontend showcase with institutional content, responsive sections, and visual hierarchy.",
     myRole:
@@ -226,6 +256,8 @@ const projects: Project[] = [
     video: "https://youtu.be/CaNlNzLP8X4",
     videoId: "CaNlNzLP8X4",
     repo: "https://github.com/san2722soni/Director-s-Chair",
+    workType: "Personal project + client/friend use case",
+    context: "Built from a real use case for cinematographer Ayush Prakash, not from a tutorial.",
     about:
       "A media workflow interface around clapperboard/director-style recording and production management flows.",
     myRole:
@@ -428,6 +460,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               </button>
             </div>
             <div className="mt-5 space-y-4">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <InfoPill label="Type" value={project.workType} />
+                {project.duration && <InfoPill label="Duration" value={project.duration} />}
+                <InfoPill label="Context" value={project.context} />
+              </div>
               <div>
                 <h4 className="text-sm font-semibold uppercase tracking-[0.2em] text-white">
                   Project About
@@ -487,6 +524,17 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function InfoPill({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-white/10 bg-white/[0.035] p-3">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200">
+        {label}
+      </p>
+      <p className="mt-2 text-xs leading-5 text-neutral-200">{value}</p>
     </div>
   );
 }
