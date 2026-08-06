@@ -60,9 +60,9 @@ const skillGroups = [
   {
     title: "Current Focus & Availability",
     icon: IconTerminal2,
-    proof: "Open to full-time roles and freelance work while sharpening deeper systems, backend, and interview fundamentals.",
-    projects: ["Open to work", "Freelance", "Learning track"],
-    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design", "Full-stack roles", "Freelance work"],
+    proof: "Currently open to full-time opportunities and freelance work, while deepening systems, backend, and interview fundamentals.",
+    projects: ["Open to work", "Taking freelance work", "Learning track"],
+    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design", "Full-stack roles", "Client work"],
     wide: true,
   },
 ];
