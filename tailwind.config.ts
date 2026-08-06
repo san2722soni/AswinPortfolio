@@ -41,9 +41,6 @@ module.exports = {
           },
         },
       },
-      backgroundImage: {
-        'hero': "url('../public/pfp4.png')",
-      },
     },
   },
   plugins: [addVariablesForColors,

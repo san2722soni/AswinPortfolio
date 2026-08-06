@@ -24,6 +24,34 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
+
+# local portfolio notes / generated audits
+/project review/
+/GITHUB_REPO_POLISH_PLAN.md
+/GITHUB_UPLOAD_PLAN.md
+/PROJECTS_TO_SHOWCASE.md
+/PROJECT_RUN_STATUS.md
+/RUN_PROJECTS_SHORT.md
+/YOUTUBE_DRAFT_TITLES_DESCRIPTIONS.txt
+/youtube-video-links.txt
+/v0-*-prompt*.txt
+/treatment.txt
+
+# local experiment/source assets not served by the site
+/pfp*.jpg
+/pfp*.svg
+/pfp_short.png
+/setup.svg
+/signature.png
+/image.png
+/svg-animation-problem.mp4
+/public/e.mp4
+/public/intro1.mp4
+/public/splash-bg.mp4
+/public/we.mp4
+/public/signature.svg
+/public/world.svg
 
 # local env files
 .env*.local

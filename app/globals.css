@@ -3,15 +3,163 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-sans: "Segoe UI Variable Text", "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-display: "Segoe UI Variable Display", "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  --font-mono: "Cascadia Code", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.hero-display {
+  font-family: var(--font-display);
+}
+
+.hero-mono {
+  font-family: var(--font-mono);
+}
+
+.hero-action-enter {
+  animation: hero-action-enter 760ms ease both;
+}
+
+.side-rail-enter {
+  animation: side-rail-enter 700ms ease both;
+}
+
+.nav-item-enter {
+  animation: nav-item-enter 720ms ease both;
+}
+
+@keyframes hero-action-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes side-rail-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes nav-item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.featured-portrait-svg svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.featured-portrait-draw,
+.featured-portrait-default {
+  transition: opacity 260ms ease;
+}
+
+.featured-portrait-draw {
+  opacity: 1;
+}
+
+.featured-portrait-draw[data-hidden="true"] {
+  opacity: 0;
+}
+
+.featured-portrait-default {
+  opacity: 0;
+}
+
+.featured-portrait-default[data-visible="true"] {
+  opacity: 1;
+}
+
+.featured-portrait-draw path {
+  fill: none;
+  fill-opacity: 0;
+  stroke: black;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 7px;
+}
+
+.hero-portrait-fade {
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 72%, transparent 98%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 72%, transparent 98%);
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #22d3ee, #d946ef);
+  border: 2px solid #050505;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 0;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.india-map svg {
+  display: block;
+  height: auto;
+  width: 100%;
+  overflow: visible;
+}
+
+.india-map svg path {
+  fill: #202020 !important;
+  stroke: rgba(255, 255, 255, 0.62) !important;
+  stroke-linejoin: round !important;
+  stroke-width: 1.4 !important;
+  vector-effect: non-scaling-stroke;
 }
 
 :root {
@@ -45,66 +193,6 @@ body {
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-}
-
-.skill {
-  width: 160px;
-  height: 160px;
-  position: relative;
-}
-
-.outer {
-  height: 160px;
-  width: 160px;
-  border-radius: 50%;
-  padding: 20px;
-  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 1.5),
-    -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
-}
-
-.inner {
-  height: 120px;
-  width: 120px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
-    inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
-    -0.5px -0.5px 0px rgba(255, 255, 255, 1),
-    0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
-}
-
-#number {
-  font-weight: 600;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-circle {
-  fill: none;
-  stroke: url(#GradientColor);
-  stroke-width: 20px;
-  stroke-dasharray: 472;
-  stroke-dashoffset: 472;
-  animation-duration: 3s;
-  animation: anim linear forwards;
-  animation-delay: 0.5s;
-}
-
-.html-circle-skill {
-  position: absolute;
-  top: 0%;
-  left: 0%;
-}
-
-@keyframes anim {
-  100% {
-    stroke-dashoffset: var(--dash-offset, 100);
   }
 }
 
