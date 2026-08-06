@@ -34,7 +34,7 @@ const experiences: TimelineItem[] = [
       { name: "Ayush Prakash Portfolio", text: "Cinematographer portfolio with media/project presentation and contact flow." },
       { name: "RealViewGarden E-Commerce", text: "Online nursery/storefront with product browsing and management direction." },
     ],
-    skills: ["Responsive UI", "Client delivery", "Portfolio UX"],
+    skills: ["HTML/CSS", "Vanilla JS", "Tailwind CDN", "Font Awesome", "YouTube embeds", "Static assets"],
   },
   {
     phase: "02. Frontend Internship",
@@ -49,7 +49,7 @@ const experiences: TimelineItem[] = [
       { name: "Dragstr", text: "Digital marketing agency website with services, case-study sections, and content updates." },
       { name: "Prestine Nature", text: "Organic product landing page with small-business branding and motion polish." },
     ],
-    skills: ["React", "Tailwind", "SEO/content", "Client updates"],
+    skills: ["HTML/CSS", "Vanilla JS", "EmailJS", "Next.js", "TypeScript", "AOS/Framer Motion"],
   },
   {
     phase: "03. Full-Stack Product Engineering",
@@ -68,7 +68,7 @@ const experiences: TimelineItem[] = [
       { name: "SAMVIT Pro / Xenvolt EPC Track", text: "Separate solar EPC tracking product with tickets, alerts, maps, reports, and metrics." },
       { name: "Randomizer / BA Test", text: "Airport staff testing/random-selection workflow with CSV, roles, reports, and MongoDB." },
     ],
-    skills: ["Next.js", "Node APIs", "MongoDB", "Linux", "PM2", "Nginx"],
+    skills: ["Next.js", "TypeScript", "PostgreSQL/Prisma", "MongoDB/Mongoose", "Recharts/Chart.js", "PM2/Nginx"],
   },
   {
     phase: "04. Frontend Client Delivery",
@@ -80,7 +80,7 @@ const experiences: TimelineItem[] = [
     location: "Remote",
     summary: "Client ed-tech platform work focused on clean presentation, course/material structure, and responsive UI.",
     projects: [{ name: "Psych Learn", text: "Psychology ed-tech landing platform." }],
-    skills: ["Next.js", "Landing UI", "EdTech", "Illustration-led UI"],
+    skills: ["Next.js", "TypeScript", "Tailwind", "shadcn UI", "AOS", "Course pages"],
   },
   {
     phase: "05. Systems & DevOps Engineering",
@@ -97,7 +97,7 @@ const experiences: TimelineItem[] = [
       { name: "Version Control Manager", text: "GitHub-like Electron/Next/Node developer tool with repo, branch, diff, CLI, and ELK direction." },
       { name: "AnarchyV2", text: "Large real-time multiplayer stack with C++ engine direction, Fastify APIs, Redis, PM2/Nginx, and runbooks." },
     ],
-    skills: ["Linux", "SSH", "Docker", "AWS", "Kubernetes", "Redis", "ELK"],
+    skills: ["Fastify/Node.js", "Redis", "MongoDB/Mongoose", "Electron", "C++/FlatBuffers", "Cloudflare/AWS"],
   },
   {
     phase: "06. AI Product Engineering",
@@ -109,7 +109,7 @@ const experiences: TimelineItem[] = [
     location: "Remote",
     summary: "Applied the full-stack/product skillset to a client AI platform with WhatsApp automation, appointment workflows, knowledge engine, and admin dashboard.",
     projects: [{ name: "Auryvedic", text: "Clinic AI assistant platform." }],
-    skills: ["Fastify", "MongoDB", "OpenAI flows", "WhatsApp", "Admin dashboard"],
+    skills: ["Fastify", "TypeScript", "MongoDB", "OpenAI SDK", "WhatsApp API", "TanStack Query"],
   },
   {
     phase: "07. Current Focus & Availability",
@@ -242,7 +242,7 @@ function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) 
         ))}
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        {item.skills.slice(0, 5).map((skill, skillIndex) => (
+        {item.skills.slice(0, 6).map((skill, skillIndex) => (
           <motion.span
             key={skill}
             initial={{ opacity: 0, x: -16 }}
