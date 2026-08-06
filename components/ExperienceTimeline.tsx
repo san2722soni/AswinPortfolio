@@ -15,7 +15,7 @@ type TimelineItem = {
   duration: string;
   location: string;
   summary: string;
-  projects: { name: string; target?: string; text: string }[];
+  projects: { name: string; target?: string; text: string; action?: "contact" }[];
   skills: string[];
 };
 
@@ -110,6 +110,22 @@ const experiences: TimelineItem[] = [
     summary: "Applied the full-stack/product skillset to a client AI platform with WhatsApp automation, appointment workflows, knowledge engine, and admin dashboard.",
     projects: [{ name: "Auryvedic", text: "Clinic AI assistant platform." }],
     skills: ["Fastify", "MongoDB", "OpenAI flows", "WhatsApp", "Admin dashboard"],
+  },
+  {
+    phase: "07. Current Focus & Availability",
+    role: "Open to Work - Full-Stack / Backend",
+    company: "Freelance & full-time roles",
+    type: "Open to work",
+    period: "Current",
+    duration: "actively available",
+    location: "Remote / India",
+    summary: "Currently open to full-time opportunities and freelance work. Alongside client work, sharpening advanced C++, LeetCode/DSA, advanced JavaScript, backend networking, and system design for deeper backend and systems roles.",
+    projects: [
+      { name: "Open to work", action: "contact", text: "Available for full-time full-stack/backend opportunities." },
+      { name: "Taking freelance work", action: "contact", text: "Available for client websites, dashboards, APIs, and automation work." },
+      { name: "Learning track", action: "contact", text: "Current focus: advanced C++, DSA, backend networking, and system design." },
+    ],
+    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design"],
   },
 ];
 
@@ -210,7 +226,13 @@ function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) 
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.42, delay: projectIndex * 0.24, ease: "easeOut" }}
-            onClick={() => openProjectFromTimeline(project.target ?? project.name)}
+            onClick={() => {
+              if (project.action === "contact") {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                return;
+              }
+              openProjectFromTimeline(project.target ?? project.name);
+            }}
             className="group inline-flex items-center gap-1 rounded border border-white/10 bg-black/20 px-3 py-2 text-xs text-neutral-300 transition hover:border-cyan-300/40 hover:text-cyan-100 sm:px-3.5 sm:py-2.5 sm:text-sm"
             title={project.text}
           >

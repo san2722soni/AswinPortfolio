@@ -57,14 +57,6 @@ const skillGroups = [
     projects: ["Auryvedic", "SAMVIT / SCADA", "ClapperBoard"],
     skills: ["OpenAI SDK", "AI SDK", "Python/XGBoost", "WhatsApp API", "Cloudinary", "PDF/QR generation", "Speech recognition"],
   },
-  {
-    title: "Current Focus & Availability",
-    icon: IconTerminal2,
-    proof: "Currently open to full-time opportunities and freelance work, while deepening systems, backend, and interview fundamentals.",
-    projects: ["Open to work", "Taking freelance work", "Learning track"],
-    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design", "Full-stack roles", "Client work"],
-    wide: true,
-  },
 ];
 
 const proofItems = [
@@ -119,7 +111,7 @@ export function Services() {
               data-aos={getSkillCardAos(index)}
               data-aos-delay={String(320 + index * 260)}
               whileHover={{ y: -6, scale: 1.02 }}
-              className={`group relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.025] to-cyan-300/[0.035] p-5 shadow-xl shadow-black/10 transition hover:border-cyan-300/45 hover:shadow-cyan-950/20 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent ${group.wide ? "lg:col-span-3" : ""}`}
+              className="group relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.025] to-cyan-300/[0.035] p-5 shadow-xl shadow-black/10 transition hover:border-cyan-300/45 hover:shadow-cyan-950/20 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent"
             >
               <div className="mb-5 flex items-center gap-3">
                 <span className="rounded-md border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-200 transition group-hover:bg-cyan-300 group-hover:text-black">
