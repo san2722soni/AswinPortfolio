@@ -27,7 +27,6 @@ export default function Home() {
   const [sideRailsVisible, setSideRailsVisible] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(false);
   const [introProgress, setIntroProgress] = useState(0);
-  const [needsStart, setNeedsStart] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const splashFadeTimerRef = useRef<number | null>(null);
   const heroSequenceTimerRefs = useRef<number[]>([]);
@@ -78,13 +77,13 @@ export default function Home() {
     const video = introVideoRef.current;
     if (!video) return;
 
-    video.muted = false;
-    video.volume = 1;
+    video.muted = true;
+    video.volume = 0;
     const playPromise = video.play();
     if (playPromise) {
-      playPromise.catch(() => setNeedsStart(true));
+      playPromise.catch(finishSplash);
     }
-  }, [keepIntroVideo, mounted]);
+  }, [finishSplash, keepIntroVideo, mounted]);
 
   if (!mounted) return null;
 
@@ -128,6 +127,7 @@ export default function Home() {
                 className="pointer-events-none mb-8 aspect-video w-full max-w-[860px] object-contain mix-blend-screen [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_95%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_95%)]"
                 src="/finalIntro.mp4"
                 autoPlay
+                muted
                 playsInline
                 disablePictureInPicture
                 preload="auto"
@@ -137,22 +137,6 @@ export default function Home() {
                 }}
                 onEnded={finishSplash}
               />
-              {needsStart && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const video = introVideoRef.current;
-                    if (!video) return;
-                    video.muted = false;
-                    video.volume = 1;
-                    video.play();
-                    setNeedsStart(false);
-                  }}
-                  className="pointer-events-auto hero-mono mb-5 rounded-sm border border-white/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white transition hover:border-cyan-200 hover:text-cyan-200"
-                >
-                  Start intro
-                </button>
-              )}
               <p className="hero-mono text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
                 Building Portfolio
               </p>
