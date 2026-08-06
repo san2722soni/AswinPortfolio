@@ -18,9 +18,9 @@ const skillGroups = [
   {
     title: "Frontend Product UI",
     icon: IconBrandReact,
-    proof: "Modern typed product UI across company sites, admin dashboards, video portfolio, and client landing work.",
-    projects: ["XENVOLT Site", "Portfolio", "Psych Learn"],
-    skills: ["TypeScript", "React", "Next.js", "Tailwind CSS", "shadcn/Radix UI", "Framer Motion", "Recharts"],
+    proof: "Typed product UI across company sites, admin dashboards, video portfolio, and client landing work.",
+    projects: ["XENVOLT Site", "XENVOLT Admin", "Psych Learn"],
+    skills: ["TypeScript", "React", "Next.js", "Tailwind CSS", "shadcn/Radix UI", "Framer Motion", "AOS"],
   },
   {
     title: "Backend/API Core",
@@ -32,30 +32,38 @@ const skillGroups = [
   {
     title: "Data/Auth Layer",
     icon: IconDatabase,
-    proof: "Database-backed products with auth, admin data, reports, realtime/storage direction, and search/cache systems.",
-    projects: ["XENVOLT Admin", "V-Dashboard", "SCADA"],
-    skills: ["MongoDB/Mongoose", "PostgreSQL", "Prisma", "Redis", "Supabase", "Clerk", "Elasticsearch"],
+    proof: "Database-backed products with auth, admin data, reports, relational modeling, cache, and search systems.",
+    projects: ["XENVOLT Admin", "V-Dashboard", "V-Server"],
+    skills: ["MongoDB/Mongoose", "PostgreSQL", "Prisma", "Redis", "Clerk/JWT", "Elasticsearch", "TanStack Table"],
   },
   {
     title: "DevOps & Cloud",
     icon: IconServerCog,
     proof: "Production-style server setup, process management, reverse proxy, cloud workflows, and deployment checks.",
-    projects: ["AnarchyV2", "VCM", "XENVOLT"],
+    projects: ["AnarchyV2", "V-Server", "XENVOLT Site"],
     skills: ["Linux", "SSH", "Docker", "AWS EC2/S3", "PM2", "Nginx", "Cloudflare"],
   },
   {
     title: "Systems & Tooling",
     icon: IconTool,
     proof: "Terminal-first debugging, desktop tooling, editor workflows, systems docs, and test-aware delivery.",
-    projects: ["VCM", "V-Server", "AnarchyV2"],
-    skills: ["Git/CLI", "Electron", "C++/FlatBuffers", "CodeMirror/Monaco", "Vitest/Jest/Cypress", "ELK/Kibana", "Runbooks"],
+    projects: ["Version Control Manager", "AnarchyV2", "Randomizer"],
+    skills: ["Git/CLI", "Electron", "C++/FlatBuffers", "CodeMirror/Monaco", "Vitest/Jest/Cypress", "Load tests", "Runbooks"],
   },
   {
     title: "AI & Integrations",
     icon: IconBrain,
     proof: "AI assistant workflows, WhatsApp automation, media/report generation, and operational integrations.",
-    projects: ["Auryvedic", "CHAKRA", "ClapperBoard"],
+    projects: ["Auryvedic", "SAMVIT / SCADA", "ClapperBoard"],
     skills: ["OpenAI SDK", "AI SDK", "Python/XGBoost", "WhatsApp API", "Cloudinary", "PDF/QR generation", "Speech recognition"],
+  },
+  {
+    title: "Current Focus & Availability",
+    icon: IconTerminal2,
+    proof: "Open to full-time roles and freelance work while sharpening deeper systems, backend, and interview fundamentals.",
+    projects: ["Open to work", "Freelance", "Learning track"],
+    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design", "Full-stack roles", "Freelance work"],
+    wide: true,
   },
 ];
 
@@ -111,7 +119,7 @@ export function Services() {
               data-aos={getSkillCardAos(index)}
               data-aos-delay={String(320 + index * 260)}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.025] to-cyan-300/[0.035] p-5 shadow-xl shadow-black/10 transition hover:border-cyan-300/45 hover:shadow-cyan-950/20 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent"
+              className={`group relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.025] to-cyan-300/[0.035] p-5 shadow-xl shadow-black/10 transition hover:border-cyan-300/45 hover:shadow-cyan-950/20 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent ${group.wide ? "lg:col-span-3" : ""}`}
             >
               <div className="mb-5 flex items-center gap-3">
                 <span className="rounded-md border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-200 transition group-hover:bg-cyan-300 group-hover:text-black">
