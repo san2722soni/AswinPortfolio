@@ -39,9 +39,11 @@ const formSchema = z.object({
 });
 
 async function onSubmit(values: z.infer<typeof formSchema>) {
-  const serviceId = process.env.NEXT_PUBLIC_EMAILJS_USER_SERVICE_ID;
-  const templateId = process.env.NEXT_PUBLIC_EMAILJS_USER_TEMPLATE_ID;
-  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_USER_ID;
+  const serviceId =
+    process.env.NEXT_PUBLIC_EMAILJS_USER_SERVICE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+  const templateId =
+    process.env.NEXT_PUBLIC_EMAILJS_USER_TEMPLATE_ID ?? process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+  const publicKey = process.env.NEXT_PUBLIC_EMAILJS_USER_ID ?? process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   if (!serviceId || !templateId || !publicKey) {
     toast.error("Email service is not configured.");

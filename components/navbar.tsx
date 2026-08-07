@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   MobileNav,
@@ -76,17 +75,14 @@ export default function Navbar(_: { name?: string; description?: string }) {
       </NavBody>
 
       <MobileNav className="mx-auto max-w-[88vw] items-stretch rounded-none bg-transparent px-0 py-4">
-        <MobileNavHeader>
-          <Image
-            src="/image.png"
-            alt="Aswin Anand signature"
-            width={128}
-            height={48}
-            className="h-10 w-auto object-contain"
-            priority={false}
-          />
-          <button type="button" aria-label="Toggle navigation" className="text-white">
-            <MobileNavToggle isOpen={open} onClick={() => setOpen((value) => !value)} />
+        <MobileNavHeader className="justify-end">
+          <button
+            type="button"
+            aria-label="Toggle navigation"
+            onClick={() => setOpen((value) => !value)}
+            className="rounded-md border border-cyan-300/15 bg-neutral-950/55 p-2 text-white backdrop-blur-md"
+          >
+            <MobileNavToggle isOpen={open} onClick={() => undefined} />
           </button>
         </MobileNavHeader>
         <MobileNavMenu

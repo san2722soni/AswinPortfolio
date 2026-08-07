@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 
 import Navbar from "@/components/navbar";
 import { Header } from "@/components/home";
@@ -29,6 +30,7 @@ export default function Home() {
   const [sideRailsVisible, setSideRailsVisible] = useState(() => skippedIntroOnMount);
   const [navbarVisible, setNavbarVisible] = useState(() => skippedIntroOnMount);
   const [introProgress, setIntroProgress] = useState(() => (skippedIntroOnMount ? 1 : 0));
+  const [needsIntroGesture, setNeedsIntroGesture] = useState(false);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const splashFadeTimerRef = useRef<number | null>(null);
   const heroSequenceTimerRefs = useRef<number[]>([]);
@@ -36,12 +38,30 @@ export default function Home() {
   const finishSplash = useCallback(() => {
     splashSeenThisRuntime = true;
     setIntroProgress(1);
+    setNeedsIntroGesture(false);
     setShowSplash(false);
     if (splashFadeTimerRef.current !== null) return;
     splashFadeTimerRef.current = window.setTimeout(() => {
       setKeepIntroVideo(false);
       setHeroAnimationStarted(true);
     }, SPLASH_FADE_MS);
+  }, []);
+
+  const startIntroWithSound = useCallback(() => {
+    const video = introVideoRef.current;
+    if (!video) return;
+
+    setNeedsIntroGesture(false);
+    video.pause();
+    try {
+      video.currentTime = 0;
+    } catch {
+      // Some mobile browsers reject seeking before metadata is ready.
+    }
+    video.muted = false;
+    video.defaultMuted = false;
+    video.volume = 1;
+    void video.play().catch(() => setNeedsIntroGesture(true));
   }, []);
 
   useEffect(() => {
@@ -80,25 +100,21 @@ export default function Home() {
     const video = introVideoRef.current;
     if (!video) return;
     const introVideo = video;
+    let cancelled = false;
 
-    function enableIntroSound() {
-      introVideo.muted = false;
-      introVideo.volume = 1;
-      void introVideo.play().catch(() => undefined);
-      document.removeEventListener("pointerdown", enableIntroSound);
-      document.removeEventListener("keydown", enableIntroSound);
-    }
     function playIntro() {
       introVideo.muted = false;
+      introVideo.defaultMuted = false;
       introVideo.volume = 1;
       const playPromise = introVideo.play();
       if (playPromise) {
         void playPromise.catch(() => {
+          if (cancelled) return;
           introVideo.muted = true;
+          introVideo.defaultMuted = true;
           introVideo.volume = 0;
+          setNeedsIntroGesture(true);
           void introVideo.play().catch(() => undefined);
-          document.addEventListener("pointerdown", enableIntroSound, { once: true });
-          document.addEventListener("keydown", enableIntroSound, { once: true });
         });
       }
     }
@@ -106,8 +122,7 @@ export default function Home() {
     playIntro();
 
     return () => {
-      document.removeEventListener("pointerdown", enableIntroSound);
-      document.removeEventListener("keydown", enableIntroSound);
+      cancelled = true;
     };
   }, [keepIntroVideo, mounted]);
 
@@ -154,6 +169,16 @@ export default function Home() {
                   className="h-full origin-left rounded-full bg-white"
                 />
               </div>
+              {needsIntroGesture && showSplash && (
+                <button
+                  type="button"
+                  onClick={startIntroWithSound}
+                  className="hero-mono mt-6 inline-flex items-center gap-2 rounded-md border border-cyan-300/70 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 backdrop-blur-md transition hover:bg-cyan-300/15"
+                >
+                  Go through portfolio
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              )}
             </motion.div>
           </motion.div>
         )}
