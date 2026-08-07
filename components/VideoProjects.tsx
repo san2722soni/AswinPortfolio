@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import Image from "next/image";
 import { animate } from "animejs";
 import AOS from "aos";
 import CountUp from "react-countup";
@@ -115,7 +114,7 @@ const projects: Project[] = [
       "I built the client-facing product screens and full-stack workflow needed for the demo.",
     outcome:
       "Shows fast client delivery, dashboard UX, appointment workflows, and full-stack product thinking.",
-    stack: ["Next.js", "Node.js", "MongoDB", "Tailwind", "API Client", "Dashboard UI"],
+    stack: ["Fastify", "TypeScript", "MongoDB", "OpenAI SDK", "WhatsApp API", "Next.js", "TanStack Query"],
     features: ["Clinic dashboard", "Appointment screens", "User management", "Conversations and knowledge flows"],
     proof: ["Client delivery", "Healthcare-style UX", "Full-stack dashboard", "Fast product execution"],
     video: "https://youtu.be/IFI0Qrgk0E4",
@@ -138,7 +137,7 @@ const projects: Project[] = [
       "I built the website, maintained updates, handled content tweaks, fixed UI/dev issues, and supported deployment workflow.",
     outcome:
       "Shows professional client/company website work, responsive UI, content-heavy pages, and real maintenance responsibility.",
-    stack: ["Next.js", "Tailwind", "shadcn/Radix", "CMS APIs", "Vercel", "Responsive UI"],
+    stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Email workflows", "Cloudinary", "Recharts"],
     features: ["16-page company website", "Case studies and blogs", "Careers and clients pages", "Maintenance and deployment workflow"],
     proof: ["Business website delivery", "UI polish", "Content-heavy Next.js app", "Devops/deployment support"],
     video: "https://youtu.be/GJjCe7zWu9Q",
@@ -160,7 +159,7 @@ const projects: Project[] = [
       "I built the admin product, content editing flow, and dashboard UX for internal website/content operations.",
     outcome:
       "Shows product thinking beyond frontend: solving an internal workflow with admin tooling.",
-    stack: ["Next.js", "Tailwind", "Admin UI", "Markdown Editor", "REST APIs", "CMS Workflow"],
+    stack: ["Next.js", "TypeScript", "Clerk", "Prisma", "PostgreSQL", "Rich text CMS", "Cloudinary"],
     features: ["Blog/content editor", "Admin dashboard", "Lead/content management", "Website update workflow"],
     proof: ["Internal tooling", "CMS product thinking", "Admin UX", "Business process improvement"],
     video: "https://youtu.be/u7WYNmXhg_Q",
@@ -182,7 +181,7 @@ const projects: Project[] = [
       "I built and connected full-stack product screens, dashboard flows, data views, and demo-ready functionality.",
     outcome:
       "Best proof of industrial dashboard thinking, data-heavy UX, and real-world monitoring software.",
-    stack: ["Next.js", "Node/Express", "MongoDB", "REST APIs", "Charts", "SCADA"],
+    stack: ["Next.js", "Node/Express", "MongoDB", "Charts", "Reports", "SCADA", "Predictive analysis"],
     features: ["Plant overview dashboard", "Energy analytics", "Alarms and reports", "Notification workflows"],
     proof: ["Industrial domain UX", "Chart-heavy dashboard work", "Backend-driven pages", "Monitoring/debugging mindset"],
     video: "https://youtu.be/xJVRv9B4Hmk",
@@ -229,7 +228,7 @@ const projects: Project[] = [
       "I built dashboard/product screens, worked on backend implementation, connected run flow, seed/demo setup, and integration between frontend and backend.",
     outcome:
       "Shows admin dashboard UX, backend services, MongoDB/Redis ecosystem, and internal tooling.",
-    stack: ["Next.js", "Node.js", "Fastify", "MongoDB", "Redis", "JWT", "API Services"],
+    stack: ["Next.js", "Fastify", "MongoDB", "Redis", "JWT", "AWS EC2", "Admin APIs"],
     features: ["Build/session management", "Developer/admin panels", "Backend API docs", "V-Server integration"],
     proof: ["Full-stack control plane", "Backend services", "Admin workflows", "MongoDB/Redis usage"],
     video: "https://youtu.be/bHUvejhSDjo",
@@ -507,22 +506,22 @@ const filters: TagFilter[] = [
 ];
 
 const searchPlaceholders = [
-  "Search SAMVIT dashboards",
+  "Search selected work",
+  "Search backend systems",
   "Search VCM",
+  "Search dashboards",
+  "Search AI platform",
   "Search client work",
-  "Search DevOps projects",
-  "Search AI WhatsApp platform",
-  "Search Xenvolt products",
 ];
 
 const projectOrder = [
-  "Auryvedic",
   "SAMVIT / SCADA Platform",
-  "SAMVIT Pro / Xenvolt EPC Track",
+  "XENVOLT Admin",
   "V-Dashboard + V-Server",
   "Version Control Manager",
   "AnarchyV2",
-  "XENVOLT Admin",
+  "Auryvedic",
+  "SAMVIT Pro / Xenvolt EPC Track",
   "XENVOLT Site",
   "CHAKRA OEE",
   "Randomizer / BA Test",
@@ -635,14 +634,14 @@ export function VideoProjects() {
         <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-start">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
-              Project Video Gallery
+              Selected Work
             </p>
             <TypingHeading
-              text="Recorded project proof."
+              text="Case studies first, video proof inside."
               className="hero-display mt-4 text-3xl font-bold leading-tight text-white md:text-5xl"
             />
             <p className="mt-5 text-base leading-8 text-neutral-300">
-              Search, filter, hover, and open any build. Timeline chips route here and open the same case-study card.
+              Six strongest projects lead here. Open a card for role, stack, what I built, video walkthrough, and public/private notes.
             </p>
           </div>
           <div className="lg:ml-auto lg:w-full lg:max-w-xl" data-aos="fade-down" data-aos-delay="420">
@@ -671,7 +670,7 @@ export function VideoProjects() {
             )}
             <div className="mt-5 flex flex-wrap justify-start gap-5 text-sm text-neutral-400 lg:justify-end">
               {[
-                [orderedProjects.length, "recorded builds"],
+                [initialProjectLimit, "selected case studies"],
                 [filters.length - 1, "work filters"],
                 [orderedProjects.filter((project) => project.category === "Job Work").length, "job-work systems"],
               ].map(([value, label]) => (
@@ -696,7 +695,7 @@ export function VideoProjects() {
                 key={filter}
                 type="button"
                 data-aos="fade-down"
-                data-aos-delay={String(300 + index * 230)}
+                data-aos-delay={String(120 + index * 80)}
                 onClick={() => {
                   setActiveFilter(filter);
                   setShowAll(false);
@@ -726,7 +725,7 @@ export function VideoProjects() {
           >
             Showing <span className="font-semibold text-cyan-100">{displayProjects.length}</span>
             {" "}of <span className="font-semibold text-cyan-100">{visibleProjects.length}</span>{" "}
-            portfolio demos in <span className="font-semibold text-white">{activeFilter}</span>
+            case studies in <span className="font-semibold text-white">{activeFilter}</span>
             {query && (
               <>
                 {" "}for <span className="font-semibold text-white">{query}</span>
@@ -777,7 +776,6 @@ function ProjectFocusCard({
   project,
   index,
   activeFilter,
-  isHovered,
   layoutId,
   onOpen,
 }: {
@@ -794,63 +792,45 @@ function ProjectFocusCard({
       layoutId={`card-${project.title}-${layoutId}`}
       layout
       data-aos={activeFilter === "All" ? getProjectCardAos(index) : "fade-up"}
-      data-aos-delay={String(260 + (index % 6) * 260)}
+      data-aos-delay={String(180 + (index % 6) * 160)}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
-      whileHover={{ y: -8, scale: 1.055, zIndex: 80 }}
+      whileHover={{ y: -4, zIndex: 80 }}
       onClick={onOpen}
-      className="group/project relative h-[360px] origin-center cursor-pointer overflow-hidden rounded-md border border-white/10 bg-black ring-1 ring-white/5 transition-[transform,opacity,border-color] duration-300 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-10 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent hover:!border-cyan-300/55"
+      className="group/project relative flex min-h-[390px] origin-center cursor-pointer flex-col rounded-md border border-white/10 bg-white/[0.035] p-5 ring-1 ring-white/5 transition-[transform,opacity,border-color,background-color] duration-300 hover:!border-cyan-300/40 hover:bg-white/[0.055]"
     >
-      <motion.div layoutId={`image-${project.title}-${layoutId}`} className="absolute inset-0 bg-black">
-        {isHovered && project.videoId ? (
-          <iframe
-            className="pointer-events-none h-full w-full scale-[1.04] object-cover opacity-75"
-            src={`https://www.youtube.com/embed/${project.videoId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${project.videoId}&playsinline=1&modestbranding=1`}
-            title={`${project.title} muted preview`}
-            allow="autoplay; encrypted-media; picture-in-picture"
-          />
-        ) : project.videoId ? (
-          <Image
-            src={`https://img.youtube.com/vi/${project.videoId}/hqdefault.jpg`}
-            alt={`${project.title} video thumbnail`}
-            fill
-            sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="h-full w-full object-cover opacity-75 transition duration-500 group-hover/project:scale-[1.08] group-hover/project:opacity-95"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_50%_20%,rgba(34,211,238,0.18),transparent_34%),linear-gradient(135deg,#050505,#171717)] text-sm font-semibold text-neutral-400">
-            Case study
-          </div>
-        )}
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-      <span className="absolute left-3 top-3 rounded-full border border-cyan-300/30 bg-black/70 px-3 py-1 text-xs font-semibold text-cyan-100">
-        {String(orderedProjects.indexOf(project) + 1).padStart(2, "0")}
-      </span>
-      <span className="absolute right-3 top-3 rounded-full border border-white/25 bg-black/65 p-3 text-white transition group-hover/project:bg-cyan-300 group-hover/project:text-black">
-        <IconPlayerPlay className="h-5 w-5" />
-      </span>
-      <div className="absolute inset-x-0 bottom-0 p-5">
-        <div className="flex flex-wrap gap-2 opacity-90">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-wrap gap-2">
           <Badge>{project.category}</Badge>
           <Badge>{project.eyebrow}</Badge>
         </div>
-        <motion.h3
-          layoutId={`title-${project.title}-${layoutId}`}
-          className="mt-4 text-xl font-semibold text-white"
-        >
-          {project.title}
-        </motion.h3>
-        <div className="max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover/project:max-h-[245px] group-hover/project:opacity-100">
-          <div className="no-scrollbar mt-3 max-h-[155px] overflow-y-auto rounded-md border border-white/10 bg-black/75 p-3 backdrop-blur">
-            <p className="text-sm font-semibold leading-6 text-neutral-100">{project.summary}</p>
-            <div className="mt-3 grid gap-2 text-xs leading-5 text-neutral-300">
-              <p><span className="text-cyan-200">Type:</span> {project.workType}</p>
-              <p><span className="text-cyan-200">Proof:</span> {project.proof.slice(0, 2).join(", ")}</p>
-            </div>
-          </div>
-          <ProjectFooter project={project} onOpen={onOpen} />
-        </div>
+        <span className="hero-mono rounded border border-white/10 px-2 py-1 text-xs text-neutral-400">
+          {String(orderedProjects.indexOf(project) + 1).padStart(2, "0")}
+        </span>
+      </div>
+      <motion.h3
+        layoutId={`title-${project.title}-${layoutId}`}
+        className="mt-5 text-2xl font-semibold leading-tight text-white"
+      >
+        {project.title}
+      </motion.h3>
+      <p className="mt-3 text-sm leading-7 text-neutral-300">{project.summary}</p>
+
+      <div className="mt-5 grid gap-3 text-sm leading-6 text-neutral-300">
+        <p><span className="text-cyan-200">Role:</span> {project.myRole}</p>
+        <p><span className="text-cyan-200">Result:</span> {project.outcome}</p>
+      </div>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        {project.stack.slice(0, 5).map((tech) => (
+          <span key={tech} className="rounded border border-white/10 bg-black/25 px-2.5 py-1 text-xs text-neutral-300">
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-auto pt-6">
+        <ProjectFooter project={project} onOpen={onOpen} />
       </div>
     </motion.article>
   );
@@ -899,7 +879,7 @@ function ProjectFooter({
             onClick={(event) => event.stopPropagation()}
             className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200"
           >
-            Watch demo <IconArrowUpRight className="h-4 w-4" />
+            Watch walkthrough <IconPlayerPlay className="h-4 w-4" />
           </a>
         )}
       </div>
@@ -928,6 +908,9 @@ function ProjectExpandableCard({
                 <DialogDescription className="mt-3 max-w-3xl text-sm leading-7 text-neutral-300">
                   {project.summary}
                 </DialogDescription>
+                <p className="mt-4 rounded-md border border-white/10 bg-white/[0.035] p-3 text-xs leading-5 text-neutral-400">
+                  Demo-safe showcase. Some source, data, and workflows may be private because this work is client, company, or senior-guided collaborator owned.
+                </p>
               </DialogHeader>
 
               <div className="mt-6 rounded-md bg-black p-3">
@@ -996,12 +979,12 @@ function ProjectExpandableCard({
                 <div className="mt-5 flex flex-wrap gap-3">
                   {project.video && (
                     <a href={project.video} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200">
-                      Watch demo <IconArrowUpRight className="h-4 w-4" />
+                      Watch walkthrough <IconPlayerPlay className="h-4 w-4" />
                     </a>
                   )}
                   {project.repo && (
                     <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200">
-                      GitHub <IconArrowUpRight className="h-4 w-4" />
+                      View code <IconArrowUpRight className="h-4 w-4" />
                     </a>
                   )}
                   {project.extraLinks?.map((link) => (

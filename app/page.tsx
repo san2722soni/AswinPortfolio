@@ -13,10 +13,9 @@ import { Footer } from "@/components/footer";
 import { SideRails } from "@/components/SideRails";
 
 const SPLASH_FADE_MS = 650;
-const HERO_DRAW_SEQUENCE_MS = 10000;
-const HERO_ACTIONS_DELAY_MS = HERO_DRAW_SEQUENCE_MS;
+const SPLASH_MAX_MS = 1800;
+const HERO_ACTIONS_DELAY_MS = 1600;
 const SIDE_RAILS_DELAY_MS = HERO_ACTIONS_DELAY_MS + 1200;
-const NAVBAR_DELAY_MS = SIDE_RAILS_DELAY_MS + 1200;
 
 export default function Home() {
   const [mounted, isMounted] = useState(false);
@@ -25,10 +24,10 @@ export default function Home() {
   const [heroAnimationStarted, setHeroAnimationStarted] = useState(false);
   const [heroActionsVisible, setHeroActionsVisible] = useState(false);
   const [sideRailsVisible, setSideRailsVisible] = useState(false);
-  const [navbarVisible, setNavbarVisible] = useState(false);
   const [introProgress, setIntroProgress] = useState(0);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const splashFadeTimerRef = useRef<number | null>(null);
+  const splashMaxTimerRef = useRef<number | null>(null);
   const heroSequenceTimerRefs = useRef<number[]>([]);
 
   const finishSplash = useCallback(() => {
@@ -44,26 +43,32 @@ export default function Home() {
   useEffect(() => {
     isMounted(true);
     document.body.style.cursor = "auto";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finishSplash();
+    } else {
+      splashMaxTimerRef.current = window.setTimeout(finishSplash, SPLASH_MAX_MS);
+    }
     return () => {
       document.body.style.cursor = "auto";
       if (splashFadeTimerRef.current !== null) {
         window.clearTimeout(splashFadeTimerRef.current);
       }
+      if (splashMaxTimerRef.current !== null) {
+        window.clearTimeout(splashMaxTimerRef.current);
+      }
       heroSequenceTimerRefs.current.forEach((timer) => window.clearTimeout(timer));
     };
-  }, []);
+  }, [finishSplash]);
 
   useEffect(() => {
     if (!heroAnimationStarted) return;
 
     setHeroActionsVisible(false);
     setSideRailsVisible(false);
-    setNavbarVisible(false);
 
     const timers = [
       window.setTimeout(() => setHeroActionsVisible(true), HERO_ACTIONS_DELAY_MS),
       window.setTimeout(() => setSideRailsVisible(true), SIDE_RAILS_DELAY_MS),
-      window.setTimeout(() => setNavbarVisible(true), NAVBAR_DELAY_MS),
     ];
     heroSequenceTimerRefs.current = timers;
 
@@ -114,7 +119,7 @@ export default function Home() {
             animate={{ opacity: showSplash ? 1 : 0, y: showSplash ? 0 : -24 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="pointer-events-none fixed inset-0 z-[9998] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_35%,#181a1d_0%,#08090a_50%,#000000_100%)]"
+            className="pointer-events-none fixed inset-0 z-[9998] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_35%,#15171a_0%,#08090a_52%,#000000_100%)]"
           >
             <motion.div
               initial={{ scale: 0.94, opacity: 0, y: 18 }}
@@ -138,8 +143,15 @@ export default function Home() {
                 onEnded={finishSplash}
               />
               <p className="hero-mono text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-                Building Portfolio
+                Aswin Anand
               </p>
+              <button
+                type="button"
+                onClick={finishSplash}
+                className="pointer-events-auto hero-mono absolute right-0 top-0 rounded-sm border border-white/15 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 transition hover:border-cyan-200 hover:text-cyan-100"
+              >
+                Skip intro
+              </button>
               <div className="mt-8 h-1.5 w-[min(420px,72vw)] overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   animate={{ scaleX: introProgress }}
@@ -155,8 +167,8 @@ export default function Home() {
         className="relative overflow-hidden bg-neutral-950 antialiased"
         id="home"
       >
-        <div className="pointer-events-none fixed top-0 z-0 h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_96%_105%_at_50%_-24%,rgba(120,119,198,0.32),rgba(255,255,255,0))]" />
-        {navbarVisible && <Navbar name="name" description="desc" />}
+        <div className="pointer-events-none fixed top-0 z-0 h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_96%_105%_at_50%_-24%,rgba(34,211,238,0.12),rgba(255,255,255,0))]" />
+        <Navbar name="name" description="desc" />
         {sideRailsVisible && <SideRails />}
         <div className="relative z-10 min-h-screen w-full overflow-x-hidden pb-16">
           {heroAnimationStarted && (

@@ -15,8 +15,16 @@ type TimelineItem = {
   duration: string;
   location: string;
   summary: string;
+  highlights: string[];
   projects: { name: string; target?: string; text: string; action?: "contact" }[];
   skills: string[];
+};
+
+const availability = {
+  title: "Open to work and freelance delivery",
+  summary:
+    "Available for full-time full-stack/backend roles and freelance builds: dashboards, APIs, websites, automation, and demo-ready product systems.",
+  focus: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design"],
 };
 
 const experiences: TimelineItem[] = [
@@ -29,6 +37,11 @@ const experiences: TimelineItem[] = [
     duration: "early client phase",
     location: "Remote",
     summary: "Started with real client websites instead of tutorial clones: education pages, creator portfolios, and nursery/storefront experiences with responsive UI and client-ready delivery.",
+    highlights: [
+      "Delivered responsive static/client websites from real briefs.",
+      "Built portfolio, education, and storefront-style layouts.",
+      "Learned client-ready structure, content hierarchy, and polish.",
+    ],
     projects: [
       { name: "The Intellect", text: "Coaching/education website with institutional content and clean responsive flow." },
       { name: "Ayush Prakash Portfolio", text: "Cinematographer portfolio with media/project presentation and contact flow." },
@@ -45,6 +58,11 @@ const experiences: TimelineItem[] = [
     duration: "4 months",
     location: "Kalyan, Maharashtra - Remote",
     summary: "Moved into a structured internship role, building and maintaining frontend marketing work with responsive layouts, interactive sections, blogs/client updates, SEO/social presence, and clean delivery flow.",
+    highlights: [
+      "Worked in a structured frontend internship environment.",
+      "Maintained agency/client pages, blogs, and responsive sections.",
+      "Moved from static work into React/Next motion-heavy landing pages.",
+    ],
     projects: [
       { name: "Dragstr", text: "Digital marketing agency website with services, case-study sections, and content updates." },
       { name: "Prestine Nature", text: "Organic product landing page with small-business branding and motion polish." },
@@ -60,6 +78,11 @@ const experiences: TimelineItem[] = [
     duration: "1 yr 4 mos",
     location: "Xenvolt AI - Kalyan, Maharashtra, India - Remote",
     summary: "Progressed from frontend into full-stack company product work: dashboards, backend-connected flows, internal tools, website/admin systems, and deployment support.",
+    highlights: [
+      "Built company website/admin tooling, industrial dashboards, and internal product flows.",
+      "Connected frontend screens to APIs, data models, reports, and demo-safe workflows.",
+      "Supported deployment/debugging work around PM2, Nginx, and production-style delivery.",
+    ],
     projects: [
       { name: "XENVOLT Site", text: "Company website with product pages, blogs, leads, white papers, and deployment workflow." },
       { name: "XENVOLT Admin", text: "Internal CMS/admin dashboard for blogs, leads, rich text, images, and website updates." },
@@ -79,6 +102,10 @@ const experiences: TimelineItem[] = [
     duration: "client project",
     location: "Remote",
     summary: "Client ed-tech platform work focused on clean presentation, course/material structure, and responsive UI.",
+    highlights: [
+      "Delivered a course/content platform UI for a client education workflow.",
+      "Focused on dynamic course pages, enrollment CTAs, and readable content structure.",
+    ],
     projects: [{ name: "Psych Learn", text: "Psychology ed-tech landing platform." }],
     skills: ["Next.js", "TypeScript", "Tailwind", "shadcn UI", "AOS", "Course pages"],
   },
@@ -91,6 +118,11 @@ const experiences: TimelineItem[] = [
     duration: "approx 10 months",
     location: "With Vineet Oli - Remote",
     summary: "Job work under senior engineer guidance: developer tools, multiplayer/server systems, deployment workflows, Linux operations, and production debugging.",
+    highlights: [
+      "Worked on multiplayer/backend systems and developer tooling under senior engineer guidance.",
+      "Built dashboard/backend pieces, run paths, and debugging workflows across Linux/server stacks.",
+      "Gained deeper exposure to C++, Redis, Fastify, Electron, PM2/Nginx, and Cloudflare/AWS paths.",
+    ],
     projects: [
       { name: "V-Server", target: "V-Dashboard + V-Server", text: "Backend multiplayer/game operations services with Redis, MongoDB, and AWS EC2 flows." },
       { name: "V-Dashboard", target: "V-Dashboard + V-Server", text: "Next.js admin control plane for game sessions, builds, and developer workflows." },
@@ -108,24 +140,13 @@ const experiences: TimelineItem[] = [
     duration: "2-3 weeks",
     location: "Remote",
     summary: "Applied the full-stack/product skillset to a client AI platform with WhatsApp automation, appointment workflows, knowledge engine, and admin dashboard.",
+    highlights: [
+      "Built a split Fastify/Next client platform for clinic operations.",
+      "Connected MongoDB-backed admin workflows with OpenAI and WhatsApp-assisted flows.",
+      "Delivered a fast demo-ready AI product surface in a short client window.",
+    ],
     projects: [{ name: "Auryvedic", text: "Clinic AI assistant platform." }],
     skills: ["Fastify", "TypeScript", "MongoDB", "OpenAI SDK", "WhatsApp API", "TanStack Query"],
-  },
-  {
-    phase: "07. Current Focus & Availability",
-    role: "Open to Work - Full-Stack / Backend",
-    company: "Freelance & full-time roles",
-    type: "Open to work",
-    period: "Current",
-    duration: "actively available",
-    location: "Remote / India",
-    summary: "Currently open to full-time opportunities and freelance work. Alongside client work, sharpening advanced C++, LeetCode/DSA, advanced JavaScript, backend networking, and system design for deeper backend and systems roles.",
-    projects: [
-      { name: "Open to work", action: "contact", text: "Available for full-time full-stack/backend opportunities." },
-      { name: "Taking freelance work", action: "contact", text: "Available for client websites, dashboards, APIs, and automation work." },
-      { name: "Learning track", action: "contact", text: "Current focus: advanced C++, DSA, backend networking, and system design." },
-    ],
-    skills: ["Advanced C++", "LeetCode/DSA", "Advanced JavaScript", "Backend networking", "System design"],
   },
 ];
 
@@ -179,18 +200,21 @@ export function ExperienceTimeline() {
           </div>
         </div>
         <Timeline data={data} className="mt-10 w-full font-sans" />
+        <AvailabilityPanel />
       </div>
     </section>
   );
 }
 
 function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) {
+  const visibleProjects = item.projects.slice(0, 4);
+
   return (
     <motion.article
       initial={{ opacity: 0, x: 42 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.28 }}
-      transition={{ duration: 0.68, delay: (index % 2) * 0.24, ease: "easeOut" }}
+      transition={{ duration: 0.55, delay: (index % 2) * 0.12, ease: "easeOut" }}
       className="rounded-md border border-white/10 bg-white/[0.04] p-4 shadow-[0_12px_40px_rgba(0,0,0,0.18)] sm:p-6 md:p-7"
     >
       <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-start">
@@ -216,16 +240,23 @@ function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) 
           {item.location}
         </p>
       </div>
-      <p className="mt-4 text-sm leading-7 text-neutral-300 sm:text-base">{item.summary}</p>
+      <ul className="mt-4 grid gap-2 text-sm leading-6 text-neutral-300 sm:text-base sm:leading-7">
+        {item.highlights.map((highlight) => (
+          <li key={highlight} className="flex gap-3">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-200" />
+            <span>{highlight}</span>
+          </li>
+        ))}
+      </ul>
       <div className="mt-4 flex flex-wrap gap-2">
-        {item.projects.map((project, projectIndex) => (
+        {visibleProjects.map((project, projectIndex) => (
           <motion.button
             key={`${item.phase}-${project.name}`}
             type="button"
             initial={{ opacity: 0, x: -18 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.42, delay: projectIndex * 0.24, ease: "easeOut" }}
+            transition={{ duration: 0.34, delay: projectIndex * 0.14, ease: "easeOut" }}
             onClick={() => {
               if (project.action === "contact") {
                 document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -250,7 +281,7 @@ function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) 
             viewport={{ once: true, amount: 0.35 }}
             transition={{
               duration: 0.4,
-              delay: item.projects.length * 0.24 + skillIndex * 0.18,
+              delay: visibleProjects.length * 0.14 + skillIndex * 0.1,
               ease: "easeOut",
             }}
             className="rounded bg-white/[0.04] px-3 py-1.5 text-[13px] text-neutral-400"
@@ -265,4 +296,40 @@ function ExperienceCard({ item, index }: { item: TimelineItem; index: number }) 
 
 function openProjectFromTimeline(projectName: string) {
   window.dispatchEvent(new CustomEvent("portfolio-project-select", { detail: { projectName } }));
+}
+
+function AvailabilityPanel() {
+  return (
+    <motion.aside
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+      className="mt-10 rounded-md border border-cyan-300/25 bg-cyan-300/[0.06] p-5 sm:p-6"
+    >
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+        <div>
+          <p className="hero-mono text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
+            Availability
+          </p>
+          <h3 className="mt-3 text-2xl font-semibold text-white">{availability.title}</h3>
+          <p className="mt-3 max-w-3xl text-sm leading-7 text-neutral-300">{availability.summary}</p>
+        </div>
+        <button
+          type="button"
+          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+          className="w-fit rounded-md bg-white px-4 py-3 text-sm font-bold text-black transition hover:bg-cyan-200"
+        >
+          Start a conversation
+        </button>
+      </div>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {availability.focus.map((item) => (
+          <span key={item} className="rounded border border-white/10 bg-black/25 px-3 py-1.5 text-xs text-neutral-300">
+            {item}
+          </span>
+        ))}
+      </div>
+    </motion.aside>
+  );
 }

@@ -16,46 +16,46 @@ import { TypingHeading } from "@/components/TypingHeading";
 
 const skillGroups = [
   {
-    title: "Frontend Product UI",
+    title: "Product UI",
     icon: IconBrandReact,
-    proof: "Typed product UI across company sites, admin dashboards, video portfolio, and client landing work.",
+    proof: "Dashboards, admin panels, landing pages, and client-facing product screens.",
     projects: ["XENVOLT Site", "XENVOLT Admin", "Psych Learn"],
-    skills: ["TypeScript", "React", "Next.js", "Tailwind CSS", "shadcn/Radix UI", "Framer Motion", "AOS"],
+    skills: ["TypeScript", "React", "Next.js", "Tailwind CSS", "shadcn/Radix UI"],
   },
   {
-    title: "Backend/API Core",
+    title: "Backend Systems",
     icon: IconBrandNodejs,
-    proof: "Backend services for dashboards, game/session systems, AI workflows, and role-based business apps.",
+    proof: "APIs and service layers for dashboards, AI workflows, game/session systems, and role-based apps.",
     projects: ["V-Server", "Auryvedic", "Randomizer"],
-    skills: ["Node.js", "Fastify", "Express", "REST APIs", "WebSockets", "JWT/OTP", "API docs"],
+    skills: ["Node.js", "Fastify", "Express", "REST APIs", "JWT/OTP"],
   },
   {
-    title: "Data/Auth Layer",
+    title: "Data & APIs",
     icon: IconDatabase,
-    proof: "Database-backed products with auth, admin data, reports, relational modeling, cache, and search systems.",
+    proof: "Database-backed products with auth, admin data, reports, cache, and search paths.",
     projects: ["XENVOLT Admin", "V-Dashboard", "V-Server"],
-    skills: ["MongoDB/Mongoose", "PostgreSQL", "Prisma", "Redis", "Clerk/JWT", "Elasticsearch", "TanStack Table"],
+    skills: ["MongoDB/Mongoose", "PostgreSQL", "Prisma", "Redis", "Clerk/JWT"],
   },
   {
-    title: "DevOps & Cloud",
+    title: "Deployment & Ops",
     icon: IconServerCog,
-    proof: "Production-style server setup, process management, reverse proxy, cloud workflows, and deployment checks.",
+    proof: "Production-style server setup, process management, reverse proxy, and deployment checks.",
     projects: ["AnarchyV2", "V-Server", "XENVOLT Site"],
-    skills: ["Linux", "SSH", "Docker", "AWS EC2/S3", "PM2", "Nginx", "Cloudflare"],
+    skills: ["Linux", "SSH", "AWS EC2/S3", "PM2", "Nginx"],
   },
   {
-    title: "Systems & Tooling",
+    title: "Developer Tooling",
     icon: IconTool,
-    proof: "Terminal-first debugging, desktop tooling, editor workflows, systems docs, and test-aware delivery.",
+    proof: "Terminal-first debugging, desktop tooling, editor workflows, systems docs, and repo operations.",
     projects: ["Version Control Manager", "AnarchyV2", "Randomizer"],
-    skills: ["Git/CLI", "Electron", "C++/FlatBuffers", "CodeMirror/Monaco", "Vitest/Jest/Cypress", "Load tests", "Runbooks"],
+    skills: ["Git/CLI", "Electron", "C++/FlatBuffers", "CodeMirror/Monaco", "Runbooks"],
   },
   {
-    title: "AI & Integrations",
+    title: "AI Integrations",
     icon: IconBrain,
-    proof: "AI assistant workflows, WhatsApp automation, media/report generation, and operational integrations.",
+    proof: "AI assistant workflows, WhatsApp automation, reports, and external service integrations.",
     projects: ["Auryvedic", "SAMVIT / SCADA", "ClapperBoard"],
-    skills: ["OpenAI SDK", "AI SDK", "Python/XGBoost", "WhatsApp API", "Cloudinary", "PDF/QR generation", "Speech recognition"],
+    skills: ["OpenAI SDK", "WhatsApp API", "Python/XGBoost", "Cloudinary", "PDF/QR generation"],
   },
 ];
 
@@ -89,15 +89,15 @@ export function Services() {
       <div className="mb-12" data-aos="fade-up">
         <div>
           <p className="hero-mono text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
-            Skills & Operating Range
+            Skills
           </p>
           <TypingHeading
-            text="Skills mapped across engineering operations."
+            text="Capabilities backed by projects."
             className="hero-display mt-4 whitespace-normal text-3xl font-bold text-white md:whitespace-nowrap md:text-5xl"
           />
           <p className="mt-5 text-base leading-8 text-neutral-300">
-            Concrete capabilities from the projects: engine work, APIs,
-            dashboards, terminal workflows, and deployment/debugging practice.
+            Grouped by what I can deliver: product UI, backend systems, data flows,
+            deployment work, developer tooling, and AI integrations.
           </p>
         </div>
       </div>
@@ -109,9 +109,9 @@ export function Services() {
             <motion.article
               key={group.title}
               data-aos={getSkillCardAos(index)}
-              data-aos-delay={String(320 + index * 260)}
+              data-aos-delay={String(160 + index * 120)}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="group relative overflow-hidden rounded-md border border-white/10 bg-gradient-to-br from-white/[0.06] via-white/[0.025] to-cyan-300/[0.035] p-5 shadow-xl shadow-black/10 transition hover:border-cyan-300/45 hover:shadow-cyan-950/20 before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-cyan-200/70 before:to-transparent"
+              className="group relative overflow-hidden rounded-md border border-white/10 bg-white/[0.035] p-5 transition hover:border-cyan-300/35 hover:bg-white/[0.055]"
             >
               <div className="mb-5 flex items-center gap-3">
                 <span className="rounded-md border border-cyan-300/20 bg-cyan-300/10 p-2 text-cyan-200 transition group-hover:bg-cyan-300 group-hover:text-black">
@@ -139,8 +139,8 @@ export function Services() {
                     initial={{ opacity: 0, y: 14, scale: 0.92 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, amount: 0.35 }}
-                    transition={{ duration: 0.4, delay: skillIndex * 0.18, ease: "easeOut" }}
-                    className="rounded border border-white/10 bg-black/40 px-3.5 py-2 text-base font-semibold text-neutral-100 transition group-hover:border-cyan-300/45 group-hover:bg-cyan-300/10 group-hover:text-cyan-50"
+                    transition={{ duration: 0.3, delay: skillIndex * 0.08, ease: "easeOut" }}
+                    className="rounded border border-white/10 bg-black/25 px-3 py-1.5 text-sm font-semibold text-neutral-200 transition group-hover:border-cyan-300/35 group-hover:text-cyan-50"
                   >
                     {skill}
                   </motion.span>
@@ -158,7 +158,7 @@ export function Services() {
             <div
               key={item.label}
               data-aos={getSkillCardAos(index + skillGroups.length)}
-              data-aos-delay={String(340 + index * 260)}
+              data-aos-delay={String(180 + index * 120)}
               className="rounded-md border border-white/10 bg-black/30 p-5"
             >
               <Icon className="h-6 w-6 text-cyan-200" />

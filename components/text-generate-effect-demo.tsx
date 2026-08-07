@@ -3,7 +3,7 @@
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const words =
-  "Full-stack software engineer building dependable product systems: APIs, dashboards, developer tools, deployment workflows, and AI-assisted flows that move from rough requirements to demo-safe production proof for client, company, and partner-led work.";
+  "Full-stack product developer building dashboards, backend systems, and developer tools. I turn rough requirements into usable products with APIs, admin flows, deployment notes, and demo-safe proof.";
 
 export default function TextGenerateEffectDemo({ start = true }: { start?: boolean }) {
   return (

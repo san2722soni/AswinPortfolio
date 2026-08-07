@@ -7,8 +7,8 @@ const portraits = [
   { src: "/pfp3.svg?v=2", label: "pfp3" },
   { src: "/pfp4.svg?v=2", label: "pfp4" },
 ];
-const FEATURED_DRAW_MS = 10000;
-const FEATURED_PATH_MS = 2000;
+const FEATURED_DRAW_MS = 5200;
+const FEATURED_PATH_MS = 1600;
 
 export function SvgPathPortrait({
   featured = false,

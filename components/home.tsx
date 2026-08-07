@@ -5,9 +5,11 @@ import { gsap } from "gsap";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
+  IconArrowDown,
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileText,
+  IconMail,
 } from "@tabler/icons-react";
 import { SvgPathPortrait } from "./SvgPathPortrait";
 import { FlipWords } from "@/components/ui/flip-words";
@@ -31,9 +33,9 @@ export const Header:React.FC<HeaderProps> = ({
 
   useEffect(() => {
     AOS.init({
-      duration: 1200,
+      duration: 800,
       easing: "ease-out-cubic",
-      offset: 150,
+      offset: 100,
       once: true,
       anchorPlacement: "top-bottom",
     });
@@ -70,11 +72,14 @@ export const Header:React.FC<HeaderProps> = ({
         <h1 className="hero-reveal hero-display text-4xl font-black leading-[0.95] text-slate-100 min-[390px]:text-5xl md:text-7xl">
           Aswin Anand.
         </h1>
+        <p className="hero-reveal mt-5 max-w-2xl text-base font-semibold leading-7 text-cyan-100 md:text-xl">
+          Full-stack product developer building dashboards, backend systems, and developer tools.
+        </p>
         <div className="hero-reveal mt-6 flex flex-wrap gap-2">
-          {["Full-stack", "Dashboards", "DevOps-ready", "AI-assisted"].map((item) => (
+          {["Backend APIs", "Admin dashboards", "DevOps workflow", "AI-assisted products"].map((item) => (
             <span
               key={item}
-              className="hero-mono rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1.5 text-xs font-semibold text-cyan-100"
+              className="hero-mono rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-xs font-semibold text-slate-300"
             >
               {item}
             </span>
@@ -89,30 +94,46 @@ export const Header:React.FC<HeaderProps> = ({
           <TextGenerateEffectDemo key={textEffectStarted ? "summary-started" : "summary-waiting"} start={textEffectStarted} />
         </div>
         {showActions && (
-        <div className="mt-8 flex flex-wrap gap-3 md:mt-12">
+        <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-12">
           <span className="hero-action-enter" style={{ animationDelay: "0ms" }}>
+            <a
+              href="#portfolio"
+              className="hero-mono inline-flex items-center gap-2 rounded-md bg-white px-4 py-3 text-xs font-black text-black transition hover:bg-cyan-200 sm:px-6 sm:py-4 sm:text-sm"
+            >
+              View selected work <IconArrowDown className="h-4 w-4" />
+            </a>
+          </span>
+          <span className="hero-action-enter" style={{ animationDelay: "180ms" }}>
+            <a
+              href="#contact"
+              className="hero-mono inline-flex items-center gap-2 rounded-md border border-cyan-300/40 px-4 py-3 text-xs font-semibold text-cyan-100 transition hover:border-cyan-300 hover:bg-cyan-300/10 sm:px-6 sm:py-4 sm:text-sm"
+            >
+              Contact me <IconMail className="h-4 w-4" />
+            </a>
+          </span>
+          <span className="hero-action-enter" style={{ animationDelay: "360ms" }}>
             <LinkPreview
               href="https://github.com/san2722soni"
               label="GitHub: project repositories and code access"
-              className="hero-mono inline-flex items-center gap-2 rounded-md border border-white/20 px-4 py-3 text-xs font-semibold text-slate-200 transition hover:border-cyan-300 hover:text-cyan-200 sm:px-6 sm:py-4 sm:text-sm"
+              className="hero-mono inline-flex items-center gap-2 rounded-md border border-white/15 px-4 py-3 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/60 hover:text-cyan-200 sm:px-5 sm:py-4 sm:text-sm"
             >
               GitHub <IconBrandGithub className="h-4 w-4" />
             </LinkPreview>
           </span>
-          <span className="hero-action-enter" style={{ animationDelay: "350ms" }}>
+          <span className="hero-action-enter" style={{ animationDelay: "540ms" }}>
             <LinkPreview
               href="https://www.linkedin.com/in/aswin-anand-90ab91275/"
               label="LinkedIn: experience, roles, and contact"
-              className="hero-mono inline-flex items-center gap-2 rounded-md border border-white/20 px-4 py-3 text-xs font-semibold text-slate-200 transition hover:border-cyan-300 hover:text-cyan-200 sm:px-6 sm:py-4 sm:text-sm"
+              className="hero-mono inline-flex items-center gap-2 rounded-md border border-white/15 px-4 py-3 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/60 hover:text-cyan-200 sm:px-5 sm:py-4 sm:text-sm"
             >
               LinkedIn <IconBrandLinkedin className="h-4 w-4" />
             </LinkPreview>
           </span>
-          <span className="hero-action-enter" style={{ animationDelay: "700ms" }}>
+          <span className="hero-action-enter" style={{ animationDelay: "720ms" }}>
             <HoverPreviewLink
               href="https://drive.google.com/file/d/1DgrB14nlrVcWycuu716Q7azKJqfsmgND/view?usp=sharing"
               preview={<ResumeHoverPreview />}
-              className="hero-mono inline-flex items-center gap-2 rounded-md border border-cyan-300/40 px-4 py-3 text-xs font-semibold text-cyan-100 transition hover:border-cyan-300 hover:bg-cyan-300/10 sm:px-6 sm:py-4 sm:text-sm"
+              className="hero-mono inline-flex items-center gap-2 rounded-md border border-white/15 px-4 py-3 text-xs font-semibold text-slate-300 transition hover:border-cyan-300/60 hover:text-cyan-200 sm:px-5 sm:py-4 sm:text-sm"
             >
               Resume <IconFileText className="h-4 w-4" />
             </HoverPreviewLink>

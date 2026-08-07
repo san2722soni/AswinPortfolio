@@ -30,11 +30,11 @@ const formSchema = z.object({
   phone: z.string().max(24, { message: "Phone number is too long." }).optional(),
   description: z
     .string()
-    .min(5, {
-      message: "Message must be atleast 5 characters.",
+    .min(10, {
+      message: "Message must be at least 10 characters.",
     })
-    .max(100, {
-      message: "Too long message",
+    .max(600, {
+      message: "Please keep the message under 600 characters.",
     }),
 });
 
@@ -49,7 +49,7 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
   }
 
   const templateParams = {
-    from_name: values.email,
+    from_name: `${values.username} (${values.email})`,
     to_name: "Aswin Anand",
     company: values.phone ?? "",
     msg: values.description,
@@ -87,11 +87,11 @@ export const FormUI = () => {
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem data-aos="fade-down" data-aos-delay="300">
-                  <FormLabel className="text-white">Full name</FormLabel>
+                <FormItem data-aos="fade-down" data-aos-delay="120">
+                  <FormLabel className="text-white">Name</FormLabel>
                   <FormControl>
                     <InputShad
-                      placeholder="Aswin Anand"
+                      placeholder="Your name"
                       {...field}
                       className="border-none bg-white/[0.09] text-white ring-none placeholder:text-neutral-500"
                     />
@@ -104,11 +104,11 @@ export const FormUI = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem data-aos="fade-down" data-aos-delay="560">
-                  <FormLabel className="text-white">Email Address</FormLabel>
+                <FormItem data-aos="fade-down" data-aos-delay="220">
+                  <FormLabel className="text-white">Email address</FormLabel>
                   <FormControl>
                     <InputShad
-                      placeholder="invictusasw7@gmail.com"
+                      placeholder="you@company.com"
                       {...field}
                       className="border-none bg-white/[0.09] text-white ring-none placeholder:text-neutral-500"
                     />
@@ -122,11 +122,11 @@ export const FormUI = () => {
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem data-aos="fade-down" data-aos-delay="820">
-                <FormLabel className="text-white">Phone Number</FormLabel>
+              <FormItem data-aos="fade-down" data-aos-delay="320">
+                <FormLabel className="text-white">Company or phone (optional)</FormLabel>
                 <FormControl>
                   <InputShad
-                    placeholder="+91 62008 55270"
+                    placeholder="Company, role, or phone"
                     {...field}
                     className="border-none bg-white/[0.09] text-white ring-none placeholder:text-neutral-500"
                   />
@@ -139,11 +139,11 @@ export const FormUI = () => {
             control={form.control}
             name="description"
             render={({ field }) => (
-              <FormItem data-aos="fade-down" data-aos-delay="1080">
+              <FormItem data-aos="fade-down" data-aos-delay="420">
                 <FormLabel className="text-white">Message</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Type your message here"
+                    placeholder="Tell me about the role, project, timeline, or problem to solve."
                     className="min-h-28 resize-none border-none bg-white/[0.09] text-white ring-none placeholder:text-neutral-500"
                     {...field}
                   />
@@ -156,10 +156,10 @@ export const FormUI = () => {
             type="submit"
             disabled={form.formState.isSubmitting}
             data-aos="fade-down"
-            data-aos-delay="1340"
+            data-aos-delay="520"
             className="bg-white/[0.08] text-white"
           >
-            {form.formState.isSubmitting ? "Sending..." : "Submit"}
+            {form.formState.isSubmitting ? "Sending..." : "Send inquiry"}
           </Button>
         </form>
       </Form>
