@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/resizable-navbar";
 
 const navItems = [
-  { name: "Home", link: "#home", id: "home" },
-  { name: "Experience", link: "#experience", id: "experience" },
-  { name: "Work", link: "#portfolio", id: "portfolio" },
-  { name: "Skills", link: "#services", id: "services" },
-  { name: "Contact", link: "#contact", id: "contact" },
+  { name: "Home", link: "/#home", id: "home" },
+  { name: "About", link: "/#about", id: "about" },
+  { name: "Experience", link: "/#experience", id: "experience" },
+  { name: "Work", link: "/#portfolio", id: "portfolio" },
+  { name: "Skills", link: "/#services", id: "services" },
+  { name: "Contact", link: "/#contact", id: "contact" },
 ];
-const sectionOrder = ["home", "experience", "portfolio", "services", "contact"];
+const sectionOrder = ["home", "about", "experience", "portfolio", "services", "contact"];
 
 const resumeUrl = "https://drive.google.com/file/d/1DgrB14nlrVcWycuu716Q7azKJqfsmgND/view?usp=sharing";
 
@@ -47,17 +48,17 @@ export default function Navbar(_: { name?: string; description?: string }) {
   return (
     <AceternityNavbar className="fixed left-0 right-0 top-3 z-[99]">
       <NavBody
-        className="hero-mono mx-auto min-w-0 max-w-[88vw] rounded-none bg-transparent px-4 py-3 text-white/90 lg:max-w-[70vw]"
+        className="hero-mono mx-auto min-w-0 max-w-[92vw] rounded-none bg-transparent px-4 py-3 text-white/90 lg:max-w-[82vw]"
       >
         <div className="flex items-center justify-center gap-1 text-sm font-semibold">
           {navItems.map((item, index) => (
             <a
               key={item.id}
               href={item.link}
-              className={`nav-item-enter rounded-md px-3 py-2 transition hover:bg-white/[0.06] hover:text-white ${
+              className={`nav-item-enter rounded-md px-2.5 py-2 transition hover:bg-white/[0.06] hover:text-white ${
                 activeSection === item.id ? "bg-white/[0.07] text-cyan-100" : "text-white/80"
               }`}
-              style={{ animationDelay: `${index * 110}ms` }}
+              style={{ animationDelay: `${index * 135}ms` }}
             >
               {item.name}
             </a>
@@ -67,7 +68,7 @@ export default function Navbar(_: { name?: string; description?: string }) {
             target="_blank"
             rel="noreferrer"
             className="nav-item-enter ml-2 rounded-md border border-cyan-300/35 px-3 py-2 text-cyan-100 transition hover:bg-cyan-300/10"
-            style={{ animationDelay: `${navItems.length * 110}ms` }}
+            style={{ animationDelay: `${navItems.length * 135}ms` }}
           >
             Resume
           </a>

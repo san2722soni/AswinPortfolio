@@ -5,33 +5,23 @@ import { TypingHeading } from "@/components/TypingHeading";
 
 export const Form = () => {
   return (
-    <section className="mx-auto w-[88vw] max-w-none py-28 lg:w-[70vw]">
-      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
-          <div className="flex flex-col justify-center">
-            <p className="hero-mono text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
-              Contact
-            </p>
-            <TypingHeading
-              text="Let's build the next useful thing."
-              className="hero-display max-w-none text-4xl font-bold leading-tight text-white md:whitespace-nowrap md:text-5xl lg:text-[3.35rem]"
-            />
-            <p className="mt-5 max-w-xl text-base leading-8 text-slate-300">
-              Available for full-time full-stack/backend roles and freelance projects.
-              Send a role, build brief, or debugging task; I usually respond with
-              demos, links, and next-step context.
-            </p>
-            <div className="mt-6 grid gap-3 text-sm text-neutral-300">
-              <a href="mailto:invictusasw7@gmail.com" className="w-fit transition hover:text-cyan-100">
-                invictusasw7@gmail.com
-              </a>
-              <a href="https://www.linkedin.com/in/aswin-anand-90ab91275/" target="_blank" rel="noreferrer" className="w-fit transition hover:text-cyan-100">
-                LinkedIn /aswin-anand-90ab91275
-              </a>
-            </div>
+    <section className="mx-auto w-[88vw] max-w-[1100px] py-20 md:py-24">
+      <div className="mb-10" data-aos="fade-up">
+        <p className="hero-mono text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
+          Contact
+        </p>
+        <TypingHeading
+          text="Let's build the next useful thing."
+          className="hero-display mt-4 text-3xl font-bold leading-tight text-white md:text-5xl"
+        />
+      </div>
+
+      <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
+          <div className="flex min-h-[360px] items-center justify-center">
             <div
               data-aos="zoom-in"
-              data-aos-delay="420"
-              className="india-map relative isolate mt-10 w-full max-w-[380px] overflow-visible opacity-80"
+              data-aos-delay="180"
+              className="india-map relative isolate mx-auto w-full max-w-[470px] overflow-visible opacity-85"
             >
               <div className="pointer-events-none absolute left-[59%] top-[45%] z-20 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300/10 blur-2xl" />
               <InlineIndiaMap />
@@ -46,7 +36,7 @@ export const Form = () => {
             <div
               data-aos="fade-up"
               data-aos-delay="260"
-              className="w-full rounded-md border border-white/10 bg-white/[0.04] p-6 sm:p-8 lg:p-10"
+              className="w-full rounded-md border border-white/10 bg-white/[0.04] p-5 sm:p-6"
             >
               <FormUI />
             </div>

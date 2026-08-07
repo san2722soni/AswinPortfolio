@@ -80,9 +80,9 @@ export const FormUI = () => {
           onSubmit={form.handleSubmit(async (values) => {
             if (await onSubmit(values)) form.reset();
           })}
-          className="space-y-7"
+          className="space-y-5"
         >
-          <div className="grid gap-7">
+          <div className="grid gap-5 sm:grid-cols-2">
             <FormField
               control={form.control}
               name="username"
@@ -157,7 +157,7 @@ export const FormUI = () => {
             disabled={form.formState.isSubmitting}
             data-aos="fade-down"
             data-aos-delay="520"
-            className="bg-white/[0.08] text-white"
+            className="bg-white/[0.08] px-5 py-3 text-sm text-white"
           >
             {form.formState.isSubmitting ? "Sending..." : "Send inquiry"}
           </Button>

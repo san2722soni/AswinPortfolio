@@ -66,13 +66,13 @@ export const Timeline = ({
         </div>
       )}
 
-      <div ref={ref} className="relative mx-auto w-full max-w-none overflow-hidden pb-8 pl-0">
+      <div ref={ref} className="relative mx-auto w-full max-w-none overflow-hidden pb-6 pl-0">
         {data.map((item, index) => (
           <div
             key={index}
-            className="relative grid gap-4 py-5 lg:grid-cols-[minmax(360px,42%)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[minmax(520px,42%)_minmax(0,1fr)] 2xl:grid-cols-[minmax(560px,42%)_minmax(0,1fr)]"
+            className="relative grid gap-3 py-3.5 lg:grid-cols-[minmax(360px,42%)_minmax(0,1fr)] lg:gap-8 xl:grid-cols-[minmax(520px,42%)_minmax(0,1fr)] 2xl:grid-cols-[minmax(560px,42%)_minmax(0,1fr)]"
           >
-            <div className="relative z-20 flex min-h-12 items-center gap-3 pl-12 sm:gap-4 sm:pl-16 lg:pl-24">
+            <div className="relative z-20 flex min-h-10 items-center gap-3 pl-12 sm:gap-4 sm:pl-16 lg:pl-24">
               <div className="absolute left-[10px] top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white shadow-[0_0_20px_rgba(34,211,238,0.18)] sm:left-[18px] dark:bg-white">
                 <div className="h-4 w-4 rounded-full border border-cyan-300/70 bg-cyan-300/20" />
               </div>

@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import Link from "next/link";
 import { animate } from "animejs";
 import AOS from "aos";
-import CountUp from "react-countup";
 import { AnimatePresence, motion } from "motion/react";
 import {
   IconArrowUpRight,
+  IconBrandGithub,
   IconBriefcase,
-  IconChevronDown,
-  IconChevronUp,
+  IconLayoutGrid,
   IconListDetails,
+  IconList,
   IconMovie,
   IconPlayerPlay,
   IconTerminal2,
@@ -515,14 +516,14 @@ const searchPlaceholders = [
 ];
 
 const projectOrder = [
+  "AnarchyV2",
+  "Version Control Manager",
   "SAMVIT / SCADA Platform",
   "XENVOLT Admin",
-  "V-Dashboard + V-Server",
-  "Version Control Manager",
-  "AnarchyV2",
   "Auryvedic",
-  "SAMVIT Pro / Xenvolt EPC Track",
+  "V-Dashboard + V-Server",
   "XENVOLT Site",
+  "SAMVIT Pro / Xenvolt EPC Track",
   "CHAKRA OEE",
   "Randomizer / BA Test",
   "Grid Prototype",
@@ -542,7 +543,6 @@ const orderedProjects = [...projects].sort(
 );
 
 const initialProjectLimit = 6;
-const selectedProjectNames = new Set(projectOrder.slice(0, initialProjectLimit));
 
 function getProjectCardAos(index: number) {
   if (index % 3 === 0) return "fade-right";
@@ -562,11 +562,16 @@ const filterIcons: Record<TagFilter, typeof IconBriefcase> = {
   Dashboard: IconListDetails,
 };
 
-export function VideoProjects() {
+const viewOptions = [
+  { value: "grid" as const, Icon: IconLayoutGrid },
+  { value: "list" as const, Icon: IconList },
+];
+
+export function VideoProjects({ mode = "home" }: { mode?: "home" | "all" }) {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeFilter, setActiveFilter] = useState<TagFilter>("All");
   const [query, setQuery] = useState("");
-  const [showAll, setShowAll] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const filterSummaryRef = useRef<HTMLDivElement>(null);
   const layoutId = useId();
   const normalizedQuery = query.trim().toLowerCase();
@@ -585,16 +590,10 @@ export function VideoProjects() {
       .toLowerCase();
     return filterMatch && (!normalizedQuery || searchBlob.includes(normalizedQuery));
   });
-  const displayProjects = showAll
-    ? visibleProjects
-    : visibleProjects.slice(0, initialProjectLimit);
-  const showProjectLevels = activeFilter === "All" && !normalizedQuery && !showAll;
-  const additionalProjects = orderedProjects.filter(
-    (project) => !selectedProjectNames.has(project.title) && project.category !== "Personal",
-  );
-  const experimentProjects = orderedProjects.filter(
-    (project) => !selectedProjectNames.has(project.title) && project.category === "Personal",
-  );
+  const displayProjects = mode === "all"
+      ? visibleProjects
+      : visibleProjects.slice(0, initialProjectLimit);
+  const featuredProjects = orderedProjects.slice(0, 3);
   const getFilterCount = (filter: TagFilter) =>
     filter === "All"
       ? orderedProjects.length
@@ -612,7 +611,7 @@ export function VideoProjects() {
 
   useEffect(() => {
     AOS.refreshHard();
-  }, [activeFilter, query, showAll]);
+  }, [activeFilter, query, viewMode]);
 
   useEffect(() => {
     const onProjectSelect = (event: Event) => {
@@ -623,7 +622,6 @@ export function VideoProjects() {
 
       setActiveFilter("All");
       setQuery(project.title);
-      setShowAll(true);
       setSelectedProject(project);
       window.setTimeout(() => {
         document.getElementById("portfolio")?.scrollIntoView({
@@ -637,64 +635,110 @@ export function VideoProjects() {
     return () => window.removeEventListener("portfolio-project-select", onProjectSelect);
   }, []);
 
-  return (
-    <section className="relative overflow-visible py-28">
-      <div className="mx-auto w-[88vw] max-w-none lg:w-[70vw]">
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-start">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
+  if (mode === "home") {
+    return (
+      <section className="relative overflow-visible py-24 md:py-32">
+        <div className="mx-auto w-[88vw] max-w-[1100px]">
+          <div className="mb-12" data-aos="fade-up">
+            <p className="hero-mono text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
               Selected Work
             </p>
             <TypingHeading
               text="Case studies first, video proof inside."
               className="hero-display mt-4 text-3xl font-bold leading-tight text-white md:text-5xl"
             />
-            <p className="mt-5 text-base leading-8 text-neutral-300">
-              Six strongest projects lead here. Open a card for role, stack, what I built, video walkthrough, and public/private notes.
+          </div>
+
+          <div className="grid gap-20">
+            {featuredProjects.map((project, index) => (
+              <FeaturedProjectCard
+                key={project.title}
+                project={project}
+                index={index}
+                onOpen={() => setSelectedProject(project)}
+              />
+            ))}
+          </div>
+
+          <div className="mt-20 flex justify-center">
+            <Link
+              href="/projects"
+              className="hero-mono inline-flex items-center gap-3 rounded border border-cyan-300 px-7 py-4 text-sm font-bold text-cyan-200 transition hover:bg-cyan-300/10"
+            >
+              View all projects
+              <IconArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+        <ProjectExpandableCard
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative overflow-visible py-20 md:py-28">
+      <div className="mx-auto w-[92vw] max-w-[1440px]">
+        <div className="grid gap-8 lg:grid-cols-[1fr_430px] lg:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
+              All Projects
+            </p>
+            <TypingHeading
+              text="All case studies."
+              className="hero-display mt-4 text-3xl font-bold leading-tight text-white md:text-5xl"
+            />
+            <p className="mt-5 max-w-3xl text-base leading-8 text-neutral-300">
+              Search, filter, and switch views across every project, stack, walkthrough, and public/private note.
             </p>
           </div>
-          <div className="lg:ml-auto lg:w-full lg:max-w-xl" data-aos="fade-down" data-aos-delay="420">
+          <div className="lg:ml-auto lg:w-full" data-aos="fade-down" data-aos-delay="420">
             <PlaceholdersAndVanishInput
               value={query}
               placeholders={searchPlaceholders}
               onChange={(value) => {
                 setQuery(value);
-                setShowAll(false);
               }}
-              onSubmit={() => setShowAll(true)}
+              onSubmit={() => undefined}
               className="mx-0 border border-cyan-300/20 bg-neutral-950 text-white shadow-[0_0_24px_rgba(34,211,238,0.08)]"
             />
-            {query && (
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery("");
-                  setSelectedProject(null);
-                  setShowAll(false);
-                }}
-                className="mt-4 w-fit rounded-md border border-white/10 px-4 py-2 text-sm font-semibold text-neutral-300 transition hover:border-cyan-300/40 hover:text-cyan-100"
-              >
-                Clear search
-              </button>
-            )}
-            <div className="mt-5 flex flex-wrap justify-start gap-5 text-sm text-neutral-400 lg:justify-end">
-              {[
-                [initialProjectLimit, "selected case studies"],
-                [filters.length - 1, "work filters"],
-                [orderedProjects.filter((project) => project.category === "Job Work").length, "job-work systems"],
-              ].map(([value, label]) => (
-                <p key={label as string} className="hero-mono">
-                  <span className="text-xl font-semibold text-white">
-                    <CountUp end={Number(value)} duration={0.8} enableScrollSpy scrollSpyOnce />
-                  </span>{" "}
-                  {label}
-                </p>
-              ))}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex rounded border border-white/10 bg-white/[0.035] p-1">
+                {viewOptions.map(({ value, Icon }) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setViewMode(value)}
+                    className={`inline-flex h-9 w-10 items-center justify-center rounded text-sm transition ${
+                      viewMode === value
+                        ? "bg-cyan-300 text-black"
+                        : "text-neutral-400 hover:text-cyan-200"
+                    }`}
+                    aria-label={`Switch to ${value} view`}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </button>
+                ))}
+              </div>
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setSelectedProject(null);
+                  }}
+                  className="rounded border border-white/10 px-4 py-2 text-sm font-semibold text-neutral-300 transition hover:border-cyan-300/40 hover:text-cyan-100"
+                >
+                  Clear search
+                </button>
+              )}
             </div>
           </div>
         </div>
 
-        <div className="mt-8 grid w-full grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-8">
+        <div className="mt-14 grid w-full grid-cols-4 gap-2 md:grid-cols-4 lg:grid-cols-8">
           {filters.map((filter, index) => {
             const Icon = filterIcons[filter];
             const active = activeFilter === filter;
@@ -706,7 +750,6 @@ export function VideoProjects() {
                 data-aos-delay={String(120 + index * 80)}
                 onClick={() => {
                   setActiveFilter(filter);
-                  setShowAll(false);
                 }}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
@@ -733,7 +776,7 @@ export function VideoProjects() {
           >
             Showing <span className="font-semibold text-cyan-100">{displayProjects.length}</span>
             {" "}of <span className="font-semibold text-cyan-100">{visibleProjects.length}</span>{" "}
-            case studies in <span className="font-semibold text-white">{activeFilter}</span>
+            projects in <span className="font-semibold text-white">{activeFilter}</span>
             {query && (
               <>
                 {" "}for <span className="font-semibold text-white">{query}</span>
@@ -742,48 +785,46 @@ export function VideoProjects() {
           </div>
         </div>
 
-        <AnimatePresence mode="popLayout">
-          <FocusCards
-            cards={displayProjects}
-            getKey={(project) => project.title}
-            className="mt-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-            renderCard={(project, index, hovered) => (
-              <ProjectFocusCard
-                project={project}
-                index={index}
-                activeFilter={activeFilter}
-                layoutId={layoutId}
-                onOpen={() => setSelectedProject(project)}
-              />
-            )}
-          />
-        </AnimatePresence>
-        {showProjectLevels && (
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            <CompactProjectList
-              title="Additional work"
-              description="Useful proof, kept compact so the strongest six stay dominant."
-              projects={additionalProjects}
-              onOpen={setSelectedProject}
+        {viewMode === "grid" ? (
+          <AnimatePresence mode="popLayout">
+            <FocusCards
+              cards={displayProjects}
+              getKey={(project) => project.title}
+              className="mt-8 gap-px overflow-hidden rounded-md border border-white/10 bg-white/10 grid-cols-1 md:grid-cols-2 xl:grid-cols-4"
+              getClassName={() => "h-full"}
+              renderCard={(project, index, hovered) => (
+                <ProjectFocusCard
+                  project={project}
+                  index={index}
+                  activeFilter={activeFilter}
+                  layoutId={layoutId}
+                  onOpen={() => setSelectedProject(project)}
+                />
+              )}
             />
-            <CompactProjectList
-              title="Experiments and personal projects"
-              description="Creative or early projects that show range without competing with selected work."
-              projects={experimentProjects}
-              onOpen={setSelectedProject}
-            />
-          </div>
-        )}
-        {visibleProjects.length > initialProjectLimit && (
-          <div className="mt-8 flex justify-center">
-            <button
-              type="button"
-              onClick={() => setShowAll((value) => !value)}
-              className="inline-flex items-center gap-2 rounded-md border border-cyan-300/35 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
-            >
-              {showAll ? "Back to selected work" : "Browse all projects"}
-              {showAll ? <IconChevronUp className="h-4 w-4" /> : <IconChevronDown className="h-4 w-4" />}
-            </button>
+          </AnimatePresence>
+        ) : (
+          <div className="mt-8 overflow-x-auto">
+            <div className="min-w-[1120px]">
+              <div className="grid grid-cols-[70px_90px_1.35fr_1fr_1.65fr_150px] gap-6 border-b border-white/10 pb-4 text-sm font-bold text-neutral-400">
+                <span>No.</span>
+                <span>Year</span>
+                <span>Title</span>
+                <span>Made at</span>
+                <span>Built with</span>
+                <span>Links</span>
+              </div>
+              <div>
+                {displayProjects.map((project, index) => (
+                  <ArchiveProjectRow
+                    key={project.title}
+                    project={project}
+                    index={index}
+                    onOpen={() => setSelectedProject(project)}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -792,6 +833,137 @@ export function VideoProjects() {
         onClose={() => setSelectedProject(null)}
       />
     </section>
+  );
+}
+
+function FeaturedProjectCard({
+  project,
+  index,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  onOpen: () => void;
+}) {
+  const reversed = index % 2 === 1;
+
+  return (
+    <article className="grid gap-5 lg:grid-cols-12 lg:items-center lg:gap-0">
+      <button
+        type="button"
+        onClick={onOpen}
+        className={`group relative min-h-[240px] overflow-hidden rounded border border-white/10 bg-white/[0.035] text-left shadow-2xl shadow-black/20 sm:min-h-[320px] lg:row-start-1 lg:min-h-[390px] ${
+          reversed ? "lg:col-start-6 lg:col-span-7" : "lg:col-start-1 lg:col-span-7"
+        }`}
+      >
+        <ProjectVisual project={project} />
+      </button>
+
+      <div
+        className={`relative z-10 lg:row-start-1 lg:col-span-6 ${
+          reversed ? "lg:col-start-1 lg:text-left" : "lg:col-start-7 lg:text-right"
+        }`}
+      >
+        <p className="hero-mono text-sm font-semibold text-cyan-300">Featured Project</p>
+        <h3 className="mt-3 text-2xl font-bold text-[#ccd6f6] md:text-3xl">{project.title}</h3>
+        <button
+          type="button"
+          onClick={onOpen}
+          className="mt-6 w-full rounded bg-neutral-900/95 p-5 text-left shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:bg-neutral-900 lg:p-6"
+        >
+          <p className="text-base leading-8 text-neutral-300">{project.summary}</p>
+        </button>
+        <div className={`mt-6 flex flex-wrap gap-4 ${reversed ? "lg:justify-start" : "lg:justify-end"}`}>
+          {project.stack.slice(0, 6).map((tech) => (
+            <span key={tech} className="hero-mono text-sm text-neutral-400">
+              {tech}
+            </span>
+          ))}
+        </div>
+        <div className={`mt-6 flex gap-5 ${reversed ? "lg:justify-start" : "lg:justify-end"}`}>
+          {project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              className="text-neutral-200 transition hover:text-cyan-300"
+              aria-label={`${project.title} repository`}
+            >
+              <IconBrandGithub className="h-5 w-5" />
+            </a>
+          )}
+          {project.video && (
+            <a
+              href={project.video}
+              target="_blank"
+              rel="noreferrer"
+              className="text-neutral-200 transition hover:text-cyan-300"
+              aria-label={`${project.title} walkthrough`}
+            >
+              <IconArrowUpRight className="h-5 w-5" />
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProjectVisual({ project }: { project: Project }) {
+  const image = project.videoId ? `https://i.ytimg.com/vi/${project.videoId}/hqdefault.jpg` : "";
+
+  return (
+    <div className="absolute inset-0">
+      {image ? (
+        <div
+          className="h-full w-full bg-cover bg-center opacity-70 grayscale transition duration-500 group-hover:scale-105 group-hover:opacity-90 group-hover:grayscale-0"
+          style={{ backgroundImage: `url(${image})` }}
+        />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-[#112240] text-2xl font-bold text-[#ccd6f6]">
+          {project.title}
+        </div>
+      )}
+      <div className="absolute inset-0 bg-cyan-300/35 mix-blend-multiply transition group-hover:bg-transparent" />
+      <div className="absolute inset-0 border border-cyan-300/15" />
+    </div>
+  );
+}
+
+function ArchiveProjectRow({
+  project,
+  index,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  onOpen: () => void;
+}) {
+  return (
+    <div className="grid grid-cols-[70px_90px_1.35fr_1fr_1.65fr_150px] gap-6 border-b border-white/10 py-5 text-sm text-neutral-400 transition hover:bg-white/[0.035]">
+      <span className="hero-mono text-neutral-500">{String(index + 1).padStart(2, "0")}</span>
+      <span className="hero-mono text-cyan-300">{getProjectYear(project)}</span>
+      <button type="button" onClick={onOpen} className="text-left font-bold text-white transition hover:text-cyan-300">
+        {project.title}
+      </button>
+      <span>{getProjectTypeLabel(project)}</span>
+      <span className="hero-mono leading-6">{project.stack.slice(0, 7).join(" - ")}</span>
+      <span className="flex items-center gap-4">
+        <button type="button" onClick={onOpen} className="inline-flex h-8 w-8 items-center justify-center rounded border border-white/10 text-neutral-200 transition hover:border-cyan-300/50 hover:text-cyan-300" aria-label={`${project.title} details`}>
+          <IconListDetails className="h-5 w-5" />
+        </button>
+        {project.repo && (
+          <a href={project.repo} target="_blank" rel="noreferrer" className="inline-flex h-8 w-8 items-center justify-center rounded border border-white/10 text-neutral-200 transition hover:border-cyan-300/50 hover:text-cyan-300" aria-label={`${project.title} repository`}>
+            <IconBrandGithub className="h-5 w-5" />
+          </a>
+        )}
+        {project.video && (
+          <a href={project.video} target="_blank" rel="noreferrer" className="inline-flex h-8 w-8 items-center justify-center rounded border border-white/10 text-neutral-200 transition hover:border-cyan-300/50 hover:text-cyan-300" aria-label={`${project.title} walkthrough`}>
+            <IconArrowUpRight className="h-5 w-5" />
+          </a>
+        )}
+      </span>
+    </div>
   );
 }
 
@@ -817,9 +989,9 @@ function ProjectFocusCard({
       data-aos-delay={String(180 + (index % 6) * 160)}
       exit={{ opacity: 0, y: 12 }}
       transition={{ duration: 0.28, ease: "easeOut" }}
-      whileHover={{ y: -4, zIndex: 80 }}
+      whileHover={{ y: -2, zIndex: 80 }}
       onClick={onOpen}
-      className="group/project relative flex min-h-[390px] origin-center cursor-pointer flex-col rounded-md border border-white/10 bg-white/[0.035] p-5 ring-1 ring-white/5 transition-[transform,opacity,border-color,background-color] duration-300 hover:!border-cyan-300/40 hover:bg-white/[0.055]"
+      className="group/project relative flex h-full min-h-[300px] origin-center cursor-pointer flex-col rounded-none bg-neutral-950 p-4 transition-[transform,opacity,background-color] duration-300 hover:bg-white/[0.035]"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-wrap gap-2">
@@ -833,19 +1005,19 @@ function ProjectFocusCard({
       </div>
       <motion.h3
         layoutId={`title-${project.title}-${layoutId}`}
-        className="mt-5 text-2xl font-semibold leading-tight text-white"
+        className="mt-5 text-xl font-semibold leading-tight text-white"
       >
         {project.title}
       </motion.h3>
-      <p className="mt-3 text-sm leading-7 text-neutral-300">{project.summary}</p>
+      <p className="mt-3 text-sm leading-6 text-neutral-300">{project.summary}</p>
 
-      <div className="mt-5 grid gap-3 text-sm leading-6 text-neutral-300">
-        <p><span className="text-cyan-200">Role:</span> {project.myRole}</p>
-        <p><span className="text-cyan-200">Result:</span> {project.outcome}</p>
+      <div className="mt-4 grid gap-2 text-xs leading-5 text-neutral-400">
+        <p><span className="text-cyan-200">Role:</span> {project.workType}</p>
+        <p><span className="text-cyan-200">Proves:</span> {project.proof.slice(0, 2).join(", ")}</p>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.stack.slice(0, 5).map((tech) => (
+      <div className="mt-4 flex flex-wrap gap-2">
+        {project.stack.slice(0, 6).map((tech) => (
           <span key={tech} className="rounded border border-white/10 bg-black/25 px-2.5 py-1 text-xs text-neutral-300">
             {tech}
           </span>
@@ -1134,6 +1306,16 @@ function getProjectTypeLabel(project: Project) {
   };
 
   return labels[project.category];
+}
+
+function getProjectYear(project: Project) {
+  if (project.title === "Auryvedic") return "2026";
+  if (["AnarchyV2", "Version Control Manager", "V-Dashboard + V-Server"].includes(project.title)) return "2025";
+  if (project.category === "Job Work") return "2024";
+  if (project.title === "Psych Learn") return "2024";
+  if (["Dragstr", "Prestine Nature"].includes(project.title)) return "2024";
+  if (project.category === "Personal") return "2024";
+  return "2023";
 }
 
 function slugify(value: string) {

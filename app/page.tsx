@@ -1,10 +1,10 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
-import AnimatedCursor from "react-animated-cursor";
 import { AnimatePresence, motion } from "motion/react";
 
 import Navbar from "@/components/navbar";
 import { Header } from "@/components/home";
+import { AboutSection } from "@/components/AboutSection";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { VideoProjects } from "@/components/VideoProjects";
 import { Services } from "@/components/services";
@@ -13,24 +13,28 @@ import { Footer } from "@/components/footer";
 import { SideRails } from "@/components/SideRails";
 
 const SPLASH_FADE_MS = 650;
-const SPLASH_MAX_MS = 1800;
-const HERO_ACTIONS_DELAY_MS = 1600;
-const SIDE_RAILS_DELAY_MS = HERO_ACTIONS_DELAY_MS + 1200;
+const HERO_TEXT_SEQUENCE_MS = 5600;
+const HERO_ACTIONS_DELAY_MS = HERO_TEXT_SEQUENCE_MS;
+const SIDE_RAILS_DELAY_MS = HERO_TEXT_SEQUENCE_MS + 300;
+const NAVBAR_DELAY_MS = HERO_TEXT_SEQUENCE_MS + 600;
+let splashSeenThisRuntime = false;
 
 export default function Home() {
+  const [skippedIntroOnMount] = useState(() => splashSeenThisRuntime);
   const [mounted, isMounted] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
-  const [keepIntroVideo, setKeepIntroVideo] = useState(true);
-  const [heroAnimationStarted, setHeroAnimationStarted] = useState(false);
-  const [heroActionsVisible, setHeroActionsVisible] = useState(false);
-  const [sideRailsVisible, setSideRailsVisible] = useState(false);
-  const [introProgress, setIntroProgress] = useState(0);
+  const [showSplash, setShowSplash] = useState(() => !skippedIntroOnMount);
+  const [keepIntroVideo, setKeepIntroVideo] = useState(() => !skippedIntroOnMount);
+  const [heroAnimationStarted, setHeroAnimationStarted] = useState(() => skippedIntroOnMount);
+  const [heroActionsVisible, setHeroActionsVisible] = useState(() => skippedIntroOnMount);
+  const [sideRailsVisible, setSideRailsVisible] = useState(() => skippedIntroOnMount);
+  const [navbarVisible, setNavbarVisible] = useState(() => skippedIntroOnMount);
+  const [introProgress, setIntroProgress] = useState(() => (skippedIntroOnMount ? 1 : 0));
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const splashFadeTimerRef = useRef<number | null>(null);
-  const splashMaxTimerRef = useRef<number | null>(null);
   const heroSequenceTimerRefs = useRef<number[]>([]);
 
   const finishSplash = useCallback(() => {
+    splashSeenThisRuntime = true;
     setIntroProgress(1);
     setShowSplash(false);
     if (splashFadeTimerRef.current !== null) return;
@@ -43,75 +47,73 @@ export default function Home() {
   useEffect(() => {
     isMounted(true);
     document.body.style.cursor = "auto";
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      finishSplash();
-    } else {
-      splashMaxTimerRef.current = window.setTimeout(finishSplash, SPLASH_MAX_MS);
-    }
     return () => {
       document.body.style.cursor = "auto";
       if (splashFadeTimerRef.current !== null) {
         window.clearTimeout(splashFadeTimerRef.current);
       }
-      if (splashMaxTimerRef.current !== null) {
-        window.clearTimeout(splashMaxTimerRef.current);
-      }
       heroSequenceTimerRefs.current.forEach((timer) => window.clearTimeout(timer));
     };
-  }, [finishSplash]);
+  }, []);
 
   useEffect(() => {
-    if (!heroAnimationStarted) return;
+    if (!heroAnimationStarted || skippedIntroOnMount) return;
 
     setHeroActionsVisible(false);
     setSideRailsVisible(false);
+    setNavbarVisible(false);
 
     const timers = [
       window.setTimeout(() => setHeroActionsVisible(true), HERO_ACTIONS_DELAY_MS),
       window.setTimeout(() => setSideRailsVisible(true), SIDE_RAILS_DELAY_MS),
+      window.setTimeout(() => setNavbarVisible(true), NAVBAR_DELAY_MS),
     ];
     heroSequenceTimerRefs.current = timers;
 
     return () => {
       timers.forEach((timer) => window.clearTimeout(timer));
     };
-  }, [heroAnimationStarted]);
+  }, [heroAnimationStarted, skippedIntroOnMount]);
 
   useEffect(() => {
     if (!mounted || !keepIntroVideo) return;
     const video = introVideoRef.current;
     if (!video) return;
 
-    video.muted = true;
-    video.volume = 0;
-    const playPromise = video.play();
-    if (playPromise) {
-      playPromise.catch(finishSplash);
+    function enableIntroSound() {
+      video.muted = false;
+      video.volume = 1;
+      void video.play().catch(() => undefined);
+      document.removeEventListener("pointerdown", enableIntroSound);
+      document.removeEventListener("keydown", enableIntroSound);
     }
-  }, [finishSplash, keepIntroVideo, mounted]);
+    function playIntro() {
+      video.muted = false;
+      video.volume = 1;
+      const playPromise = video.play();
+      if (playPromise) {
+        void playPromise.catch(() => {
+          video.muted = true;
+          video.volume = 0;
+          void video.play().catch(() => undefined);
+          document.addEventListener("pointerdown", enableIntroSound, { once: true });
+          document.addEventListener("keydown", enableIntroSound, { once: true });
+        });
+      }
+    }
+
+    playIntro();
+
+    return () => {
+      document.removeEventListener("pointerdown", enableIntroSound);
+      document.removeEventListener("keydown", enableIntroSound);
+    };
+  }, [keepIntroVideo, mounted]);
 
   if (!mounted) return null;
 
   return (
     <>
-      <span className="z-[9999]">
-        <AnimatedCursor
-          showSystemCursor
-          innerSize={8}
-          outerSize={35}
-          innerScale={1}
-          outerScale={2}
-          outerAlpha={0}
-          innerStyle={{
-            backgroundColor: "var(--cursor-color)",
-            zIndex: 10020,
-          }}
-          outerStyle={{
-            border: "3px solid var(--cursor-color)",
-            zIndex: 10020,
-          }}
-        />
-      </span>
       <AnimatePresence>
         {keepIntroVideo && (
           <motion.div
@@ -119,7 +121,7 @@ export default function Home() {
             animate={{ opacity: showSplash ? 1 : 0, y: showSplash ? 0 : -24 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="pointer-events-none fixed inset-0 z-[9998] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_50%_35%,#15171a_0%,#08090a_52%,#000000_100%)]"
+            className="fixed inset-0 z-[9998] flex items-center justify-center overflow-hidden bg-neutral-950 bg-[radial-gradient(ellipse_96%_105%_at_50%_-24%,rgba(34,211,238,0.12),rgba(255,255,255,0))]"
           >
             <motion.div
               initial={{ scale: 0.94, opacity: 0, y: 18 }}
@@ -129,10 +131,9 @@ export default function Home() {
             >
               <video
                 ref={introVideoRef}
-                className="pointer-events-none mb-8 aspect-video w-full max-w-[860px] object-contain mix-blend-screen [mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_95%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_45%,transparent_95%)]"
-                src="/finalIntro.mp4"
+                className="pointer-events-none mb-8 aspect-video w-full max-w-[860px] object-contain opacity-95 drop-shadow-[0_0_44px_rgba(34,211,238,0.18)] [mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)]"
+                src="/f_intro.mp4"
                 autoPlay
-                muted
                 playsInline
                 disablePictureInPicture
                 preload="auto"
@@ -143,15 +144,8 @@ export default function Home() {
                 onEnded={finishSplash}
               />
               <p className="hero-mono text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-                Aswin Anand
+                Building Portfolio
               </p>
-              <button
-                type="button"
-                onClick={finishSplash}
-                className="pointer-events-auto hero-mono absolute right-0 top-0 rounded-sm border border-white/15 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75 transition hover:border-cyan-200 hover:text-cyan-100"
-              >
-                Skip intro
-              </button>
               <div className="mt-8 h-1.5 w-[min(420px,72vw)] overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   animate={{ scaleX: introProgress }}
@@ -168,9 +162,9 @@ export default function Home() {
         id="home"
       >
         <div className="pointer-events-none fixed top-0 z-0 h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_96%_105%_at_50%_-24%,rgba(34,211,238,0.12),rgba(255,255,255,0))]" />
-        <Navbar name="name" description="desc" />
+        {navbarVisible && <Navbar name="name" description="desc" />}
         {sideRailsVisible && <SideRails />}
-        <div className="relative z-10 min-h-screen w-full overflow-x-hidden pb-16">
+        <div className="relative z-10 min-h-[88vh] w-full overflow-x-hidden pb-2">
           {heroAnimationStarted && (
             <Header
               className={""}
@@ -180,16 +174,21 @@ export default function Home() {
             />
           )}
         </div>
-        <section id="experience" className="relative z-10">
+        {heroAnimationStarted && (
+          <section id="about" className="relative z-10 scroll-mt-24">
+            <AboutSection animatePortrait={heroAnimationStarted} />
+          </section>
+        )}
+        <section id="experience" className="relative z-10 scroll-mt-24">
           <ExperienceTimeline />
         </section>
-        <section id="portfolio" className="relative z-10">
+        <section id="portfolio" className="relative z-10 scroll-mt-24">
           <VideoProjects />
         </section>
-        <section id="services" className="relative z-10">
+        <section id="services" className="relative z-10 scroll-mt-24">
           <Services />
         </section>
-        <section id="contact" className="relative z-10">
+        <section id="contact" className="relative z-10 scroll-mt-24">
           <Form />
         </section>
         <div className="relative z-10">

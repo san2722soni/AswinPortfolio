@@ -7,8 +7,8 @@ const portraits = [
   { src: "/pfp3.svg?v=2", label: "pfp3" },
   { src: "/pfp4.svg?v=2", label: "pfp4" },
 ];
-const FEATURED_DRAW_MS = 5200;
-const FEATURED_PATH_MS = 1600;
+const FEATURED_DRAW_MS = 15000;
+const FEATURED_PATH_MS = 2000;
 
 export function SvgPathPortrait({
   featured = false,
@@ -129,12 +129,12 @@ function FeaturedSvgPortrait({ animate }: { animate: boolean }) {
       <div
         ref={wrapRef}
         data-hidden={showDefault}
-        className="featured-portrait-draw absolute inset-0 h-full w-full"
+        className="featured-portrait-draw absolute inset-0 h-full w-full scale-[1.28] md:scale-[1.22] lg:scale-[1.24]"
         dangerouslySetInnerHTML={{ __html: drawSvg }}
       />
       <div
         data-visible={showDefault}
-        className="featured-portrait-default absolute inset-0 h-full w-full"
+        className="featured-portrait-default absolute inset-0 h-full w-full scale-[1.28] md:scale-[1.22] lg:scale-[1.24]"
         dangerouslySetInnerHTML={{ __html: defaultSvg }}
       />
     </div>
@@ -241,7 +241,7 @@ function SvgPathCard({
         onClick={() => setReplay((value) => value + 1)}
         className="absolute bottom-3 right-3 rounded-md border border-white/15 bg-white px-3 py-2 text-xs font-bold text-black shadow-xl transition hover:bg-cyan-200"
       >
-        {featured ? "Replay 10s draw" : "Show animation"}
+        {featured ? "Replay 15s draw" : "Show animation"}
       </button>
     </div>
   );
