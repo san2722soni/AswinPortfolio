@@ -54,20 +54,20 @@ type Project = {
 const projects: Project[] = [
   {
     title: "AnarchyV2",
-    eyebrow: "Massive Multiplayer Game Server",
+    eyebrow: "Real-Time Multiplayer Game Server",
     category: "Senior Guided",
     workType: "Senior engineer guided job work",
     duration: "2-3 months",
     context:
-      "Worked with Vineet Oli on a massive multiplayer game/server system where one server coordinates many running boards/players.",
+      "Worked with Vineet Oli on a real-time multiplayer game/server system where one server coordinates many running boards/players.",
     summary:
       "A multiplayer game platform built around engine/runtime thinking, backend services, load testing, and operational scripts.",
     about:
-      "AnarchyV2 was a large game/server engineering project inspired by a massive multi-board chess-like workload. The core idea was to support a very high number of simultaneous players and game boards through one coordinated backend/runtime system.",
+      "AnarchyV2 was a large game/server engineering project inspired by a multi-board chess-like workload. The core idea was to coordinate many players and game boards through one backend/runtime system.",
     myRole:
       "I coded and debugged implementation pieces while Vineet Oli guided architecture, review, and engineering direction. This was one of my strongest learning-heavy job-work projects.",
     outcome:
-      "Best proof of systems thinking, terminal-first debugging, multiplayer backend work, load testing, and senior-guided engineering growth.",
+      "Best proof of systems thinking, terminal-first debugging, multiplayer backend implementation, and load-test-aware engineering under senior guidance.",
     stack: ["C++", "Next.js", "Node/Fastify", "MongoDB", "Redis", "Linux", "PM2", "Nginx", "ELK"],
     features: ["Game client/server flow", "Engine/runtime structure", "Load-test direction", "Deployment and monitoring scripts"],
     proof: ["Systems engineering", "Multiplayer backend thinking", "Linux/terminal workflow", "Performance/debugging mindset"],
@@ -542,6 +542,8 @@ const orderedProjects = [...projects].sort(
 );
 
 const initialProjectLimit = 6;
+const selectedProjectNames = new Set(projectOrder.slice(0, initialProjectLimit));
+
 function getProjectCardAos(index: number) {
   if (index % 3 === 0) return "fade-right";
   if (index % 3 === 2) return "fade-left";
@@ -586,6 +588,13 @@ export function VideoProjects() {
   const displayProjects = showAll
     ? visibleProjects
     : visibleProjects.slice(0, initialProjectLimit);
+  const showProjectLevels = activeFilter === "All" && !normalizedQuery && !showAll;
+  const additionalProjects = orderedProjects.filter(
+    (project) => !selectedProjectNames.has(project.title) && project.category !== "Personal",
+  );
+  const experimentProjects = orderedProjects.filter(
+    (project) => !selectedProjectNames.has(project.title) && project.category === "Personal",
+  );
   const getFilterCount = (filter: TagFilter) =>
     filter === "All"
       ? orderedProjects.length
@@ -677,7 +686,6 @@ export function VideoProjects() {
                 <p key={label as string} className="hero-mono">
                   <span className="text-xl font-semibold text-white">
                     <CountUp end={Number(value)} duration={0.8} enableScrollSpy scrollSpyOnce />
-                    +
                   </span>{" "}
                   {label}
                 </p>
@@ -744,13 +752,28 @@ export function VideoProjects() {
                 project={project}
                 index={index}
                 activeFilter={activeFilter}
-                isHovered={hovered === index}
                 layoutId={layoutId}
                 onOpen={() => setSelectedProject(project)}
               />
             )}
           />
         </AnimatePresence>
+        {showProjectLevels && (
+          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            <CompactProjectList
+              title="Additional work"
+              description="Useful proof, kept compact so the strongest six stay dominant."
+              projects={additionalProjects}
+              onOpen={setSelectedProject}
+            />
+            <CompactProjectList
+              title="Experiments and personal projects"
+              description="Creative or early projects that show range without competing with selected work."
+              projects={experimentProjects}
+              onOpen={setSelectedProject}
+            />
+          </div>
+        )}
         {visibleProjects.length > initialProjectLimit && (
           <div className="mt-8 flex justify-center">
             <button
@@ -758,7 +781,7 @@ export function VideoProjects() {
               onClick={() => setShowAll((value) => !value)}
               className="inline-flex items-center gap-2 rounded-md border border-cyan-300/35 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
             >
-              {showAll ? "Show less" : "Show more"}
+              {showAll ? "Back to selected work" : "Browse all projects"}
               {showAll ? <IconChevronUp className="h-4 w-4" /> : <IconChevronDown className="h-4 w-4" />}
             </button>
           </div>
@@ -782,7 +805,6 @@ function ProjectFocusCard({
   project: Project;
   index: number;
   activeFilter: TagFilter;
-  isHovered: boolean;
   layoutId: string;
   onOpen: () => void;
 }) {
@@ -801,8 +823,9 @@ function ProjectFocusCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-wrap gap-2">
-          <Badge>{project.category}</Badge>
+          <Badge>{getProjectTypeLabel(project)}</Badge>
           <Badge>{project.eyebrow}</Badge>
+          <Badge>{project.repo ? "Public code" : "Private/demo-safe"}</Badge>
         </div>
         <span className="hero-mono rounded border border-white/10 px-2 py-1 text-xs text-neutral-400">
           {String(orderedProjects.indexOf(project) + 1).padStart(2, "0")}
@@ -852,38 +875,87 @@ function ProjectFooter({
   onOpen: () => void;
 }) {
   return (
-    <>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {project.stack.slice(0, 6).map((tech) => (
-          <span key={tech} className="rounded border border-white/10 bg-black/30 px-2 py-1 text-xs text-neutral-300">
-            {tech}
-          </span>
+    <div className="flex flex-wrap gap-3">
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          onOpen();
+        }}
+        className="inline-flex items-center gap-2 rounded-md border border-cyan-300/35 px-3 py-2 text-xs font-semibold text-cyan-100 transition hover:bg-cyan-300/10"
+      >
+        Details <IconListDetails className="h-4 w-4" />
+      </button>
+      {project.video && (
+        <a
+          href={project.video}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(event) => event.stopPropagation()}
+          className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200"
+        >
+          Watch walkthrough <IconPlayerPlay className="h-4 w-4" />
+        </a>
+      )}
+      {project.repo && (
+        <a
+          href={project.repo}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(event) => event.stopPropagation()}
+          className="inline-flex items-center gap-2 rounded-md border border-white/15 px-3 py-2 text-xs font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
+        >
+          View code <IconArrowUpRight className="h-4 w-4" />
+        </a>
+      )}
+    </div>
+  );
+}
+
+function CompactProjectList({
+  title,
+  description,
+  projects,
+  onOpen,
+}: {
+  title: string;
+  description: string;
+  projects: Project[];
+  onOpen: (project: Project) => void;
+}) {
+  return (
+    <section className="rounded-md border border-white/10 bg-white/[0.025] p-4">
+      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-2 text-sm leading-6 text-neutral-400">{description}</p>
+      <div className="mt-4 grid gap-3">
+        {projects.map((project) => (
+          <button
+            key={project.title}
+            type="button"
+            onClick={() => onOpen(project)}
+            className="group grid gap-2 rounded-md border border-white/10 bg-black/20 p-3 text-left transition hover:border-cyan-300/35 hover:bg-white/[0.04]"
+          >
+            <span className="flex flex-wrap items-center gap-2">
+              <span className="font-semibold text-white">{project.title}</span>
+              <span className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-neutral-400">
+                {getProjectTypeLabel(project)}
+              </span>
+              <span className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-neutral-400">
+                {project.repo ? "Public code" : "Demo-safe"}
+              </span>
+            </span>
+            <span className="text-sm leading-6 text-neutral-300">{project.summary}</span>
+            <span className="flex flex-wrap gap-2">
+              {project.stack.slice(0, 4).map((tech) => (
+                <span key={tech} className="rounded bg-white/[0.045] px-2 py-1 text-[11px] text-neutral-400">
+                  {tech}
+                </span>
+              ))}
+            </span>
+          </button>
         ))}
       </div>
-      <div className="mt-6 flex flex-wrap gap-3">
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            onOpen();
-          }}
-          className="inline-flex items-center gap-2 rounded-md border border-cyan-300/35 px-3 py-2 text-xs font-semibold text-cyan-100 transition hover:bg-cyan-300/10"
-        >
-          Details <IconListDetails className="h-4 w-4" />
-        </button>
-        {project.video && (
-          <a
-            href={project.video}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-            className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-black transition hover:bg-cyan-200"
-          >
-            Watch walkthrough <IconPlayerPlay className="h-4 w-4" />
-          </a>
-        )}
-      </div>
-    </>
+    </section>
   );
 }
 
@@ -1051,6 +1123,17 @@ function matchesFilter(project: Project, filter: TagFilter) {
   };
 
   return terms[filter as Exclude<TagFilter, Filter>]?.some((term) => blob.includes(term)) ?? false;
+}
+
+function getProjectTypeLabel(project: Project) {
+  const labels: Record<Project["category"], string> = {
+    "Job Work": "Company work",
+    "Senior Guided": "Guided work",
+    "Client Work": "Client work",
+    Personal: "Personal",
+  };
+
+  return labels[project.category];
 }
 
 function slugify(value: string) {

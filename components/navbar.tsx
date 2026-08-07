@@ -13,8 +13,8 @@ import {
 
 const navItems = [
   { name: "Home", link: "#home", id: "home" },
-  { name: "Work", link: "#portfolio", id: "portfolio" },
   { name: "Experience", link: "#experience", id: "experience" },
+  { name: "Work", link: "#portfolio", id: "portfolio" },
   { name: "Skills", link: "#services", id: "services" },
   { name: "Contact", link: "#contact", id: "contact" },
 ];

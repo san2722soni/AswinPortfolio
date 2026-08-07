@@ -85,6 +85,11 @@ export const Header:React.FC<HeaderProps> = ({
             </span>
           ))}
         </div>
+        <div className="hero-reveal mt-6 grid max-w-3xl gap-3 border-y border-white/10 py-4 text-sm leading-6 text-neutral-300 sm:grid-cols-3">
+          <p><span className="block text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">Target</span> Full-stack / Backend Developer</p>
+          <p><span className="block text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">Availability</span> Open to work and freelance</p>
+          <p><span className="block text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">Location</span> India, remote-friendly</p>
+        </div>
         <h2 className={`hero-reveal hero-display mt-10 max-w-[900px] text-left text-3xl font-black leading-[1.08] text-slate-200 min-[390px]:text-[2.15rem] md:mt-12 md:text-[3.1rem] ${className}`}>
           <span className="text-slate-400">I turn</span>{" "}
           <FlipWords words={["requirements", "workflows", "product ideas", "internal tools"]} className="px-1 text-cyan-100" />
