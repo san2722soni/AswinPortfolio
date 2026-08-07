@@ -79,23 +79,24 @@ export default function Home() {
     if (!mounted || !keepIntroVideo) return;
     const video = introVideoRef.current;
     if (!video) return;
+    const introVideo = video;
 
     function enableIntroSound() {
-      video.muted = false;
-      video.volume = 1;
-      void video.play().catch(() => undefined);
+      introVideo.muted = false;
+      introVideo.volume = 1;
+      void introVideo.play().catch(() => undefined);
       document.removeEventListener("pointerdown", enableIntroSound);
       document.removeEventListener("keydown", enableIntroSound);
     }
     function playIntro() {
-      video.muted = false;
-      video.volume = 1;
-      const playPromise = video.play();
+      introVideo.muted = false;
+      introVideo.volume = 1;
+      const playPromise = introVideo.play();
       if (playPromise) {
         void playPromise.catch(() => {
-          video.muted = true;
-          video.volume = 0;
-          void video.play().catch(() => undefined);
+          introVideo.muted = true;
+          introVideo.volume = 0;
+          void introVideo.play().catch(() => undefined);
           document.addEventListener("pointerdown", enableIntroSound, { once: true });
           document.addEventListener("keydown", enableIntroSound, { once: true });
         });
