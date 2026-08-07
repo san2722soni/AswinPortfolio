@@ -33,7 +33,7 @@ export function SvgPathPortrait({
 function FeaturedSvgPortrait({ animate }: { animate: boolean }) {
   const [drawSvg, setDrawSvg] = useState("");
   const [defaultSvg, setDefaultSvg] = useState("");
-  const [showDefault, setShowDefault] = useState(!animate);
+  const [showDefault, setShowDefault] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,7 +75,7 @@ function FeaturedSvgPortrait({ animate }: { animate: boolean }) {
     const root = wrapRef.current;
     if (!root || !drawSvg) return;
 
-    setShowDefault(!animate);
+    setShowDefault(false);
 
     const paths = Array.from(root.querySelectorAll("path"))
       .map((path) => {
@@ -98,7 +98,7 @@ function FeaturedSvgPortrait({ animate }: { animate: boolean }) {
       path.style.strokeLinecap = "round";
       path.style.strokeLinejoin = "round";
       path.style.strokeDasharray = `${length}`;
-      path.style.strokeDashoffset = animate ? `${length}` : "0";
+      path.style.strokeDashoffset = `${length}`;
       path.style.transition = "none";
     });
 
@@ -128,7 +128,7 @@ function FeaturedSvgPortrait({ animate }: { animate: boolean }) {
     <div className="featured-portrait-svg relative h-full min-h-0 overflow-hidden opacity-100">
       <div
         ref={wrapRef}
-        data-hidden={showDefault}
+        data-hidden={!animate || showDefault}
         className="featured-portrait-draw absolute inset-0 h-full w-full scale-[1.28] md:scale-[1.22] lg:scale-[1.24]"
         dangerouslySetInnerHTML={{ __html: drawSvg }}
       />

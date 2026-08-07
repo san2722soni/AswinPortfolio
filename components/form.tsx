@@ -51,9 +51,15 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
   }
 
   const templateParams = {
-    from_name: `${values.username} (${values.email})`,
+    title: "Portfolio contact form",
+    name: values.username,
+    email: values.email,
+    reply_to: values.email,
+    from_name: values.username,
     to_name: "Aswin Anand",
+    phone: values.phone ?? "",
     company: values.phone ?? "",
+    message: values.description,
     msg: values.description,
   };
 

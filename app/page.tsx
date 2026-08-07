@@ -30,7 +30,7 @@ export default function Home() {
   const [sideRailsVisible, setSideRailsVisible] = useState(() => skippedIntroOnMount);
   const [navbarVisible, setNavbarVisible] = useState(() => skippedIntroOnMount);
   const [introProgress, setIntroProgress] = useState(() => (skippedIntroOnMount ? 1 : 0));
-  const [needsIntroGesture, setNeedsIntroGesture] = useState(false);
+  const [needsIntroGesture, setNeedsIntroGesture] = useState(() => !skippedIntroOnMount);
   const introVideoRef = useRef<HTMLVideoElement>(null);
   const splashFadeTimerRef = useRef<number | null>(null);
   const heroSequenceTimerRefs = useRef<number[]>([]);
@@ -96,7 +96,7 @@ export default function Home() {
   }, [heroAnimationStarted, skippedIntroOnMount]);
 
   useEffect(() => {
-    if (!mounted || !keepIntroVideo) return;
+    if (!mounted || !keepIntroVideo || needsIntroGesture) return;
     const video = introVideoRef.current;
     if (!video) return;
     const introVideo = video;
@@ -124,7 +124,7 @@ export default function Home() {
     return () => {
       cancelled = true;
     };
-  }, [keepIntroVideo, mounted]);
+  }, [keepIntroVideo, mounted, needsIntroGesture]);
 
   if (!mounted) return null;
 
@@ -149,7 +149,7 @@ export default function Home() {
                 ref={introVideoRef}
                 className="pointer-events-none mb-8 aspect-video w-full max-w-[860px] object-contain opacity-95 drop-shadow-[0_0_44px_rgba(34,211,238,0.18)] [mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)]"
                 src="/f_intro.mp4"
-                autoPlay
+                autoPlay={!needsIntroGesture}
                 playsInline
                 disablePictureInPicture
                 preload="auto"
@@ -169,17 +169,24 @@ export default function Home() {
                   className="h-full origin-left rounded-full bg-white"
                 />
               </div>
-              {needsIntroGesture && showSplash && (
+            </motion.div>
+            {needsIntroGesture && showSplash && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/35 px-6 backdrop-blur-md"
+              >
                 <button
                   type="button"
                   onClick={startIntroWithSound}
-                  className="hero-mono mt-6 inline-flex items-center gap-2 rounded-md border border-cyan-300/70 bg-cyan-300/10 px-5 py-3 text-sm font-semibold text-cyan-100 backdrop-blur-md transition hover:bg-cyan-300/15"
+                  className="hero-mono inline-flex items-center gap-2 rounded-md border border-cyan-300/70 bg-neutral-950/75 px-5 py-3 text-sm font-semibold text-cyan-100 shadow-[0_18px_70px_rgba(0,0,0,0.45)] transition hover:bg-cyan-300/15"
                 >
                   Go through portfolio
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </button>
-              )}
-            </motion.div>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

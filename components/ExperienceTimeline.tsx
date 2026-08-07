@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IconArrowUpRight, IconBriefcase, IconMapPin } from "@tabler/icons-react";
 import { cn } from "@/utils/cn";
 import { TypingHeading } from "@/components/TypingHeading";
@@ -178,26 +178,32 @@ const experiences: Experience[] = [
 
 export function ExperienceTimeline() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const active = experiences[activeIndex];
 
+  const selectExperience = (index: number) => {
+    setActiveIndex(index);
+    tabRefs.current[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  };
+
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative py-16 md:py-24">
       <div className="mx-auto w-[88vw] max-w-[1100px]">
-        <div className="mb-12" data-aos="fade-up">
-          <p className="hero-mono text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">
+        <div className="mb-8 md:mb-10" data-aos="fade-up">
+          <p className="hero-mono text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200 md:text-sm">
             Experience Timeline
           </p>
           <TypingHeading
             text="Work progression, not project dumping."
-            className="hero-display mt-4 text-3xl font-bold leading-tight text-white md:text-5xl"
+            className="hero-display mt-3 text-2xl font-bold leading-tight text-white md:text-4xl"
           />
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[290px_minmax(0,1fr)]">
+        <div className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-8">
           <div
             role="tablist"
             aria-label="Experience history"
-            className="flex overflow-x-auto border-b border-[#233554] lg:block lg:overflow-visible lg:border-b-0 lg:border-l"
+            className="flex scroll-px-4 overflow-x-auto border-b border-[#233554] lg:block lg:overflow-visible lg:border-b-0 lg:border-l"
           >
             {experiences.map((item, index) => {
               const selected = activeIndex === index;
@@ -205,65 +211,68 @@ export function ExperienceTimeline() {
               return (
                 <button
                   key={item.phase}
+                  ref={(node) => {
+                    tabRefs.current[index] = node;
+                  }}
                   type="button"
                   role="tab"
                   aria-selected={selected}
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => selectExperience(index)}
                   className={cn(
-                    "group min-w-[220px] border-b-2 px-4 py-4 text-left transition lg:min-w-0 lg:w-full lg:border-b-0 lg:border-l-2 lg:px-5",
+                    "group min-w-[178px] border-b-2 px-3 py-3 text-left transition sm:min-w-[200px] lg:min-w-0 lg:w-full lg:border-b-0 lg:border-l-2 lg:px-4",
                     selected
                       ? "border-cyan-300 bg-cyan-300/[0.06]"
                       : "border-transparent hover:bg-white/[0.035]",
                   )}
                 >
                   <span className="flex items-center justify-between gap-4">
-                    <span className={cn("hero-mono text-xs font-semibold", selected ? "text-cyan-200" : "text-[#8892b0]")}>
+                    <span className={cn("hero-mono text-[11px] font-semibold md:text-xs", selected ? "text-cyan-200" : "text-[#8892b0]")}>
                       {String(index + 1).padStart(2, "0")}. {item.tab}
                     </span>
-                    <span className="hero-mono text-[11px] text-[#8892b0]">{item.year}</span>
+                    <span className="hero-mono text-[10px] text-[#8892b0] md:text-[11px]">{item.year}</span>
                   </span>
-                  <span className="mt-1 block text-sm font-semibold text-[#ccd6f6]">{item.role.split(" ").slice(0, 3).join(" ")}</span>
+                  <span className="mt-1 block text-xs font-semibold text-[#ccd6f6] md:text-sm">{item.role.split(" ").slice(0, 3).join(" ")}</span>
                 </button>
               );
             })}
           </div>
 
-          <article className="min-h-[460px]">
+          <article className="min-h-[380px] md:min-h-[430px]">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex min-w-0 flex-wrap items-center gap-2">
-                <span className="hero-mono text-sm font-bold text-[#ccd6f6]">{active.phase}</span>
+                <span className="hero-mono text-xs font-bold text-[#ccd6f6] md:text-sm">{active.phase}</span>
                 <span className="rounded border border-cyan-300/35 bg-cyan-300/[0.08] px-3 py-1.5 text-xs font-semibold text-cyan-100">
                   {active.type}
                 </span>
               </div>
-              <span className="hero-mono text-sm leading-6 text-[#8892b0]">
+              <span className="hero-mono text-xs leading-5 text-[#8892b0] md:text-sm md:leading-6">
                 {active.period} / {active.duration}
               </span>
             </div>
 
-            <h3 className="mt-8 flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-2xl font-bold leading-8 text-[#ccd6f6]">
-              <IconBriefcase className="h-5 w-5 shrink-0 text-cyan-300" />
+            <h3 className="mt-6 flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-xl font-bold leading-7 text-[#ccd6f6] md:mt-8 md:text-2xl md:leading-8">
+              <IconBriefcase className="h-4 w-4 shrink-0 text-cyan-300 md:h-5 md:w-5" />
               <span>{active.role}</span>
               <span className="text-[#8892b0]">/</span>
               <span className="text-cyan-300">{active.company}</span>
             </h3>
 
-            <p className="mt-5 inline-flex items-center gap-2 text-sm leading-6 text-[#8892b0]">
+            <p className="mt-4 inline-flex items-center gap-2 text-xs leading-5 text-[#8892b0] md:mt-5 md:text-sm md:leading-6">
               <IconMapPin className="h-4 w-4 text-cyan-300" />
               {active.location}
             </p>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-[#a8b2d1]">{active.summary}</p>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#a8b2d1] md:mt-5 md:text-base md:leading-8">{active.summary}</p>
 
-            <ul className="mt-7 grid gap-4">
+            <ul className="mt-5 grid gap-3 md:mt-7 md:gap-4">
               {active.bullets.map((bullet) => (
-                <li key={bullet} className="grid grid-cols-[18px_1fr] gap-3 text-base leading-7 text-[#a8b2d1]">
-                  <span className="mt-2 h-0 w-0 border-y-[5px] border-l-[7px] border-y-transparent border-l-cyan-300" />
+                <li key={bullet} className="grid grid-cols-[16px_1fr] gap-2 text-sm leading-6 text-[#a8b2d1] md:grid-cols-[18px_1fr] md:gap-3 md:text-base md:leading-7">
+                  <span className="mt-2 h-0 w-0 border-y-[4px] border-l-[6px] border-y-transparent border-l-cyan-300 md:border-y-[5px] md:border-l-[7px]" />
                   <span>{bullet}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-2 md:mt-8 md:gap-3">
               {active.projects.map((project) => (
                 <button
                   key={`${active.phase}-${project.name}`}
@@ -275,7 +284,7 @@ export function ExperienceTimeline() {
                     }
                     openProjectFromTimeline(project.target ?? project.name);
                   }}
-                  className="group inline-flex items-center gap-1 rounded border border-[#233554] bg-[#112240]/70 px-4 py-3 text-sm font-semibold text-[#ccd6f6] transition hover:border-cyan-300/50 hover:text-cyan-200"
+                  className="group inline-flex items-center gap-1 rounded border border-[#233554] bg-[#112240]/70 px-3 py-2 text-xs font-semibold text-[#ccd6f6] transition hover:border-cyan-300/50 hover:text-cyan-200 md:px-4 md:py-3 md:text-sm"
                   title={project.text}
                 >
                   {project.name}
@@ -284,9 +293,9 @@ export function ExperienceTimeline() {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-2 md:mt-6">
               {active.skills.map((skill) => (
-                <span key={skill} className="hero-mono rounded bg-white/[0.045] px-3 py-2 text-xs text-[#8892b0]">
+                <span key={skill} className="hero-mono rounded bg-white/[0.045] px-2.5 py-1.5 text-[11px] text-[#8892b0] md:px-3 md:py-2 md:text-xs">
                   {skill}
                 </span>
               ))}
