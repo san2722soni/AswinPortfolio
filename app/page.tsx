@@ -148,7 +148,7 @@ export default function Home() {
               <video
                 ref={introVideoRef}
                 className="pointer-events-none mb-8 aspect-video w-full max-w-[860px] object-contain opacity-95 drop-shadow-[0_0_44px_rgba(34,211,238,0.18)] [mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,black_72%,rgba(0,0,0,0.82)_88%,transparent_100%)]"
-                src="/f_intro.mp4"
+                src="/f_into_clean.mp4"
                 autoPlay={!needsIntroGesture}
                 playsInline
                 disablePictureInPicture
